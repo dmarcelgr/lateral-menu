@@ -1,14 +1,16 @@
 # How to install project
 
-clone repo - git clone url
+clone repo: git clone https://github.com/dmarcelgr/lateral-menu.git
 
+Run:
 npm install
 
+Then:
 npm run dev 
 
+--
 # If postcss fails run
 npm install -D tailwindcss postcss autoprefixer
-
 
 -- 
 # React + TypeScript + Vite
