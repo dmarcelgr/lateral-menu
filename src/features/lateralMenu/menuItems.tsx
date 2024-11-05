@@ -12,7 +12,7 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
-import { MenuSubItems } from './subMenuItems.tsx';
+import { SubMenuItems } from './subMenuItems.tsx';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { StyledAppBar } from './constants/menuConstants.tsx';
 
@@ -60,7 +60,7 @@ export function MenuItems(props: []) {
             {/*submenu for mobile*/}
             {item.submenu && props.mobile && (
               <Collapse in={submenuOpen[item.key]} timeout="auto" unmountOnExit>
-                <MenuSubItems items={item.submenu}></MenuSubItems>
+                <SubMenuItems items={item.submenu}></SubMenuItems>
               </Collapse>
             )}
             {/*submenu for web*/}
@@ -93,7 +93,7 @@ export function MenuItems(props: []) {
                       </IconButton>
                     </Toolbar>
                   </StyledAppBar>
-                  <MenuSubItems items={item.submenu}></MenuSubItems>
+                  <SubMenuItems items={item.submenu}></SubMenuItems>
                 </Box>
               </Drawer>
             )}
