@@ -3,7 +3,7 @@ import {
   SubmenuListItemButton,
   SubmenuListItemIcon,
   SubmenuListItemText,
-} from './constants/menuConstants.tsx';
+} from './constants/styledComponents.tsx';
 import { t } from 'i18next';
 
 function getRandomInt(max): number {
