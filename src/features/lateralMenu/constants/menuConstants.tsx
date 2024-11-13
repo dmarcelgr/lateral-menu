@@ -15,29 +15,26 @@ import {
   GroupAdd,
   Groups,
   Inbox,
+  Info,
   LibraryBooks,
   ListAlt,
+  Lock,
   LockPerson,
   Mail,
   MonitorHeart,
   Notifications,
+  Password,
   PermContactCalendar,
   PermPhoneMsg,
   Person,
   RequestQuote,
   Search,
   Settings,
+  Shield,
+  SwitchAccount,
   Today,
   Videocam,
 } from '@mui/icons-material';
-import { StyledComponent } from '@emotion/styled';
-import {
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  styled,
-  Toolbar,
-} from '@mui/material';
 import { menuItem } from './menuInterface.ts';
 import { UserMd } from '../../../assets/icons/userMd.tsx';
 
@@ -45,25 +42,25 @@ import { UserMd } from '../../../assets/icons/userMd.tsx';
 export const menuItems: menuItem[] = [
   {
     key: 1,
-    title: 'Patients',
+    title: 'patients',
     link: '/patients',
     icon: <Groups />,
     submenu: [
       {
         key: 'newp',
-        title: 'Create a new patient',
+        title: 'create_a_new_patient',
         link: '',
         icon: <Person />,
       },
       {
         key: 'plist',
-        title: 'Patient list',
+        title: 'patient_list',
         link: '',
         icon: <Groups />,
       },
       {
         key: 'appoint',
-        title: 'Appointments',
+        title: 'appointments',
         icon: <AccessTime />,
         link: ' ',
       },
@@ -89,13 +86,13 @@ export const menuItems: menuItem[] = [
       },
       {
         key: 'teleschedule',
-        title: 'Schedule',
+        title: 'schedule',
         link: '',
         icon: <PermContactCalendar />,
       },
       {
         key: 'teleappointments',
-        title: 'Appointments',
+        title: 'appointments',
         link: '',
         icon: <Today />,
       },
@@ -103,67 +100,67 @@ export const menuItems: menuItem[] = [
   },
   {
     key: 3,
-    title: 'Remote Patient Monitoring',
+    title: 'remote_patient_monitoring',
     link: '/rpm',
     icon: <Favorite />,
     submenu: [
       {
         key: 'rpmdashboard',
-        title: 'RPM Dashboard',
+        title: 'rpm_dashboard',
         link: '',
         icon: <Favorite />,
       },
       {
         key: 'rpmstatistics',
-        title: 'RPM Statistics',
+        title: 'rpm_statistics',
         link: '',
         icon: <MonitorHeart />,
       },
       {
         key: 'rpmeducation',
-        title: 'RPM Education List',
+        title: 'rpm_education_list',
         link: '',
         icon: <LibraryBooks />,
       },
       {
         key: 'rpmtasks',
-        title: 'Tasks',
+        title: 'tasks',
         link: '',
         icon: <Assignment />,
       },
       {
         key: 'rpmreports',
-        title: 'Reports',
+        title: 'reports',
         link: '',
         icon: <BarChart />,
       },
       {
         key: 'rpmcompliantpatients',
-        title: 'Compliant patients',
+        title: 'compliant_patients',
         link: '',
         icon: <BarChart />,
       },
       {
         key: 'rpmimprovingbp',
-        title: 'Improving blood pressure',
+        title: 'improving_bp',
         link: '',
         icon: <BarChart />,
       },
       {
         key: 'rpmclaimsapproval',
-        title: 'RPM Claims Approval',
+        title: 'rpm_claims_approval',
         link: '',
         icon: <RequestQuote />,
       },
       {
         key: 'rpmmedicaldevices',
-        title: 'Medical Devices',
+        title: 'medical_devices',
         link: '',
         icon: <DevicesOther />,
       },
       {
         key: 'rpmconsentlist',
-        title: 'Consent List',
+        title: 'consent_list',
         link: '',
         icon: <LibraryBooks />,
       },
@@ -171,115 +168,115 @@ export const menuItems: menuItem[] = [
   },
   {
     key: 4,
-    title: 'Settings',
+    title: 'settings',
     link: '/settings',
     icon: <Settings />,
     submenu: [
       {
         key: 'sttappointments',
-        title: 'Appointment types',
+        title: 'appointment_types',
         link: '',
         icon: <PermContactCalendar />,
       },
       {
         key: 'sttcareteam',
-        title: 'Care team',
+        title: 'care_team',
         link: '',
         icon: <UserMd />,
       },
       {
         key: 'sttconsentlist',
-        title: 'Consent list',
+        title: 'consent_list',
         link: '',
         icon: <ListAlt />,
       },
       {
         key: 'sttvitals',
-        title: 'Vitals reference ranges',
+        title: 'vitals_reference_ranges',
         link: '',
         icon: <MonitorHeart />,
       },
       {
         key: 'sttreporttelehealth',
-        title: 'Report telehealth',
+        title: 'report_telehealth',
         link: '',
         icon: <AddToQueue />,
       },
       {
         key: 'sttpopulationgroups',
-        title: 'Population groups',
+        title: 'population_groups',
         link: '',
         icon: <Groups />,
       },
       {
         key: 'sttreferringp',
-        title: 'Referring provider list',
+        title: 'referring_provider_list',
         link: '',
         icon: <GroupAdd />,
       },
       {
         key: 'sttgoalset',
-        title: 'Goal set',
+        title: 'goal_set',
         link: '',
         icon: <FlagCircle />,
       },
       {
         key: 'sttpracticelist',
-        title: 'Practice list',
+        title: 'practice_list',
         link: '',
         icon: <Article />,
       },
       {
         key: 'sttfeeschedule',
-        title: 'Fee schedule',
+        title: 'fee_schedule',
         link: '',
         icon: <Article />,
       },
       {
         key: 'sttinsurancelist',
-        title: 'Insurances list',
+        title: 'insurances_list',
         link: '',
         icon: <Article />,
       },
       {
         key: 'sttvoicecalls',
-        title: 'Voice calls report',
+        title: 'voice_calls_report',
         link: '',
         icon: <PermPhoneMsg />,
       },
       {
         key: 'sttnewprovider',
-        title: 'New provider',
+        title: 'new_provider',
         link: '',
         icon: <DomainAdd />,
       },
       {
         key: 'sttinteroperabilitysettings',
-        title: 'Interoperability settings',
+        title: 'interoperability_settings',
         link: '',
         icon: <DisplaySettings />,
       },
       {
         key: 'sttadminusers',
-        title: 'Admin users',
+        title: 'admin_users',
         link: '',
         icon: <LockPerson />,
       },
       {
         key: 'sttanalyticsapi',
-        title: 'Analytics API calls',
+        title: 'analytics_api_calls',
         link: '',
         icon: <BarChart />,
       },
       {
         key: 'sttreportsinbox',
-        title: 'Reports inbox',
+        title: 'reports_inbox',
         link: '',
         icon: <Inbox />,
       },
       {
         key: 'sttreportsdashboard',
-        title: 'Reports dashboard',
+        title: 'reports_dashboard',
         link: '',
         icon: <Assessment />,
       },
@@ -287,7 +284,7 @@ export const menuItems: menuItem[] = [
   },
   {
     key: 5,
-    title: 'Telehealth',
+    title: 'telehealth',
     link: '/waiting-room',
     icon: <Videocam />,
     submenu: [],
@@ -297,76 +294,73 @@ export const menuItems: menuItem[] = [
 export const bottomMenuItems: menuItem[] = [
   {
     key: 6,
-    title: 'Search',
+    title: 'search',
     link: '#search',
     icon: <Search />,
     submenu: [],
   },
   {
     key: 7,
-    title: 'Messages',
+    title: 'messages',
     link: '/inbox',
     icon: <Mail />,
     submenu: [],
   },
   {
     key: 8,
-    title: 'Notifications',
+    title: 'notifications',
     link: '/notifications',
     icon: <Notifications />,
     submenu: [],
   },
   {
     key: 9,
-    title: 'User',
+    title: 'user',
     link: '/user',
     icon: <AccountCircle />,
-    submenu: [],
+    submenu: [
+      {
+        key: 'profile',
+        title: 'profile',
+        link: '',
+        icon: <Person />,
+      },
+      {
+        key: 'secquestions',
+        title: 'security_questions',
+        link: '',
+        icon: <Shield />,
+      },
+      {
+        key: 'pass',
+        title: 'password',
+        link: '',
+        icon: <Password />,
+      },
+      {
+        key: 'medicaldevices',
+        title: 'medical_devices',
+        link: '',
+        icon: <DevicesOther />,
+      },
+      {
+        key: 'aboutus',
+        title: 'about_us',
+        link: '',
+        icon: <Info />,
+      },
+      {
+        key: 'changeaccount',
+        title: 'change_account',
+        link: '',
+        icon: <SwitchAccount />,
+      },
+      {
+        key: 'logout',
+        title: 'log_out',
+        link: '',
+        icon: <Lock />,
+      },
+    ],
   },
 ];
-
-// styled components for sub menu
-export const SubmenuListItemButton: StyledComponent<any> = styled(
-  ListItemButton
-)(({ theme }) => ({
-  backgroundColor: 'transparent',
-  color: theme.palette.primary.text,
-  '&:hover': {
-    backgroundColor: theme.palette.primary.lightblue,
-    color: theme.palette.primary.light,
-  },
-  fontSize: '14px',
-  width: '18rem',
-  boxShadow: 'inset 0 1px 1px #e5e5e5;',
-}));
-
-export const SubmenuListItemIcon: StyledComponent<any> = styled(ListItemIcon)(
-  ({ theme }) => ({
-    color: theme.palette.primary.main,
-    '&:hover': {
-      color: theme.palette.primary.light,
-    },
-    fontSize: '10px',
-    width: '17rem',
-    zIndex: '2',
-    height: 'auto',
-  })
-);
-
-export const SubmenuListItemText: StyledComponent<any> = styled(ListItemText)(
-  () => ({
-    zIndex: '1',
-    marginLeft: '-14rem',
-  })
-);
-
-export const SubmenuToolbar: StyledComponent<any> = styled(Toolbar)(
-  ({ theme }) => ({
-    backgroundColor: theme.palette.primary.light,
-    color: theme.palette.primary.main,
-    fontSize: '18px',
-    fontWeight: '500',
-    justifyContent: 'center',
-    padding: '0',
-  })
-);

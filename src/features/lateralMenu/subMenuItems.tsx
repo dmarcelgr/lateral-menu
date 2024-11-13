@@ -17,7 +17,7 @@ export function SubMenuItems(props: []) {
       <List
         aria-label="lateral menu"
         key={randomKey}
-        sx={{ bgcolor: 'primary.light' }}
+        sx={{ bgcolor: 'greyscale.light' }}
       >
         {props.items.map((subitem) => {
           return (

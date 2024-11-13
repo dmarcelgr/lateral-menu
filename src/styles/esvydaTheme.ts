@@ -5,13 +5,18 @@ const esvydaTheme: Theme = createTheme({
   palette: {
     primary: {
       main: '#0e405e',
-      lightblue: '#1972a8',
-      accent: '#e8911d',
-      darkerblue: '#1A3443',
-      text: '#000000',
+      dark: '#1A3443',
+      light: '#1972a8',
+    },
+    orange: {
+      main: '#e8911d',
+    },
+    greyscale: {
       light: '#ffffff',
-      border: '#B8B8B8',
-      grey: '#858585',
+      main: '#858585',
+      lightgrey: '#B8B8B8',
+      shadow: '#e5e5e5',
+      darker: '#000000',
     },
   },
   typography: {
@@ -42,13 +47,6 @@ const esvydaTheme: Theme = createTheme({
           },
           width: '40px',
           minWidth: 'auto',
-        },
-      },
-    },
-    MuiSvgIcon: {
-      styleOverrides: {
-        root: {
-          fontSize: '1.8rem',
         },
       },
     },

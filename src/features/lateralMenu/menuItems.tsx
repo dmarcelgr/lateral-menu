@@ -6,7 +6,6 @@ import {
   IconButton,
   List,
   ListItem,
-  ListItemButton,
   ListItemIcon,
   ListItemText,
   Typography,
@@ -14,7 +13,11 @@ import {
 import React, { useState } from 'react';
 import { SubMenuItems } from './subMenuItems.tsx';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { SubmenuToolbar } from './constants/menuConstants.tsx';
+import {
+  LateralMenuListItemButton,
+  SubmenuToolbar,
+} from './constants/styledComponents.tsx';
+import { t } from 'i18next';
 
 export function MenuItems(props: []) {
   const [submenuOpen, setSubmenuOpen] = useState(false);
@@ -46,16 +49,18 @@ export function MenuItems(props: []) {
         return (
           <>
             <ListItem key={item.key} disablePadding className="h-14">
-              <ListItemButton
-                divider
-                color="primary.lightText"
+              <LateralMenuListItemButton
+                color="greyscale.light"
                 onClick={() =>
                   handleToggle(item.key, props.mobile ? 'mobile' : 'web')
                 }
               >
-                <ListItemIcon className="text-3xl">{item.icon}</ListItemIcon>
+                <ListItemIcon>
+                  {/*{item.icon}*/}
+                  {React.cloneElement(item.icon, { fontSize: 'large' })}
+                </ListItemIcon>
                 {props.text && <ListItemText>{item.title}</ListItemText>}
-              </ListItemButton>
+              </LateralMenuListItemButton>
             </ListItem>
             {/*submenu for mobile*/}
             {item.submenu && props.mobile && (
@@ -75,7 +80,7 @@ export function MenuItems(props: []) {
                   keepMounted: false,
                 }}
               >
-                <Box className="h-full w-max" bgcolor="primary.light">
+                <Box className="h-full w-max" bgcolor="greyscale.light">
                   <AppBar position="static" className="flex">
                     <SubmenuToolbar className="flex justify-between">
                       <Typography
@@ -83,7 +88,7 @@ export function MenuItems(props: []) {
                         component="div"
                         className="color-primary"
                       >
-                        {item.title}
+                        {t(item.title)}
                       </Typography>
                       <IconButton
                         aria-label="close submenu"

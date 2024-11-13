@@ -54,10 +54,7 @@ export function LateralMenu() {
               keepMounted: false,
             }}
           >
-            <Box
-              className="bg-primary.main flex-col p-4"
-              bgcolor="primary.main"
-            >
+            <Box className="bg-blue.main flex-col p-4" bgcolor="blue.main">
               <img src={esvydaBigIcon} className="w-1/5" alt="Esvyda logo" />
               <MenuItems items={menuItems} text={true} mobile={true} />
               <MenuItems items={bottomMenuItems} text={true} mobile={true} />
@@ -67,7 +64,7 @@ export function LateralMenu() {
           <Drawer
             className="hidden lg:block flex items-center x-4"
             variant="permanent"
-            bcolor="primary.main"
+            bcolor="blue.main"
           >
             <img
               src={esvydaIcon}
