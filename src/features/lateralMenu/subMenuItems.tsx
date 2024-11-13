@@ -1,8 +1,10 @@
-import { List, ListItemText } from '@mui/material';
+import { List } from '@mui/material';
 import {
-  StyledListItemButton,
-  StyledListItemIcon,
+  SubmenuListItemButton,
+  SubmenuListItemIcon,
+  SubmenuListItemText,
 } from './constants/menuConstants.tsx';
+import { t } from 'i18next';
 
 function getRandomInt(max): number {
   return Math.floor(Math.random() * max);
@@ -19,10 +21,10 @@ export function SubMenuItems(props: []) {
       >
         {props.items.map((subitem) => {
           return (
-            <StyledListItemButton key={subitem.key}>
-              <StyledListItemIcon>{subitem.icon}</StyledListItemIcon>
-              <ListItemText>{subitem.title}</ListItemText>
-            </StyledListItemButton>
+            <SubmenuListItemButton key={subitem.key}>
+              <SubmenuListItemIcon>{subitem.icon}</SubmenuListItemIcon>
+              <SubmenuListItemText>{t(subitem.title)}</SubmenuListItemText>
+            </SubmenuListItemButton>
           );
         })}
       </List>

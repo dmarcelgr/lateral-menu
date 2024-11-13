@@ -7,8 +7,11 @@ const esvydaTheme: Theme = createTheme({
       main: '#0e405e',
       lightblue: '#1972a8',
       accent: '#e8911d',
-      text: '#1A3443',
+      darkerblue: '#1A3443',
+      text: '#000000',
       light: '#ffffff',
+      border: '#B8B8B8',
+      grey: '#858585',
     },
   },
   typography: {
@@ -20,15 +23,19 @@ const esvydaTheme: Theme = createTheme({
     h2: {
       fontSize: '1.5rem',
     },
+    h4: {
+      fontSize: '1.125rem',
+      fontWeight: '500',
+    },
     body1: {
-      fontSize: '1rem',
+      fontSize: '14px',
     },
   },
   components: {
     MuiListItemIcon: {
       styleOverrides: {
         root: {
-          fontSize: '2rem',
+          fontSize: '3rem',
           color: '#ffffffc7',
           '&:hover': {
             color: '#ffffff',

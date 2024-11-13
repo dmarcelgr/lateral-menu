@@ -1,5 +1,4 @@
 import React from 'react';
-import { MenuItems } from '../menuItems.tsx';
 import {
   AccessTime,
   AccountCircle,
@@ -13,27 +12,34 @@ import {
   DomainAdd,
   Favorite,
   FlagCircle,
-  Forum,
   GroupAdd,
   Groups,
   Inbox,
   LibraryBooks,
   ListAlt,
   LockPerson,
+  Mail,
   MonitorHeart,
   Notifications,
-  People,
   PermContactCalendar,
   PermPhoneMsg,
+  Person,
   RequestQuote,
   Search,
   Settings,
   Today,
-  VideoChat,
+  Videocam,
 } from '@mui/icons-material';
 import { StyledComponent } from '@emotion/styled';
-import { AppBar, ListItemButton, ListItemIcon, styled } from '@mui/material';
+import {
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  styled,
+  Toolbar,
+} from '@mui/material';
 import { menuItem } from './menuInterface.ts';
+import { UserMd } from '../../../assets/icons/userMd.tsx';
 
 // Menu Items data / data structure
 export const menuItems: menuItem[] = [
@@ -47,7 +53,7 @@ export const menuItems: menuItem[] = [
         key: 'newp',
         title: 'Create a new patient',
         link: '',
-        icon: <People />,
+        icon: <Person />,
       },
       {
         key: 'plist',
@@ -99,7 +105,7 @@ export const menuItems: menuItem[] = [
     key: 3,
     title: 'Remote Patient Monitoring',
     link: '/rpm',
-    icon: <DevicesOther />,
+    icon: <Favorite />,
     submenu: [
       {
         key: 'rpmdashboard',
@@ -179,7 +185,7 @@ export const menuItems: menuItem[] = [
         key: 'sttcareteam',
         title: 'Care team',
         link: '',
-        icon: <People />,
+        icon: <UserMd />,
       },
       {
         key: 'sttconsentlist',
@@ -283,7 +289,7 @@ export const menuItems: menuItem[] = [
     key: 5,
     title: 'Telehealth',
     link: '/waiting-room',
-    icon: <VideoChat />,
+    icon: <Videocam />,
     submenu: [],
   },
 ];
@@ -300,7 +306,7 @@ export const bottomMenuItems: menuItem[] = [
     key: 7,
     title: 'Messages',
     link: '/inbox',
-    icon: <Forum />,
+    icon: <Mail />,
     submenu: [],
   },
   {
@@ -319,50 +325,48 @@ export const bottomMenuItems: menuItem[] = [
   },
 ];
 
-// Menu Drawer
-export const drawerItems: React.JSX.Element = (
-  <>
-    <MenuItems items={menuItems} />
-    <MenuItems items={bottomMenuItems} />
-  </>
-);
-
-// Responsive Menu Drawer
-export const responsiveDrawerItems: React.JSX.Element = (
-  <>
-    <MenuItems items={menuItems} text={true} mobile={true} />
-    <MenuItems items={bottomMenuItems} text={true} mobile={true} />
-  </>
-);
-
 // styled components for sub menu
-export const StyledListItemButton: StyledComponent<any> = styled(
+export const SubmenuListItemButton: StyledComponent<any> = styled(
   ListItemButton
-)(({ theme, active }) => ({
-  backgroundColor: active ? theme.palette.primary : 'transparent',
-  color: active ? theme.palette.primary.light : theme.palette.primary.main,
+)(({ theme }) => ({
+  backgroundColor: 'transparent',
+  color: theme.palette.primary.text,
   '&:hover': {
-    backgroundColor: active
-      ? theme.palette.primary.main
-      : theme.palette.primary.main,
+    backgroundColor: theme.palette.primary.lightblue,
     color: theme.palette.primary.light,
   },
-  fontSize: '1rem',
+  fontSize: '14px',
   width: '18rem',
+  boxShadow: 'inset 0 1px 1px #e5e5e5;',
 }));
 
-export const StyledListItemIcon: StyledComponent<any> = styled(ListItemIcon)(
-  ({ theme: theme, active }) => ({
-    color: active ? theme.palette.primary.light : theme.palette.primary.main,
+export const SubmenuListItemIcon: StyledComponent<any> = styled(ListItemIcon)(
+  ({ theme }) => ({
+    color: theme.palette.primary.main,
     '&:hover': {
       color: theme.palette.primary.light,
     },
+    fontSize: '10px',
+    width: '17rem',
+    zIndex: '2',
+    height: 'auto',
   })
 );
 
-export const StyledAppBar: StyledComponent<any> = styled(AppBar)(
+export const SubmenuListItemText: StyledComponent<any> = styled(ListItemText)(
+  () => ({
+    zIndex: '1',
+    marginLeft: '-14rem',
+  })
+);
+
+export const SubmenuToolbar: StyledComponent<any> = styled(Toolbar)(
   ({ theme }) => ({
     backgroundColor: theme.palette.primary.light,
     color: theme.palette.primary.main,
+    fontSize: '18px',
+    fontWeight: '500',
+    justifyContent: 'center',
+    padding: '0',
   })
 );

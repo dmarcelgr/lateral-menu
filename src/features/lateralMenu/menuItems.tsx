@@ -1,4 +1,5 @@
 import {
+  AppBar,
   Box,
   Collapse,
   Drawer,
@@ -8,13 +9,12 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Toolbar,
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
 import { SubMenuItems } from './subMenuItems.tsx';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { StyledAppBar } from './constants/menuConstants.tsx';
+import { SubmenuToolbar } from './constants/menuConstants.tsx';
 
 export function MenuItems(props: []) {
   const [submenuOpen, setSubmenuOpen] = useState(false);
@@ -53,7 +53,7 @@ export function MenuItems(props: []) {
                   handleToggle(item.key, props.mobile ? 'mobile' : 'web')
                 }
               >
-                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemIcon className="text-3xl">{item.icon}</ListItemIcon>
                 {props.text && <ListItemText>{item.title}</ListItemText>}
               </ListItemButton>
             </ListItem>
@@ -66,6 +66,7 @@ export function MenuItems(props: []) {
             {/*submenu for web*/}
             {item.submenu && !props.mobile && (
               <Drawer
+                className="w-full"
                 anchor="left"
                 variant="temporary"
                 open={webSubmenuOpen[item.key]}
@@ -74,11 +75,11 @@ export function MenuItems(props: []) {
                   keepMounted: false,
                 }}
               >
-                <Box className="h-full" bgcolor="primary.light">
-                  <StyledAppBar position="static" className="flex">
-                    <Toolbar>
+                <Box className="h-full w-max" bgcolor="primary.light">
+                  <AppBar position="static" className="flex">
+                    <SubmenuToolbar className="flex justify-between">
                       <Typography
-                        variant="h6"
+                        variant="h4"
                         component="div"
                         className="color-primary"
                       >
@@ -91,8 +92,8 @@ export function MenuItems(props: []) {
                       >
                         <ArrowBackIcon />
                       </IconButton>
-                    </Toolbar>
-                  </StyledAppBar>
+                    </SubmenuToolbar>
+                  </AppBar>
                   <SubMenuItems items={item.submenu}></SubMenuItems>
                 </Box>
               </Drawer>
