@@ -1,11 +1,9 @@
 import React from 'react';
 import {
-  AccessTime,
   AccountCircle,
-  AddToQueue,
   Article,
-  Assessment,
   Assignment,
+  Badge,
   BarChart,
   DevicesOther,
   DisplaySettings,
@@ -13,18 +11,15 @@ import {
   Favorite,
   FlagCircle,
   GroupAdd,
-  Groups,
   Inbox,
   Info,
   LibraryBooks,
-  ListAlt,
   Lock,
   LockPerson,
   Mail,
   MonitorHeart,
   Notifications,
   Password,
-  PermContactCalendar,
   PermPhoneMsg,
   Person,
   RequestQuote,
@@ -36,7 +31,18 @@ import {
   Videocam,
 } from '@mui/icons-material';
 import { menuItem } from './menuInterface.ts';
-import { UserMd } from '../../../assets/icons/userMd.tsx';
+import {
+  ChartIcon,
+  ReportsIcon,
+  ScheduleIcon,
+  TelehealthIcon,
+  UserMdIcon,
+  UsersGroupIcon,
+} from '../../../assets/icons';
+import { Box } from '@mui/material';
+import { MenuItems } from '../menuItems.tsx';
+import esvydaIcon from '/logos/logo-svg-esvyda.svg';
+import esvydaBigIcon from '/logos/fulllogo-svg-esvyda.svg';
 
 // Menu Items data / data structure
 export const menuItems: menuItem[] = [
@@ -44,7 +50,7 @@ export const menuItems: menuItem[] = [
     key: 1,
     title: 'patients',
     link: '/patients',
-    icon: <Groups />,
+    icon: <UsersGroupIcon />,
     submenu: [
       {
         key: 'newp',
@@ -56,18 +62,18 @@ export const menuItems: menuItem[] = [
         key: 'plist',
         title: 'patient_list',
         link: '',
-        icon: <Groups />,
+        icon: <UsersGroupIcon />,
       },
       {
         key: 'appoint',
         title: 'appointments',
-        icon: <AccessTime />,
+        icon: <Today />,
         link: ' ',
       },
       {
         key: 'reports',
         title: 'Reports',
-        icon: <Assessment />,
+        icon: <ReportsIcon />,
         link: ' ',
       },
     ],
@@ -76,19 +82,19 @@ export const menuItems: menuItem[] = [
     key: 2,
     title: 'Telehealth',
     link: '/telehealth',
-    icon: <AddToQueue />,
+    icon: <TelehealthIcon />,
     submenu: [
       {
         key: 'teledash',
         title: 'Telehealth Dashboard',
         link: '',
-        icon: <AddToQueue />,
+        icon: <TelehealthIcon />,
       },
       {
         key: 'teleschedule',
         title: 'schedule',
         link: '',
-        icon: <PermContactCalendar />,
+        icon: <ScheduleIcon />,
       },
       {
         key: 'teleappointments',
@@ -132,19 +138,19 @@ export const menuItems: menuItem[] = [
         key: 'rpmreports',
         title: 'reports',
         link: '',
-        icon: <BarChart />,
+        icon: <ChartIcon />,
       },
       {
         key: 'rpmcompliantpatients',
         title: 'compliant_patients',
         link: '',
-        icon: <BarChart />,
+        icon: <ChartIcon />,
       },
       {
         key: 'rpmimprovingbp',
         title: 'improving_bp',
         link: '',
-        icon: <BarChart />,
+        icon: <ChartIcon />,
       },
       {
         key: 'rpmclaimsapproval',
@@ -176,19 +182,19 @@ export const menuItems: menuItem[] = [
         key: 'sttappointments',
         title: 'appointment_types',
         link: '',
-        icon: <PermContactCalendar />,
+        icon: <Today />,
       },
       {
         key: 'sttcareteam',
         title: 'care_team',
         link: '',
-        icon: <UserMd />,
+        icon: <UserMdIcon />,
       },
       {
         key: 'sttconsentlist',
         title: 'consent_list',
         link: '',
-        icon: <ListAlt />,
+        icon: <LibraryBooks />,
       },
       {
         key: 'sttvitals',
@@ -200,13 +206,13 @@ export const menuItems: menuItem[] = [
         key: 'sttreporttelehealth',
         title: 'report_telehealth',
         link: '',
-        icon: <AddToQueue />,
+        icon: <TelehealthIcon />,
       },
       {
         key: 'sttpopulationgroups',
         title: 'population_groups',
         link: '',
-        icon: <Groups />,
+        icon: <UsersGroupIcon />,
       },
       {
         key: 'sttreferringp',
@@ -278,7 +284,7 @@ export const menuItems: menuItem[] = [
         key: 'sttreportsdashboard',
         title: 'reports_dashboard',
         link: '',
-        icon: <Assessment />,
+        icon: <ReportsIcon />,
       },
     ],
   },
@@ -350,6 +356,12 @@ export const bottomMenuItems: menuItem[] = [
         icon: <Info />,
       },
       {
+        key: 'administrative',
+        title: 'administrative',
+        link: '',
+        icon: <Badge />,
+      },
+      {
         key: 'changeaccount',
         title: 'change_account',
         link: '',
@@ -364,3 +376,23 @@ export const bottomMenuItems: menuItem[] = [
     ],
   },
 ];
+
+// Menu structure
+export const menuContent: JSX.Element = (
+  <>
+    <img
+      src={esvydaBigIcon}
+      className="w-1/5 lg:hidden sm:block"
+      alt="Esvyda logo"
+    />
+    <img
+      src={esvydaIcon}
+      className="w-10 py-1 pl-3 lg:block sm:hidden"
+      alt="Esvyda icon"
+    />
+    <Box className="flex flex-col justify-between h-full">
+      <MenuItems items={menuItems} />
+      <MenuItems items={bottomMenuItems} />
+    </Box>
+  </>
+);

@@ -1,10 +1,7 @@
-import esvydaBigIcon from '../../assets/logos/fulllogo-svg-esvyda.svg';
-import esvydaIcon from '../../assets/logos/logo-svg-esvyda.svg';
 import { Box, Container, Drawer, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { bottomMenuItems, menuItems } from './constants/menuConstants.tsx';
+import { menuContent } from './constants/menuConstants.tsx';
 import React from 'react';
-import { MenuItems } from './menuItems.tsx';
 
 export function LateralMenu() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -39,7 +36,7 @@ export function LateralMenu() {
         </Box>
         <Box
           component="nav"
-          className="w-fit min-h-screen flex flex-col align-middle shadow-md space-y-4 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]"
+          className="w-fit min-h-screen flex flex-col align-middle shadow-md space-y-4"
           aria-label="esvyda lateral menu"
         >
           {/* mobile menu*/}
@@ -54,27 +51,21 @@ export function LateralMenu() {
               keepMounted: false,
             }}
           >
-            <Box className="bg-blue.main flex-col p-4" bgcolor="blue.main">
-              <img src={esvydaBigIcon} className="w-1/5" alt="Esvyda logo" />
-              <MenuItems items={menuItems} text={true} mobile={true} />
-              <MenuItems items={bottomMenuItems} text={true} mobile={true} />
+            <Box className="flex-col p-4" bgcolor="primary.main">
+              {menuContent}
             </Box>
           </Drawer>
           {/* Lateral menu */}
           <Drawer
-            className="hidden lg:block flex items-center x-4"
+            className="hidden lg:block flex items-center x-4 sm:align-middle"
             variant="permanent"
-            bcolor="blue.main"
+            PaperProps={{
+              sx: {
+                backgroundColor: 'primary.main',
+              },
+            }}
           >
-            <img
-              src={esvydaIcon}
-              className="w-10 py-1 pl-3"
-              alt="Esvyda icon"
-            />
-            <Box className="flex flex-col justify-between h-full">
-              <MenuItems items={menuItems} />
-              <MenuItems items={bottomMenuItems} />
-            </Box>
+            {menuContent}
           </Drawer>
         </Box>
       </Container>

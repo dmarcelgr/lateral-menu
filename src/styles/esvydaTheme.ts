@@ -6,22 +6,36 @@ const esvydaTheme: Theme = createTheme({
     primary: {
       main: '#0e405e',
       dark: '#1A3443',
+      darker: '#0b364f',
       light: '#1972a8',
     },
-    orange: {
-      main: '#e8911d',
-    },
-    greyscale: {
+    secondary: {
       light: '#ffffff',
       main: '#858585',
       lightgrey: '#B8B8B8',
       shadow: '#e5e5e5',
+      dark: '#606060',
       darker: '#000000',
+    },
+    orange: {
+      main: '#e8911d',
+    },
+    error: {
+      main: '#f44336',
+    },
+    success: {
+      main: '#4caf50',
+    },
+    warning: {
+      main: '#e8911d',
+    },
+    info: {
+      main: '#1972a8',
     },
   },
   typography: {
     fontFamily: 'Roboto',
-    fontSize: 14,
+    fontSize: 15,
     h1: {
       fontSize: '2rem',
     },
@@ -33,7 +47,7 @@ const esvydaTheme: Theme = createTheme({
       fontWeight: '500',
     },
     body1: {
-      fontSize: '14px',
+      fontSize: '15px',
     },
   },
   components: {
@@ -41,20 +55,12 @@ const esvydaTheme: Theme = createTheme({
       styleOverrides: {
         root: {
           fontSize: '3rem',
-          color: '#ffffffc7',
+          color: '#ffffff',
           '&:hover': {
             color: '#ffffff',
           },
           width: '40px',
           minWidth: 'auto',
-        },
-      },
-    },
-    MuiDrawer: {
-      styleOverrides: {
-        paper: {
-          backgroundColor: '#0e405e',
-          color: '#fff',
         },
       },
     },

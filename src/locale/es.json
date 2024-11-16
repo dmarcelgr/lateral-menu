@@ -44,6 +44,7 @@
   "security_questions": "Preguntas de seguridad",
   "password": "Contraseña",
   "about_us": "Sobre nosotros",
+  "administrative": "Zona administrativa",
   "change_account": "Cambiar cuenta",
   "log_out": "Cerrar sesión"
 }
