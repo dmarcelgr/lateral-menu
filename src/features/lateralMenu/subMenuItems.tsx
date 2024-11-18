@@ -13,8 +13,6 @@ function getRandomInt(max): number {
 
 interface menuItemsProps {
   items: menuItem[];
-  mobile: boolean;
-  text: boolean;
 }
 
 export function SubMenuItems(props: menuItemsProps[]) {
@@ -29,8 +27,9 @@ export function SubMenuItems(props: menuItemsProps[]) {
           return (
             <ListItemButton
               key={subitem.key}
-              className="shadow-inner bg-primary-main text-white bg-primary-main"
+              className="shadow-inner"
               sx={{
+                padding: '5px 10px',
                 ':hover': {
                   bgcolor: 'primary.light',
                   color: 'secondary.light',
@@ -38,7 +37,7 @@ export function SubMenuItems(props: menuItemsProps[]) {
               }}
             >
               <ListItemIcon
-                className="z-20 w-72  px-1 py-1 text-sm"
+                className="z-20 w-10 px-1 py-1"
                 sx={{
                   color: 'primary.dark',
                   ':hover': {
@@ -49,9 +48,9 @@ export function SubMenuItems(props: menuItemsProps[]) {
                 {subitem.icon}
               </ListItemIcon>
               <ListItemText
-                className="z-10"
+                className="z-10 w-fit"
                 sx={{
-                  color: 'primary.main',
+                  color: 'secondary.main',
                   ':hover': {
                     color: 'secondary.light',
                   },

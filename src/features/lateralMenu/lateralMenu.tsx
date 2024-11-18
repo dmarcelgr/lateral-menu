@@ -1,64 +1,57 @@
-import { Box, Container, Drawer, IconButton } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import {
+  Box,
+  Container,
+  Drawer,
+  IconButton,
+  useMediaQuery,
+} from '@mui/material';
+import { Close, Menu } from '@mui/icons-material';
 import { menuContent } from './constants/menuConstants.tsx';
 import React from 'react';
 
 export function LateralMenu() {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [isClosing, setIsClosing] = React.useState(false);
+  const matchesResponsiveWidth = useMediaQuery('(min-width:1023px)');
+  const [menuOpen, setMenuOpen] = React.useState(false);
 
-  const handleDrawerClose = (): void => {
-    setIsClosing(true);
-    setMobileOpen(false);
+  const handleToggle = (): void => {
+    setMenuOpen(!menuOpen);
   };
 
-  const handleDrawerTransitionEnd = (): void => {
-    setIsClosing(false);
-  };
-
-  const handleDrawerToggle = (): void => {
-    if (!isClosing) {
-      setMobileOpen(!mobileOpen);
-    }
+  const handleClose = (): void => {
+    setMenuOpen(false);
   };
 
   return (
     <>
-      <Container>
-        <Box className="w-9 px-2 content-center rounded-full">
+      <Container className="z-1">
+        {/*Hamburger menu button for mobile*/}
+        <Box
+          className={`p-2 block lg:hidden flex ${menuOpen ? 'justify-end' : 'justify-start'}`}
+        >
           <IconButton
             aria-label="open menu"
-            edge="start"
-            onClick={handleDrawerToggle}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Box>
-        <Box
-          component="nav"
-          className="w-fit min-h-screen flex flex-col align-middle shadow-md space-y-4"
-          aria-label="esvyda lateral menu"
-        >
-          {/* mobile menu*/}
-          <Drawer
-            anchor="top"
-            className="block lg:hidden gap-64 align-middle"
-            variant="temporary"
-            open={mobileOpen}
-            onTransitionEnd={handleDrawerTransitionEnd}
-            onClose={handleDrawerClose}
-            ModalProps={{
-              keepMounted: false,
+            edge={menuOpen ? 'end' : 'start'}
+            onClick={handleToggle}
+            className="z-[2000] shadow"
+            sx={{
+              color: 'secondary.light',
+              backgroundColor: 'primary.main',
+              borderRadius: '3rem',
+              ':hover': {
+                bgcolor: 'primary.dark',
+              },
             }}
           >
-            <Box className="flex-col p-4" bgcolor="primary.main">
-              {menuContent}
-            </Box>
-          </Drawer>
-          {/* Lateral menu */}
+            {menuOpen ? <Close /> : <Menu />}
+          </IconButton>
+        </Box>
+        <Box className="shadow-md">
           <Drawer
-            className="hidden lg:block flex items-center x-4 sm:align-middle"
-            variant="permanent"
+            className="flex items-center x-4 sm:align-middle shadow-md z-2"
+            anchor={matchesResponsiveWidth ? 'left' : 'top'}
+            variant={matchesResponsiveWidth ? 'permanent' : 'temporary'}
+            open={menuOpen}
+            onClose={handleClose}
             PaperProps={{
               sx: {
                 backgroundColor: 'primary.main',

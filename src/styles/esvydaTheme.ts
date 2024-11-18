@@ -54,12 +54,7 @@ const esvydaTheme: Theme = createTheme({
     MuiListItemIcon: {
       styleOverrides: {
         root: {
-          fontSize: '3rem',
           color: '#ffffff',
-          '&:hover': {
-            color: '#ffffff',
-          },
-          width: '40px',
           minWidth: 'auto',
         },
       },

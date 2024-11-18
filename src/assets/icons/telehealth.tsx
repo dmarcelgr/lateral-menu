@@ -1,10 +1,16 @@
 import React from 'react';
 
 export const TelehealthIcon = () => (
+  // <svg
+  //   xmlns="http://www.w3.org/2000/svg"
+  //   width="40"
+  //   height="30"
+  //   viewBox="0 90 1200 900"
+  // >
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="35"
-    height="30"
+    width="40"
+    height="24"
     viewBox="0 90 1200 900"
   >
     <path

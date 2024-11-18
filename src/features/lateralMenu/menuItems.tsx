@@ -1,7 +1,6 @@
 import {
   AppBar,
   Box,
-  Collapse,
   Drawer,
   IconButton,
   List,
@@ -13,127 +12,129 @@ import {
   Typography,
   useMediaQuery,
 } from '@mui/material';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { SubMenuItems } from './subMenuItems.tsx';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { ArrowBack } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { menuItem } from './constants/menuInterface.ts';
 
 interface menuItemsProps {
   items: menuItem[];
-  mobile: boolean;
-  text: boolean;
 }
 
 export function MenuItems(props: menuItemsProps) {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   const { t }: Function = useTranslation();
   const { items }: menuItem = props;
-  const matchesWidth: boolean = useMediaQuery('(min-width:1023px)');
-
+  const matchesResponsiveWidth = useMediaQuery('(min-width:1023px)');
   const [submenuOpen, setSubmenuOpen] = useState(false);
-  const [webSubmenuOpen, setWebSubmenuOpen] = useState(false);
-  const [webSubmenuClose, setWebSubmenuClose] = useState(false);
 
   const handleToggle = (key: never): void => {
-    if (matchesWidth) {
-      setWebSubmenuOpen((prevState: any) => ({
-        ...prevState,
-        [key]: !prevState[key],
-      }));
-    } else {
-      setSubmenuOpen((prevState: any) => ({
-        ...prevState,
-        [key]: !prevState[key],
-      }));
-    }
+    setSubmenuOpen((prevState: any) => ({
+      ...prevState,
+      [key]: !prevState[key],
+    }));
   };
 
   const handleDrawerClose = (): void => {
-    setWebSubmenuClose(true);
-    setWebSubmenuOpen(false);
+    setSubmenuOpen(false);
   };
 
   return (
-    <List aria-label="lateral menu">
+    <List aria-label="lateral menu" className="p-0">
       {items.map((item) => {
         return (
           <>
+            {/*main menu structure*/}
             <ListItem
               key={item.key}
               disablePadding
-              className="h-14 opacity-60 hover:opacity-100"
+              className="h-14 lg:opacity-60 hover:opacity-100 h-fit"
               sx={{
-                bgcolor: 'primary.darker',
+                bgcolor: 'primary.main',
                 ':hover': {
+                  color: 'secondary.light',
                   bgcolor: 'secondary.dark',
                 },
               }}
             >
               <ListItemButton
-                className="shadow-inner divide-y-2 divide-slate-400"
+                className="shadow-inner divide-none lg:divide-solid divide-y-2 divide-slate-400 py-10 h-[4rem]"
                 onClick={() => handleToggle(item.key)}
               >
                 <ListItemIcon>
-                  {item.icon}
-                  {/*{React.cloneElement(item.icon, { fontSize: 'large' })}*/}
+                  {React.cloneElement(item.icon, {
+                    sx: {
+                      color: 'secondary.light',
+                      width: '2.5rem',
+                      fontSize: '2rem',
+                    },
+                  })}
                 </ListItemIcon>
-                {!matchesWidth && <ListItemText>{item.title}</ListItemText>}
+                <ListItemText
+                  className="block lg:hidden"
+                  sx={{ color: 'secondary.light' }}
+                >
+                  {t(item.title)}
+                </ListItemText>
               </ListItemButton>
             </ListItem>
-            {/*submenu for mobile*/}
-            {matchesWidth && (
-              <Collapse in={submenuOpen[item.key]} timeout="auto" unmountOnExit>
-                <SubMenuItems items={item.submenu}></SubMenuItems>
-              </Collapse>
-            )}
-            {/*submenu for web*/}
+            {/*submenu structure*/}
             {item.submenu && (
               <Drawer
                 className="w-full"
-                anchor="left"
+                anchor={matchesResponsiveWidth ? 'left' : 'top'}
                 variant="temporary"
                 hideBackdrop
-                open={webSubmenuOpen[item.key]}
+                open={submenuOpen[item.key]}
                 onClose={handleDrawerClose}
                 ModalProps={{
-                  keepMounted: true,
+                  keepMounted: false,
                 }}
                 PaperProps={{
                   sx: {
-                    left: '5%',
-                    width: '30%',
+                    left: { xs: '1', lg: '4.5rem' },
+                    width: { xs: '100%', lg: '30%' },
                   },
                 }}
               >
-                <Box className="h-full w-full" bgcolor="secondary.light">
+                <Box
+                  className="h-full w-full px-2.5"
+                  bgcolor="primary.main lg:secondary.light"
+                >
                   <AppBar
                     position="static"
                     className="flex"
                     color="secondary.light"
                     elevation={0}
                   >
-                    <Toolbar className="flex flex-row justify-between">
-                      <span className="flex-1"></span>
+                    <Toolbar
+                      className={`flex flex-row min-h-12 ${submenuOpen ? 'justify-start' : 'justify-between'}`}
+                    >
+                      <span className="flex-1 hidden lg:block"></span>
                       <Typography
                         variant="h4"
                         component="div"
                         color="primary.main"
+                        className="block"
                       >
                         {t(item.title)}
                       </Typography>
-                      <span className="flex-1"></span>
+                      <span className="flex-1 hidden lg:block"></span>
                       <IconButton
                         aria-label="close submenu"
                         edge="end"
                         color="primary.main"
                         onClick={handleDrawerClose}
                       >
-                        <ArrowBackIcon />
+                        <ArrowBack />
                       </IconButton>
                     </Toolbar>
                   </AppBar>
-                  <SubMenuItems items={item.submenu}></SubMenuItems>
+                  <SubMenuItems
+                    key={item.key}
+                    items={item.submenu}
+                  ></SubMenuItems>
                 </Box>
               </Drawer>
             )}

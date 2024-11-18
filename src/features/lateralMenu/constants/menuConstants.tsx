@@ -42,7 +42,7 @@ import {
 import { Box } from '@mui/material';
 import { MenuItems } from '../menuItems.tsx';
 import esvydaIcon from '/logos/logo-svg-esvyda.svg';
-import esvydaBigIcon from '/logos/fulllogo-svg-esvyda.svg';
+import esvydaBigIcon from '/logos/fulllogo-svg-esvyda.svg'; // Menu Items data / data structure
 
 // Menu Items data / data structure
 export const menuItems: menuItem[] = [
@@ -380,16 +380,23 @@ export const bottomMenuItems: menuItem[] = [
 // Menu structure
 export const menuContent: JSX.Element = (
   <>
-    <img
-      src={esvydaBigIcon}
-      className="w-1/5 lg:hidden sm:block"
-      alt="Esvyda logo"
-    />
-    <img
-      src={esvydaIcon}
-      className="w-10 py-1 pl-3 lg:block sm:hidden"
-      alt="Esvyda icon"
-    />
+    <Box
+      bgcolor="primary.main"
+      className="w-full p-0 border-t-2 border-t-slate-500"
+    >
+      {/*logo for mobile*/}
+      <img
+        src={esvydaBigIcon}
+        className="w-1/5 sm:block lg:hidden"
+        alt="Esvyda logo"
+      />
+      {/*logo-icon for web app*/}
+      <img
+        src={esvydaIcon}
+        className="w-10 py-1 pl-3 hidden lg:flex"
+        alt="Esvyda icon"
+      />
+    </Box>
     <Box className="flex flex-col justify-between h-full">
       <MenuItems items={menuItems} />
       <MenuItems items={bottomMenuItems} />
