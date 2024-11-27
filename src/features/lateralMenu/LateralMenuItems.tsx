@@ -12,26 +12,24 @@ import {
   Typography,
   useMediaQuery,
 } from '@mui/material';
-import React, { useState } from 'react';
-import { SubMenuItems } from './subMenuItems.tsx';
+import { useState } from 'react';
+import { SubMenuItems } from './SubMenuItems.tsx';
 import { ArrowBack } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
-import { menuItem } from './constants/menuInterface.ts';
+import { MenuItem } from './interfaces/menuInterface.ts';
 
-interface menuItemsProps {
-  items: menuItem[];
+interface MenuItemsProps {
+  items: MenuItem[];
 }
 
-export function MenuItems(props: menuItemsProps) {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-  const { t }: Function = useTranslation();
-  const { items }: menuItem = props;
+export function LateralMenuItems(props: MenuItemsProps) {
+  const { t } = useTranslation();
+  const { items }: MenuItem = props;
   const matchesResponsiveWidth = useMediaQuery('(min-width:1023px)');
   const [submenuOpen, setSubmenuOpen] = useState(false);
 
-  const handleToggle = (key: never): void => {
-    setSubmenuOpen((prevState: any) => ({
-      ...prevState,
+  const handleToggle = (key: number) => {
+    setSubmenuOpen((prevState: boolean) => ({
       [key]: !prevState[key],
     }));
   };
@@ -62,14 +60,18 @@ export function MenuItems(props: menuItemsProps) {
                 className="shadow-inner divide-none lg:divide-solid divide-y-2 divide-slate-400 py-10 h-[4rem]"
                 onClick={() => handleToggle(item.key)}
               >
-                <ListItemIcon>
-                  {React.cloneElement(item.icon, {
-                    sx: {
-                      color: 'secondary.light',
-                      width: '2.5rem',
-                      fontSize: '2rem',
-                    },
-                  })}
+                <ListItemIcon className="min-w-12	">
+                  {item.icon}
+                  {/*{cloneElement(*/}
+                  {/*  item.icon*/}
+                  {/*  //   {*/}
+                  {/*  //   sx: {*/}
+                  {/*  //     color: 'secondary.light',*/}
+                  {/*  //     width: '2.5rem',*/}
+                  {/*  //     fontSize: '2rem',*/}
+                  {/*  //   },*/}
+                  {/*  // }*/}
+                  {/*)}*/}
                 </ListItemIcon>
                 <ListItemText
                   className="block lg:hidden"

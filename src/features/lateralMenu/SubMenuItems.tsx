@@ -5,18 +5,18 @@ import {
   ListItemText,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { menuItem } from './constants/menuInterface.ts';
+import { MenuItem } from './interfaces/menuInterface.ts';
 
 function getRandomInt(max): number {
   return Math.floor(Math.random() * max);
 }
 
-interface menuItemsProps {
-  items: menuItem[];
+interface MenuItemsProps {
+  items: MenuItem[];
 }
 
-export function SubMenuItems(props: menuItemsProps[]) {
-  const { items }: menuItem = props;
+export function SubMenuItems(props: MenuItemsProps[]) {
+  const { items }: MenuItem = props;
 
   const { t } = useTranslation();
   const randomKey: number = getRandomInt(2);

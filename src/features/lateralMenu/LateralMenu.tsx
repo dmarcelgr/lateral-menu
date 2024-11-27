@@ -6,12 +6,12 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { Close, Menu } from '@mui/icons-material';
-import { menuContent } from './constants/menuConstants.tsx';
-import React from 'react';
+import { MenuContent } from './constants/MenuContent.tsx';
+import { useState } from 'react';
 
 export function LateralMenu() {
   const matchesResponsiveWidth = useMediaQuery('(min-width:1023px)');
-  const [menuOpen, setMenuOpen] = React.useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleToggle = (): void => {
     setMenuOpen(!menuOpen);
@@ -32,11 +32,10 @@ export function LateralMenu() {
             aria-label="open menu"
             edge={menuOpen ? 'end' : 'start'}
             onClick={handleToggle}
-            className="z-[2000] shadow"
+            className="z-[2000] shadow rounded-full"
             sx={{
               color: 'secondary.light',
               backgroundColor: 'primary.main',
-              borderRadius: '3rem',
               ':hover': {
                 bgcolor: 'primary.dark',
               },
@@ -58,7 +57,7 @@ export function LateralMenu() {
               },
             }}
           >
-            {menuContent}
+            <MenuContent />
           </Drawer>
         </Box>
       </Container>
