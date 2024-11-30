@@ -1,11 +1,7 @@
-import {
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from '@mui/material';
+import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { MenuItem } from './interfaces/menuInterface.ts';
+import { Link } from 'react-router-dom';
 
 function getRandomInt(max): number {
   return Math.floor(Math.random() * max);
@@ -25,9 +21,12 @@ export function SubMenuItems(props: MenuItemsProps[]) {
       <List aria-label="lateral menu" key={randomKey}>
         {items.map((subitem) => {
           return (
-            <ListItemButton
+            <ListItem
+              component={Link}
+              button
               key={subitem.key}
               className="shadow-inner"
+              to={subitem.link}
               sx={{
                 padding: '5px 10px',
                 ':hover': {
@@ -57,7 +56,7 @@ export function SubMenuItems(props: MenuItemsProps[]) {
                 }}
                 primary={t(subitem.title)}
               />
-            </ListItemButton>
+            </ListItem>
           );
         })}
       </List>

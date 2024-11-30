@@ -12,13 +12,14 @@ import {
   Typography,
   useMediaQuery,
 } from '@mui/material';
-import { useState } from 'react';
+import { cloneElement, useState } from 'react';
 import { SubMenuItems } from './SubMenuItems.tsx';
 import { ArrowBack } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { MenuItem } from './interfaces/menuInterface.ts';
 
 interface MenuItemsProps {
+  key: string;
   items: MenuItem[];
 }
 
@@ -39,7 +40,7 @@ export function LateralMenuItems(props: MenuItemsProps) {
   };
 
   return (
-    <List aria-label="lateral menu" className="p-0">
+    <List aria-label="lateral menu" key={items.key} className="p-0">
       {items.map((item) => {
         return (
           <>
@@ -61,17 +62,13 @@ export function LateralMenuItems(props: MenuItemsProps) {
                 onClick={() => handleToggle(item.key)}
               >
                 <ListItemIcon className="min-w-12	">
-                  {item.icon}
-                  {/*{cloneElement(*/}
-                  {/*  item.icon*/}
-                  {/*  //   {*/}
-                  {/*  //   sx: {*/}
-                  {/*  //     color: 'secondary.light',*/}
-                  {/*  //     width: '2.5rem',*/}
-                  {/*  //     fontSize: '2rem',*/}
-                  {/*  //   },*/}
-                  {/*  // }*/}
-                  {/*)}*/}
+                  {cloneElement(item.icon, {
+                    sx: {
+                      color: 'secondary.light',
+                      width: '2.5rem',
+                      fontSize: '2rem',
+                    },
+                  })}
                 </ListItemIcon>
                 <ListItemText
                   className="block lg:hidden"
@@ -84,7 +81,7 @@ export function LateralMenuItems(props: MenuItemsProps) {
             {/*submenu structure*/}
             {item.submenu && (
               <Drawer
-                className="w-full"
+                className="w-full absolute !left-5"
                 anchor={matchesResponsiveWidth ? 'left' : 'top'}
                 variant="temporary"
                 hideBackdrop

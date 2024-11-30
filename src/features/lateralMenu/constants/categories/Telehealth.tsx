@@ -11,19 +11,19 @@ export const Telehealth: MenuItem = {
     {
       key: 2001,
       title: 'Telehealth Dashboard',
-      link: '',
+      link: 'dashboard/medicaltelehealth/home',
       icon: <TelehealthIcon />,
     },
     {
       key: 2002,
       title: 'schedule',
-      link: '',
+      link: 'patients/schedule/22',
       icon: <ScheduleIcon />,
     },
     {
       key: 2003,
       title: 'appointments',
-      link: '',
+      link: 'patients/appointments',
       icon: <Today />,
     },
   ],
