@@ -1,11 +1,11 @@
 import { Link, Outlet, Route, Routes, useParams } from 'react-router-dom';
-import { MainLayout } from '../components/MainLayout.tsx';
+import { Box } from '@mui/material';
 
 export const AppRouter = () => {
   return (
     <Routes>
       {/*Main route*/}
-      <Route path="/" element={<MainLayout />}>
+      <Route path="/" element={<Home />}>
         {/*Patients*/}
         <Route
           path="patients/*"
@@ -284,20 +284,21 @@ export const AppRouter = () => {
 
 function Home() {
   return (
-    <div>
+    <Box className="w-full pl-20">
       <h2>Home</h2>
-    </div>
+      <Outlet />
+    </Box>
   );
 }
 
 function NoMatch() {
   return (
-    <div>
+    <Box>
       <h2>Nothing to see here!</h2>
       <p>
         <Link to="/">Go to the home page</Link>
       </p>
-    </div>
+    </Box>
   );
 }
 

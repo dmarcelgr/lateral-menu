@@ -81,7 +81,7 @@ export function LateralMenuItems(props: MenuItemsProps) {
             {/*submenu structure*/}
             {item.submenu && (
               <Drawer
-                className="w-full absolute !left-5"
+                className="w-full absolute !left-20"
                 anchor={matchesResponsiveWidth ? 'left' : 'top'}
                 variant="temporary"
                 hideBackdrop
