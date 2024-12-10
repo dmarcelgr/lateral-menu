@@ -23,7 +23,7 @@ export function LateralMenu() {
 
   return (
     <>
-      <Container className="z-1">
+      <Container>
         {/*Hamburger menu button for mobile*/}
         <Box
           className={`p-2 block lg:hidden flex ${menuOpen ? 'justify-end' : 'justify-start'}`}
@@ -44,9 +44,9 @@ export function LateralMenu() {
             {menuOpen ? <Close /> : <Menu />}
           </IconButton>
         </Box>
-        <Box className="shadow-md">
+        <Box>
           <Drawer
-            className="flex items-center x-4 sm:align-middle shadow-md z-2"
+            className="flex items-center x-4 sm:align-middle shadow-md !z-4"
             anchor={matchesResponsiveWidth ? 'left' : 'top'}
             variant={matchesResponsiveWidth ? 'permanent' : 'temporary'}
             open={menuOpen}

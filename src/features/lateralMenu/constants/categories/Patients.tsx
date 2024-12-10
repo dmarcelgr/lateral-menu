@@ -30,7 +30,7 @@ export const Patients: MenuItem = {
       key: 1004,
       title: 'Reports',
       icon: <ReportsIcon />,
-      link: 'reports/medicare-time-tracking',
+      link: 'patients/reports/medicare-time-tracking',
     },
   ],
 };

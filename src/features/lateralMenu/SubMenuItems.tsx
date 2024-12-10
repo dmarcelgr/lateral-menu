@@ -23,7 +23,6 @@ export function SubMenuItems(props: MenuItemsProps[]) {
           return (
             <ListItem
               component={Link}
-              button
               key={subitem.key}
               className="shadow-inner"
               to={subitem.link}

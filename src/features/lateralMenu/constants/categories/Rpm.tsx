@@ -42,19 +42,19 @@ export const RemotePatientMonitoring: MenuItem = {
     {
       key: 3005,
       title: 'reports',
-      link: 'reports/dashboard',
+      link: 'patients/reports/dashboard',
       icon: <ChartIcon />,
     },
     {
       key: 3006,
       title: 'compliant_patients',
-      link: 'reports/compliant-patients',
+      link: 'patients/reports/compliant-patients',
       icon: <ChartIcon />,
     },
     {
       key: 3007,
       title: 'improving_bp',
-      link: 'reports/blood-pressure-improvement',
+      link: 'patients/reports/blood-pressure-improvement',
       icon: <ChartIcon />,
     },
     {

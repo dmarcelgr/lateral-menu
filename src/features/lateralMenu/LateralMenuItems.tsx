@@ -1,7 +1,9 @@
 import {
   AppBar,
   Box,
+  Divider,
   Drawer,
+  Fade,
   IconButton,
   List,
   ListItem,
@@ -44,6 +46,10 @@ export function LateralMenuItems(props: MenuItemsProps) {
       {items.map((item) => {
         return (
           <>
+            <Divider
+              component="li"
+              className="z-100 opacity-60 lg:!border-t	lg:!border-slate-400"
+            />
             {/*main menu structure*/}
             <ListItem
               key={item.key}
@@ -58,7 +64,7 @@ export function LateralMenuItems(props: MenuItemsProps) {
               }}
             >
               <ListItemButton
-                className="shadow-inner divide-none lg:divide-solid divide-y-2 divide-slate-400 py-10 h-[4rem]"
+                className="py-10 h-16"
                 onClick={() => handleToggle(item.key)}
               >
                 <ListItemIcon className="min-w-12	">
@@ -81,12 +87,14 @@ export function LateralMenuItems(props: MenuItemsProps) {
             {/*submenu structure*/}
             {item.submenu && (
               <Drawer
-                className="w-full absolute !left-20"
+                className="w-full absolute !left-20 !z-1"
                 anchor={matchesResponsiveWidth ? 'left' : 'top'}
                 variant="temporary"
                 hideBackdrop
                 open={submenuOpen[item.key]}
                 onClose={handleDrawerClose}
+                TransitionComponent={Fade}
+                transitionDuration={0}
                 ModalProps={{
                   keepMounted: false,
                 }}
