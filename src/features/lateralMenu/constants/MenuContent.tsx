@@ -2,7 +2,7 @@
 import { Box, useMediaQuery } from '@mui/material';
 import esvydaBigIcon from '/logos/fulllogo-svg-esvyda.svg';
 import esvydaIcon from '/logos/logo-svg-esvyda.svg';
-import { LateralMenuItems } from '../LateralMenuItems.tsx';
+import { LateralMenuItems } from '../components/LateralMenuItems.tsx';
 import JSX from 'react';
 import { ewpBottomMenuItems, ewpMenuItems } from './MenuConstants.tsx';
 import { Link } from 'react-router-dom';

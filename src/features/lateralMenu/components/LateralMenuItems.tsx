@@ -18,8 +18,8 @@ import { cloneElement, useState } from 'react';
 import { SubMenuItems } from './SubMenuItems.tsx';
 import { ArrowBack } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
-import { MenuItem } from './interfaces/menuInterface.ts';
-import { MessagesComponent } from '../messages/components/messagesComponent.tsx';
+import { MenuItem } from '../interfaces/menuInterface.ts';
+import { MessagesComponent } from '../../messages/components/MessagesComponent.tsx';
 
 interface MenuItemsProps {
   key: string;

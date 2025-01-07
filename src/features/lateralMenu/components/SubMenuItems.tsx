@@ -1,6 +1,6 @@
 import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { MenuItem } from './interfaces/menuInterface.ts';
+import { MenuItem } from '../interfaces/menuInterface.ts';
 import { Link } from 'react-router-dom';
 
 function getRandomInt(max): number {

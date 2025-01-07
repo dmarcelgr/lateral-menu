@@ -1,13 +1,12 @@
 import {
   Avatar,
   Badge,
-  Divider,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
 } from '@mui/material';
-import esvydaLogo from '../../../assets/images/logo-svg-esvyda.svg';
+import icon_indeterminate from '../../../assets/images/icon_indeterminate.png';
 import { useGetMessagesInboxQuery } from '../redux/apis/messagesApi.ts';
 import { useTranslation } from 'react-i18next';
 import { format, parseISO } from 'date-fns';
@@ -31,12 +30,22 @@ export function MessagesInbox() {
         <ListItem
           key={message.id}
           secondaryAction={
-            <Badge color="primary" badgeContent={1} max={999}></Badge>
+            message.status != 'read' && (
+              <Badge color="primary" badgeContent={1} max={999}></Badge>
+            )
           }
+          className="shadow-inner my-2"
         >
           <ListItemAvatar>
             <Avatar>
-              <img src={esvydaLogo} className="esvyda logo" alt="Esvyda logo" />
+              <img
+                src={
+                  message.user_from.people.image_filename
+                    ? message.user_from.people.image_filename
+                    : icon_indeterminate
+                }
+                alt="User"
+              />
             </Avatar>
           </ListItemAvatar>
 
@@ -51,8 +60,6 @@ export function MessagesInbox() {
             }
             secondary={`${message.message}`}
           />
-          <Divider />
-          {/*  status */}
         </ListItem>
       ))}
     </List>

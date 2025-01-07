@@ -1228,7 +1228,6 @@ export default function MessagesModel(data: []):
   // console.log('MessagesModel: ', data);
   try {
     const result = data?.length ? data : [];
-    // const result = data?.length ? transformData(data[0]) : [];
     return {
       data: result[0],
     };
