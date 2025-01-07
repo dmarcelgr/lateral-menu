@@ -19,6 +19,7 @@ import { SubMenuItems } from './SubMenuItems.tsx';
 import { ArrowBack } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { MenuItem } from './interfaces/menuInterface.ts';
+import { MessagesComponent } from '../messages/components/messagesComponent.tsx';
 
 interface MenuItemsProps {
   key: string;
@@ -138,10 +139,13 @@ export function LateralMenuItems(props: MenuItemsProps) {
                       </IconButton>
                     </Toolbar>
                   </AppBar>
-                  <SubMenuItems
-                    key={item.key}
-                    items={item.submenu}
-                  ></SubMenuItems>
+                  {item.title === 'inbox' && <MessagesComponent />}
+                  {item.title != 'inbox' && (
+                    <SubMenuItems
+                      key={item.key}
+                      items={item.submenu}
+                    ></SubMenuItems>
+                  )}
                 </Box>
               </Drawer>
             )}

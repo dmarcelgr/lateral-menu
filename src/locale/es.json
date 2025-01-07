@@ -38,6 +38,7 @@
   "reports_dashboard": "Panel de reportes",
   "search": "Búsqueda",
   "messages": "Mensajes",
+  "inbox": "Bandeja de entrada",
   "notifications": "Notificaciones",
   "user": "Usuario",
   "profile": "Perfil",
@@ -46,5 +47,9 @@
   "about_us": "Sobre nosotros",
   "administrative": "Zona administrativa",
   "change_account": "Cambiar cuenta",
-  "log_out": "Cerrar sesión"
+  "log_out": "Cerrar sesión",
+  "compose_message": "Escribir mensaje",
+  "view_messages": "Ver mensajes",
+  "loading": "Cargando",
+  "error_loading": "Error al cargar"
 }

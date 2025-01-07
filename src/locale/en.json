@@ -38,6 +38,7 @@
   "reports_dashboard": "Reports dashboard",
   "search": "Search",
   "messages": "Messages",
+  "inbox": "Inbox",
   "notifications": "Notifications",
   "user": "User",
   "profile": "Profile",
@@ -46,5 +47,9 @@
   "about_us": "About us",
   "administrative": "Administrative",
   "change_account": "Change account",
-  "log_out": "Log out"
+  "log_out": "Log out",
+  "compose_message": "Compose message",
+  "view_messages": "View messages",
+  "loading": "Loading",
+  "error_loading": "Error at loading"
 }

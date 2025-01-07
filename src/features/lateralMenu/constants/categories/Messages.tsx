@@ -3,7 +3,7 @@ import { Mail } from '@mui/icons-material';
 
 export const Messages: MenuItem = {
   key: 7000,
-  title: 'messages',
+  title: 'inbox',
   link: '/inbox',
   icon: <Mail />,
   submenu: [],
