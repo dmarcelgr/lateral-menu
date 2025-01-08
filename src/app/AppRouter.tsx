@@ -162,6 +162,30 @@ export const AppRouter = () => {
               element={<PageLinkTest name="Blood pressure improvement" />}
             />
           </Route>
+
+          {/*  Inbox Messages */}
+          <Route path="msgs/*" element={<PageLinkTest name="Messages main" />}>
+            {/*Messages inbox*/}
+            <Route
+              path="inbox"
+              element={<PageLinkTest name="Messages inbox" />}
+            />
+            {/*Messages view*/}
+            <Route
+              path="view/*"
+              element={<PageLinkTest name="Messages view" />}
+            >
+              <Route
+                path=":messageid"
+                element={<PageLinkTest name="Messages view id" />}
+              />
+            </Route>
+            {/*Messages compose*/}
+            <Route
+              path="compose"
+              element={<PageLinkTest name="Messages compose" />}
+            />
+          </Route>
         </Route>
         {/*End of patients routes*/}
 
@@ -309,10 +333,12 @@ interface Props {
 // Function to validate urls
 function PageLinkTest(items: Props) {
   const { patientid }: number = useParams();
+  const { messageid }: number = useParams();
   return (
     <div>
       <h1>Welcome to {items.name}</h1>
       {patientid && <b>patient id = {patientid}</b>}
+      {messageid && <b>message id = {messageid}</b>}
       <Outlet />
     </div>
   );

@@ -1,5 +1,7 @@
 // Api for Inbox Section at Lateral Menu:
 //esvyda-api-messages-section-get&djng_url_kwarg_section=inbox&page=1&page_size=20
+import icon_man from '../../../assets/images/icon_man.png';
+import icon_woman from '../../../assets/images/icon_woman.png';
 
 export const dataAux = [
   {
@@ -1229,9 +1231,27 @@ export default function MessagesModel(data: []):
   try {
     const result = data?.length ? data : [];
     return {
-      data: result[0],
+      data: countUnreadMessages(result[0]),
     };
   } catch (e) {
     console.log('Error at MessagesModel', e);
   }
+}
+
+function countUnreadMessages(data) {
+  let messages = data.group_data;
+  for (let i = messages.user_list.length - 1; i >= 0; i--) {
+    messages.user_list[i]['count'] = messages.user_count_list[i];
+    if (messages.user_list[i].user_from.people.image_filename == undefined) {
+      switch (messages.user_list[i].user_from.people.gender) {
+        case 'M':
+          messages.user_list[i].user_from.people.image_filename = icon_man;
+          break;
+        case 'F':
+          messages.user_list[i].user_from.people.image_filename = icon_woman;
+          break;
+      }
+    }
+  }
+  return data;
 }

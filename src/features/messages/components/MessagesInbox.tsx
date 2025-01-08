@@ -10,6 +10,7 @@ import icon_indeterminate from '../../../assets/images/icon_indeterminate.png';
 import { useGetMessagesInboxQuery } from '../redux/apis/messagesApi.ts';
 import { useTranslation } from 'react-i18next';
 import { format, parseISO } from 'date-fns';
+import { Link } from 'react-router-dom';
 
 function formatDate(originalDate: Date) {
   return format(parseISO(originalDate), 'dd/MM/yyyy');
@@ -28,13 +29,19 @@ export function MessagesInbox() {
     <List>
       {messages.data.group_data.user_list.map((message) => (
         <ListItem
+          component={Link}
+          to={`patients/#/msgs/view/${message.id}`}
           key={message.id}
           secondaryAction={
-            message.status != 'read' && (
-              <Badge color="primary" badgeContent={1} max={999}></Badge>
+            message.count > 0 && (
+              <Badge
+                color="primary"
+                badgeContent={message.count}
+                max={999}
+              ></Badge>
             )
           }
-          className="shadow-inner my-2"
+          className="shadow-inner hover:bg-slate-50"
         >
           <ListItemAvatar>
             <Avatar>
@@ -50,6 +57,7 @@ export function MessagesInbox() {
           </ListItemAvatar>
 
           <ListItemText
+            className="hover:!text-sky-700"
             primary={
               <>
                 <b>{message.user_from.full_name}</b>{' '}
@@ -58,7 +66,15 @@ export function MessagesInbox() {
                 </span>
               </>
             }
-            secondary={`${message.message}`}
+            secondary={
+              <>
+                <span
+                  className={`${message.count > 0 ? `font-bold` : `font-normal`}`}
+                >
+                  {message.message}
+                </span>
+              </>
+            }
           />
         </ListItem>
       ))}

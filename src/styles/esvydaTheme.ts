@@ -7,7 +7,7 @@ const esvydaTheme: Theme = createTheme({
       main: '#0e405e',
       dark: '#1A3443',
       darker: '#0b364f',
-      light: '#1972a8',
+      light: '#1c7ab4',
     },
     secondary: {
       light: '#ffffff',

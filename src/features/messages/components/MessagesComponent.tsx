@@ -7,7 +7,7 @@ export function MessagesComponent() {
   const { t } = useTranslation();
   return (
     <Box
-      className="h-full w-full  px-2.5 lg:-mt-2"
+      className="h-full w-full px-0 lg:-mt-2"
       bgcolor="primary.main lg:secondary.light"
     >
       <AppBar
@@ -15,22 +15,26 @@ export function MessagesComponent() {
         color="secondary.light"
         elevation={0}
         disable-gutters
-        className="w-full"
+        className="flex"
       >
-        <Toolbar className={`flex space-x-12`}>
+        <Toolbar className="justify-center space-x-4 -ml-6">
           <Button
+            className="!normal-case"
             variant="outlined"
             tabIndex={-1}
             size="small"
             startIcon={<Create />}
+            href="msg/compose"
           >
             {t('compose_message')}
           </Button>
           <Button
+            className="!normal-case"
             variant="outlined"
             tabIndex={-1}
             size="small"
             startIcon={<Forum />}
+            href="msg/view"
           >
             {t('view_messages')}
           </Button>
