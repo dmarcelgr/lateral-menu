@@ -6,7 +6,6 @@ import {
   ListItemAvatar,
   ListItemText,
 } from '@mui/material';
-import icon_indeterminate from '../../../assets/images/icon_indeterminate.png';
 import { useGetMessagesInboxQuery } from '../redux/apis/messagesApi.ts';
 import { useTranslation } from 'react-i18next';
 import { format, parseISO } from 'date-fns';
@@ -45,14 +44,7 @@ export function MessagesInbox() {
         >
           <ListItemAvatar>
             <Avatar>
-              <img
-                src={
-                  message.user_from.people.image_filename
-                    ? message.user_from.people.image_filename
-                    : icon_indeterminate
-                }
-                alt="User"
-              />
+              <img src={message.user_from.people.image_filename} alt="User" />
             </Avatar>
           </ListItemAvatar>
 

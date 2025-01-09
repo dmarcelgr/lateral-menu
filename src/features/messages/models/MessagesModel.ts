@@ -1251,6 +1251,9 @@ function countUnreadMessages(data) {
           messages.user_list[i].user_from.people.image_filename = icon_woman;
           break;
       }
+    } else {
+      messages.user_list[i].user_from.people.image_filename = icon_man;
+      //   Delete this else after demo
     }
   }
   return data;

@@ -20,10 +20,24 @@ import { ArrowBack } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { MenuItem } from '../interfaces/menuInterface.ts';
 import { MessagesComponent } from '../../messages/components/MessagesComponent.tsx';
+import { NotificationsComponent } from '../../notifications/components/NotificationsComponent.tsx';
 
 interface MenuItemsProps {
   key: string;
   items: MenuItem[];
+}
+
+function showComponent(title, key, submenu) {
+  switch (title) {
+    case 'inbox':
+      return <MessagesComponent />;
+    case 'notifications':
+      return <NotificationsComponent />;
+    case 'search':
+      return <h1>Hola desde search</h1>;
+    default:
+      return <SubMenuItems key={key} items={submenu}></SubMenuItems>;
+  }
 }
 
 export function LateralMenuItems(props: MenuItemsProps) {
@@ -139,13 +153,7 @@ export function LateralMenuItems(props: MenuItemsProps) {
                       </IconButton>
                     </Toolbar>
                   </AppBar>
-                  {item.title === 'inbox' && <MessagesComponent />}
-                  {item.title != 'inbox' && (
-                    <SubMenuItems
-                      key={item.key}
-                      items={item.submenu}
-                    ></SubMenuItems>
-                  )}
+                  {showComponent(item.title, item.key, item.submenu)}
                 </Box>
               </Drawer>
             )}
