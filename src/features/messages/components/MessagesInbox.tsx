@@ -10,19 +10,17 @@ import { useGetMessagesInboxQuery } from '../redux/apis/messagesApi.ts';
 import { useTranslation } from 'react-i18next';
 import { format, parseISO } from 'date-fns';
 import { Link } from 'react-router-dom';
+import FormatISODate from '../../../components/FormatISODate.tsx';
 
-function formatDate(originalDate: Date) {
+function formatDate(originalDate: string) {
   return format(parseISO(originalDate), 'dd/MM/yyyy');
 }
 
 export function MessagesInbox() {
   const { t } = useTranslation();
 
-  const { data: messages, error, isLoading } = useGetMessagesInboxQuery();
+  const { data: messages, isLoading } = useGetMessagesInboxQuery();
   if (isLoading) return <p>{t('loading')}...</p>;
-  if (error) return <p>{t('error_loading')}...</p>;
-
-  console.log('messages content at inboxComp: ', messages);
 
   return (
     <List>
@@ -54,7 +52,7 @@ export function MessagesInbox() {
               <>
                 <b>{message.user_from.full_name}</b>{' '}
                 <span className="text-slate-500">
-                  {formatDate(message.created_at)}
+                  <FormatISODate date={message.created_at} />
                 </span>
               </>
             }

@@ -51,5 +51,8 @@
   "compose_message": "Escribir mensaje",
   "view_messages": "Ver mensajes",
   "loading": "Cargando",
-  "error_loading": "Error al cargar"
+  "error_loading": "Error al cargar",
+  "only_show_unread": "Mostrar sólo no leídos",
+  "show_my_patients": "Mostrar mis pacientes",
+  "events": "Eventos"
 }

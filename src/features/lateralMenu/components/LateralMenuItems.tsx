@@ -20,7 +20,7 @@ import { ArrowBack } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { MenuItem } from '../interfaces/menuInterface.ts';
 import { MessagesComponent } from '../../messages/components/MessagesComponent.tsx';
-import { NotificationsComponent } from '../../notifications/components/NotificationsComponent.tsx';
+import { Notifications } from '../../notifications/components/Notifications.tsx';
 
 interface MenuItemsProps {
   key: string;
@@ -32,7 +32,7 @@ function showComponent(title, key, submenu) {
     case 'inbox':
       return <MessagesComponent />;
     case 'notifications':
-      return <NotificationsComponent />;
+      return <Notifications />;
     case 'search':
       return <h1>Hola desde search</h1>;
     default:
@@ -116,12 +116,12 @@ export function LateralMenuItems(props: MenuItemsProps) {
                 PaperProps={{
                   sx: {
                     left: { xs: '1', lg: '4.5rem' },
-                    width: { xs: '100%', lg: '30%' },
+                    width: { xs: '100%', lg: '35%' },
                   },
                 }}
               >
                 <Box
-                  className="h-full w-full px-2.5"
+                  className="h-full w-full px-2"
                   bgcolor="primary.main lg:secondary.light"
                 >
                   <AppBar

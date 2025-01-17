@@ -51,5 +51,8 @@
   "compose_message": "Compose message",
   "view_messages": "View messages",
   "loading": "Loading",
-  "error_loading": "Error at loading"
+  "error_loading": "Error at loading",
+  "only_show_unread": "Only show unread",
+  "show_my_patients": "Show my patients",
+  "events": "Events"
 }

@@ -1,14 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { messagesApi } from '../features/messages/redux/apis/messagesApi.ts';
 import { setupListeners } from '@reduxjs/toolkit/query';
+import { messagesApi } from '../features/messages/redux/apis/messagesApi.ts';
+import { notificationsApi } from '../features/notifications/redux/apis/notificationsApi.ts';
 
 export const store = configureStore({
   reducer: {
     [messagesApi.reducerPath]: messagesApi.reducer,
+    [notificationsApi.reducerPath]: notificationsApi.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(messagesApi.middleware),
+    getDefaultMiddleware().concat(
+      messagesApi.middleware,
+      notificationsApi.middleware
+    ),
 });
 
 setupListeners(store.dispatch);
