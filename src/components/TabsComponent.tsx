@@ -1,58 +1,50 @@
-import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import { ReactNode, SyntheticEvent, useState } from 'react';
+import { AppBar, Box, Tab, Tabs } from '@mui/material';
 
 interface TabPanelProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   dir?: string;
   index: number;
   value: number;
 }
 
-function TabPanel(props: TabPanelProps) {
+function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
-  console.log('Tabpanel props', props);
+
   return (
     <div
       role="tabpanel"
       hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{value}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
 }
 
 function a11yProps(index: number) {
-  console.log('index at a11yprops, ', index);
   return {
-    id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
   };
 }
 
-interface TabsComponentProps {
+interface TabsData {
   index: number;
-  value: number;
-  content: never;
+  label: string;
+  content: ReactNode;
 }
 
-export default function TabsComponent(tabsData: TabsComponentProps) {
-  console.log('TabsComponent tabsData ', tabsData);
-  const theme = useTheme();
-  const [value, setValue] = React.useState(0);
+interface TabsComponentProps {
+  tabsData: TabsData[];
+}
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+export default function TabsComponent({ tabsData }: TabsComponentProps) {
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
@@ -60,6 +52,7 @@ export default function TabsComponent(tabsData: TabsComponentProps) {
     <Box>
       <AppBar position="static">
         <Tabs
+          bgcolor="primary"
           value={value}
           onChange={handleChange}
           indicatorColor="secondary"
@@ -67,17 +60,20 @@ export default function TabsComponent(tabsData: TabsComponentProps) {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          {tabsData.tabsData.forEach((item) => {
-            console.log('Data at tabs component, ', item);
-            <Tab label={item.value} {...a11yProps(item.index)} />;
-          })}
+          {tabsData.map((item: TabsData) => (
+            <Tab
+              key={item.index}
+              label={item.label}
+              {...a11yProps(item.index)}
+            />
+          ))}
         </Tabs>
       </AppBar>
-      {tabsData.tabsData.forEach((item) => {
-        <TabPanel value={item.value} index={item.index} dir={theme.direction}>
-          {item}
-        </TabPanel>;
-      })}
+      {tabsData.map((item: TabsData) => (
+        <CustomTabPanel key={item.index} value={value} index={item.index}>
+          {item.content}
+        </CustomTabPanel>
+      ))}
     </Box>
   );
 }

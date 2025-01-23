@@ -8,13 +8,8 @@ import {
 } from '@mui/material';
 import { useGetMessagesInboxQuery } from '../redux/apis/messagesApi.ts';
 import { useTranslation } from 'react-i18next';
-import { format, parseISO } from 'date-fns';
 import { Link } from 'react-router-dom';
 import FormatISODate from '../../../components/FormatISODate.tsx';
-
-function formatDate(originalDate: string) {
-  return format(parseISO(originalDate), 'dd/MM/yyyy');
-}
 
 export function MessagesInbox() {
   const { t } = useTranslation();
