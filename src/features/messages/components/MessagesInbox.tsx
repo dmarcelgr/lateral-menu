@@ -6,29 +6,34 @@ import {
   ListItemAvatar,
   ListItemText,
 } from '@mui/material';
-import { useGetMessagesInboxQuery } from '../redux/apis/messagesApi.ts';
+import { useGetMessagesInboxQuery } from '../redux/api/messagesApi.ts';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import FormatISODate from '../../../components/FormatISODate.tsx';
+import EWPFormatISODate from '../../../components/EWPFormatISODate.tsx';
+import { Person } from '@mui/icons-material';
+
+import { Message } from '../models';
 
 export function MessagesInbox() {
   const { t } = useTranslation();
 
-  const { data: messages, isLoading } = useGetMessagesInboxQuery();
+  const { data: messages, isLoading }: Message = useGetMessagesInboxQuery();
   if (isLoading) return <p>{t('loading')}...</p>;
+
+  console.log('Messages at Inbox :: ', messages);
 
   return (
     <List>
-      {messages.data.group_data.user_list.map((message) => (
+      {messages.messages.map((message) => (
         <ListItem
           component={Link}
           to={`patients/#/msgs/view/${message.id}`}
           key={message.id}
           secondaryAction={
-            message.count > 0 && (
+            message.messagesCount > 0 && (
               <Badge
                 color="primary"
-                badgeContent={message.count}
+                badgeContent={message.messagesCount}
                 max={999}
               ></Badge>
             )
@@ -36,8 +41,12 @@ export function MessagesInbox() {
           className="shadow-inner hover:bg-slate-50"
         >
           <ListItemAvatar>
-            <Avatar>
-              <img src={message.user_from.people.image_filename} alt="User" />
+            <Avatar sx={{ backgroundColor: 'primary.light' }}>
+              {message.patientPhoto != undefined ? (
+                <img src={message.patientPhoto} alt="User" />
+              ) : (
+                <Person />
+              )}
             </Avatar>
           </ListItemAvatar>
 
@@ -45,16 +54,16 @@ export function MessagesInbox() {
             className="hover:!text-sky-700"
             primary={
               <>
-                <b>{message.user_from.full_name}</b>{' '}
+                <b>{message.patientName}</b>{' '}
                 <span className="text-slate-500">
-                  <FormatISODate date={message.created_at} />
+                  <EWPFormatISODate date={message.createDate} />
                 </span>
               </>
             }
             secondary={
               <>
                 <span
-                  className={`${message.count > 0 ? `font-bold` : `font-normal`}`}
+                  className={`${message.messagesCount > 0 ? `font-bold` : `font-normal`}`}
                 >
                   {message.message}
                 </span>

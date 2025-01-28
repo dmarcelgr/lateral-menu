@@ -7,11 +7,11 @@ import {
   ListItemAvatar,
   ListItemText,
 } from '@mui/material';
-import { useGetAlertsQuery } from '../../redux/apis/notificationsApi.ts';
+import { useGetAlertsQuery } from '../../redux/api/notificationsApi.ts';
 import { Link } from 'react-router-dom';
 import LoaderIcon from '../../../../assets/loaders/loading.tsx';
-import icon_indeterminate from '../../../../assets/images/icon_indeterminate.png';
-import FormatISODate from '../../../../components/FormatISODate.tsx';
+import EWPFormatISODate from '../../../../components/EWPFormatISODate.tsx';
+import { Person } from '@mui/icons-material';
 
 export default function AlertsDataComponent() {
   const { data: alerts, isLoading } = useGetAlertsQuery();
@@ -30,21 +30,21 @@ export default function AlertsDataComponent() {
                 key={alert.id}
                 secondaryAction={
                   <span className="text-slate-500">
-                    <FormatISODate date={alert.symptom_resport.created_at} />
+                    <EWPFormatISODate date={alert.symptom_resport.created_at} />
                   </span>
                 }
                 className="shadow-inner hover:bg-slate-50"
               >
                 <ListItemAvatar>
-                  <Avatar>
-                    <img
-                      src={
-                        alert.patient.id_people.image_filename != null
-                          ? alert.patient.id_people.image_filename
-                          : icon_indeterminate
-                      }
-                      alt="User"
-                    />
+                  <Avatar sx={{ backgroundColor: 'primary.light' }}>
+                    {alert.patient.id_people.image_filename != null ? (
+                      <img
+                        src={alert.patient.id_people.image_filename}
+                        alt="User"
+                      />
+                    ) : (
+                      <Person />
+                    )}
                   </Avatar>
                 </ListItemAvatar>
 

@@ -1,5 +1,4 @@
 import {
-  AppBar,
   Box,
   Divider,
   Drawer,
@@ -18,7 +17,7 @@ import { cloneElement, useState } from 'react';
 import { SubMenuItems } from './SubMenuItems.tsx';
 import { ArrowBack } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
-import { MenuItem } from '../interfaces/menuInterface.ts';
+import { MenuItem } from '../models/menu.ts';
 import { MessagesComponent } from '../../messages/components/MessagesComponent.tsx';
 import { Notifications } from '../../notifications/components/Notifications.tsx';
 
@@ -124,35 +123,28 @@ export function LateralMenuItems(props: MenuItemsProps) {
                   className="h-full w-full px-2"
                   bgcolor="primary.main lg:secondary.light"
                 >
-                  <AppBar
-                    position="static"
-                    className="flex"
-                    color="secondary.light"
-                    elevation={0}
+                  <Toolbar
+                    className={`flex flex-row min-h-12 ${submenuOpen ? 'justify-start' : 'justify-between'}`}
                   >
-                    <Toolbar
-                      className={`flex flex-row min-h-12 ${submenuOpen ? 'justify-start' : 'justify-between'}`}
+                    <span className="flex-1 hidden lg:block"></span>
+                    <Typography
+                      variant="h4"
+                      component="div"
+                      color="primary.main"
+                      className="block"
                     >
-                      <span className="flex-1 hidden lg:block"></span>
-                      <Typography
-                        variant="h4"
-                        component="div"
-                        color="primary.main"
-                        className="block"
-                      >
-                        {t(item.title)}
-                      </Typography>
-                      <span className="flex-1 hidden lg:block"></span>
-                      <IconButton
-                        aria-label="close submenu"
-                        edge="end"
-                        color="primary.main"
-                        onClick={handleDrawerClose}
-                      >
-                        <ArrowBack />
-                      </IconButton>
-                    </Toolbar>
-                  </AppBar>
+                      {t(item.title)}
+                    </Typography>
+                    <span className="flex-1 hidden lg:block"></span>
+                    <IconButton
+                      aria-label="close submenu"
+                      edge="end"
+                      color="primary.main"
+                      onClick={handleDrawerClose}
+                    >
+                      <ArrowBack />
+                    </IconButton>
+                  </Toolbar>
                   {showComponent(item.title, item.key, item.submenu)}
                 </Box>
               </Drawer>

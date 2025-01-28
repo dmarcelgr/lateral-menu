@@ -1,22 +1,18 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import MessagesModel, { dataAux } from '../../models/MessagesModel.ts';
+import MessagesAdapter, {
+  dataAux,
+} from '../../adapters/MessagesAdapter.adapter.ts';
 
-interface Message {
-  group_data: JSON;
-  messages: [];
-  is_family_member: boolean;
-  is_patient: boolean;
-  total_messages: number;
-}
+import { MessagesProps } from '../../dto';
 
 export const messagesApi = createApi({
   reducerPath: 'messagesApi',
   baseQuery: fetchBaseQuery({ baseUrl: '/api/' }), // Base ficticia
   endpoints: (builder) => {
     return {
-      getMessagesInbox: builder.query<Message[], void>({
+      getMessagesInbox: builder.query<MessagesProps[], void>({
         queryFn: async () => {
-          return { data: MessagesModel(dataAux) };
+          return { data: MessagesAdapter(dataAux) };
         },
       }),
     };

@@ -1,4 +1,4 @@
-import { MenuItem } from '../../interfaces/menuInterface.ts';
+import { MenuItem } from '../../models/menu.ts';
 import {
   AccountCircle,
   Badge,
@@ -11,7 +11,7 @@ import {
   SwitchAccount,
 } from '@mui/icons-material';
 
-export const UserProfile: MenuItem = {
+export const USER_PROFILE: MenuItem = {
   key: 9000,
   title: 'user',
   link: '/user',

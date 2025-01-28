@@ -1,4 +1,4 @@
-import { MenuItem } from '../../interfaces/menuInterface.ts';
+import { MenuItem } from '../../models/menu.ts';
 import {
   ReportsIcon,
   TelehealthIcon,
@@ -22,7 +22,7 @@ import {
 } from '@mui/icons-material';
 import React from 'react';
 
-export const EwpSettings: MenuItem = {
+export const SETTINGS: MenuItem = {
   key: 4000,
   title: 'settings',
   link: '/settings',

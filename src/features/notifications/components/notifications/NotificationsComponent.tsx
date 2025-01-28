@@ -1,5 +1,4 @@
 import {
-  AppBar,
   Box,
   FormControlLabel,
   FormGroup,
@@ -32,32 +31,25 @@ export default function NotificationsComponent() {
   return (
     <>
       <Box>
-        <AppBar
-          position="static"
-          color="secondary.light"
-          elevation={0}
-          className="!flex !flex-nowrap"
-        >
-          <Toolbar className="justify-center space-x-4 -ml-6">
-            <span className="flex-1 hidden lg:block"></span>
-            <IconButton className="!p-0 !mx-0" aria-label="Example">
-              <Refresh />
-            </IconButton>
-            <FormGroup row className="!mx-0 !flex-nowrap">
-              <FormControlLabel
-                className="!mx-0"
-                control={
-                  <Switch
-                    checked={checkedUnread}
-                    onChange={(event) => handleChange(event, 'unread')}
-                    inputProps={{ 'aria-label': 'controlled' }}
-                  />
-                }
-                label={t('only_show_unread')}
-              />
-            </FormGroup>
-          </Toolbar>
-        </AppBar>
+        <Toolbar className="justify-center space-x-4 -ml-6">
+          <span className="flex-1 hidden lg:block"></span>
+          <IconButton className="!p-0 !mx-0" aria-label="Example">
+            <Refresh />
+          </IconButton>
+          <FormGroup row className="!mx-0 !flex-nowrap">
+            <FormControlLabel
+              className="!mx-0"
+              control={
+                <Switch
+                  checked={checkedUnread}
+                  onChange={(event) => handleChange(event, 'unread')}
+                  inputProps={{ 'aria-label': 'controlled' }}
+                />
+              }
+              label={t('only_show_unread')}
+            />
+          </FormGroup>
+        </Toolbar>
         <NotificationsDataComponent />
       </Box>
     </>

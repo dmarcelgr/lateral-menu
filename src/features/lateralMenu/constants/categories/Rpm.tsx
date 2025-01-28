@@ -1,4 +1,4 @@
-import { MenuItem } from '../../interfaces/menuInterface.ts';
+import { MenuItem } from '../../models/menu.ts';
 import {
   Assignment,
   DevicesOther,
@@ -9,7 +9,7 @@ import {
 } from '@mui/icons-material';
 import { ChartIcon } from '../../../../assets/icons';
 
-export const RemotePatientMonitoring: MenuItem = {
+export const REMOTE_PATIENT_MONITORING: MenuItem = {
   key: 3000,
   title: 'remote_patient_monitoring',
   link: '/rpm',

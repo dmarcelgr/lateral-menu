@@ -3,7 +3,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { Box, TablePagination } from '@mui/material';
 
-export default function EsvydaPagination() {
+export default function EWPPagination() {
   const [page, setPage] = React.useState(2);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 

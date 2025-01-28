@@ -1,27 +1,27 @@
-import { MenuItem } from '../interfaces/menuInterface.ts';
+import { MenuItem } from '../models/menu.ts';
 import {
-  EwpSettings,
-  Messages,
-  Patients,
-  PatientSearch,
-  RemotePatientMonitoring,
-  Telehealth,
-  TelehealthRoom,
-  UserNotifications,
-  UserProfile,
+  MESSAGES,
+  PATIENT_SEARCH,
+  PATIENTS,
+  REMOTE_PATIENT_MONITORING,
+  SETTINGS,
+  TELEHEALTH,
+  TELEHEALTH_ROOM,
+  USER_NOTIFICATIONS,
+  USER_PROFILE,
 } from './categories'; // Import menu items
 
 // Menu division / structure
-export const ewpMenuItems: MenuItem[] = [
-  Patients,
-  Telehealth,
-  RemotePatientMonitoring,
-  EwpSettings,
-  TelehealthRoom,
+export const EWP_TOP_MENU_ITEMS: MenuItem[] = [
+  PATIENTS,
+  TELEHEALTH,
+  REMOTE_PATIENT_MONITORING,
+  SETTINGS,
+  TELEHEALTH_ROOM,
 ];
-export const ewpBottomMenuItems: MenuItem[] = [
-  PatientSearch,
-  Messages,
-  UserNotifications,
-  UserProfile,
+export const EWP_BOTTOM_MENU_ITEMS: MenuItem[] = [
+  PATIENT_SEARCH,
+  MESSAGES,
+  USER_NOTIFICATIONS,
+  USER_PROFILE,
 ];

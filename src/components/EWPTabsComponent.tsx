@@ -41,7 +41,7 @@ interface TabsComponentProps {
   tabsData: TabsData[];
 }
 
-export default function TabsComponent({ tabsData }: TabsComponentProps) {
+export default function EWPTabsComponent({ tabsData }: TabsComponentProps) {
   const [value, setValue] = useState(0);
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {

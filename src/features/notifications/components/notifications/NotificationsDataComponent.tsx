@@ -6,10 +6,10 @@ import {
   ListItemAvatar,
   ListItemText,
 } from '@mui/material';
-import { useGetNotificationsQuery } from '../../redux/apis/notificationsApi.ts';
+import { useGetNotificationsQuery } from '../../redux/api/notificationsApi.ts';
 import LoaderIcon from '../../../../assets/loaders/loading.tsx';
 import { Link } from 'react-router-dom';
-import FormatISODate from '../../../../components/FormatISODate.tsx';
+import EWPFormatISODate from '../../../../components/EWPFormatISODate.tsx';
 import { ReceiptLong } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 
@@ -32,7 +32,7 @@ export default function NotificationsDataComponent() {
                 key={notification.id}
                 secondaryAction={
                   <span className="text-slate-500">
-                    <FormatISODate date={notification.created_at} />
+                    <EWPFormatISODate date={notification.created_at} />
                   </span>
                 }
                 className="shadow-inner hover:bg-slate-50"

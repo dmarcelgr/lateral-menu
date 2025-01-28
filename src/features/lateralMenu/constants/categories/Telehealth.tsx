@@ -1,8 +1,8 @@
-import { MenuItem } from '../../interfaces/menuInterface.ts';
+import { MenuItem } from '../../models/menu.ts';
 import { ScheduleIcon, TelehealthIcon } from '../../../../assets/icons';
 import { Today } from '@mui/icons-material';
 
-export const Telehealth: MenuItem = {
+export const TELEHEALTH: MenuItem = {
   key: 2000,
   title: 'Telehealth',
   link: '/telehealth',

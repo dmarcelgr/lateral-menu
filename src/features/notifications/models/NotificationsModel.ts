@@ -158,7 +158,7 @@ export default function NotificationsModel(data: []):
   | undefined {
   // // @ts-ignore
   data = dataAux;
-  // console.log('MessagesModel: ', data);
+  // console.log('MessagesAdapterAdapter: ', data);
   try {
     const result = data;
     // const result = data?.length ? data : [];

@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { messagesApi } from '../features/messages/redux/apis/messagesApi.ts';
-import { notificationsApi } from '../features/notifications/redux/apis/notificationsApi.ts';
+import { messagesApi } from '../features/messages/redux/api/messagesApi.ts';
+import { notificationsApi } from '../features/notifications/redux/api/notificationsApi.ts';
 
 export const store = configureStore({
   reducer: {

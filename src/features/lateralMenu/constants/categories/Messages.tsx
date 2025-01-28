@@ -1,7 +1,7 @@
-import { MenuItem } from '../../interfaces/menuInterface.ts';
+import { MenuItem } from '../../models/menu.ts';
 import { Mail } from '@mui/icons-material';
 
-export const Messages: MenuItem = {
+export const MESSAGES: MenuItem = {
   key: 7000,
   title: 'inbox',
   link: '/inbox',

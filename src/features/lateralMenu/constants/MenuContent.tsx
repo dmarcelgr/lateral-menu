@@ -4,7 +4,7 @@ import esvydaBigIcon from '/logos/fulllogo-svg-esvyda.svg';
 import esvydaIcon from '/logos/logo-svg-esvyda.svg';
 import { LateralMenuItems } from '../components/LateralMenuItems.tsx';
 import JSX from 'react';
-import { ewpBottomMenuItems, ewpMenuItems } from './MenuConstants.tsx';
+import { EWP_BOTTOM_MENU_ITEMS, EWP_TOP_MENU_ITEMS } from './MenuConstants.tsx';
 import { Link } from 'react-router-dom';
 
 export function MenuContent(): JSX.Element {
@@ -25,8 +25,8 @@ export function MenuContent(): JSX.Element {
         </Link>
       </Box>
       <Box className="flex flex-col justify-between h-full">
-        <LateralMenuItems key="TopItems" items={ewpMenuItems} />
-        <LateralMenuItems key="BottomItems" items={ewpBottomMenuItems} />
+        <LateralMenuItems key="TopItems" items={EWP_TOP_MENU_ITEMS} />
+        <LateralMenuItems key="BottomItems" items={EWP_BOTTOM_MENU_ITEMS} />
       </Box>
     </>
   );

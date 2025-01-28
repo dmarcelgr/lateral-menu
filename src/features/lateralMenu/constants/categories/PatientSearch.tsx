@@ -1,7 +1,7 @@
-import { MenuItem } from '../../interfaces/menuInterface.ts';
+import { MenuItem } from '../../models/menu.ts';
 import { Search } from '@mui/icons-material';
 
-export const PatientSearch: MenuItem = {
+export const PATIENT_SEARCH: MenuItem = {
   key: 6000,
   title: 'search',
   link: '#search',

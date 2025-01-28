@@ -1,8 +1,8 @@
-import { MenuItem } from '../../interfaces/menuInterface.ts';
+import { MenuItem } from '../../models/menu.ts';
 import { ReportsIcon, UsersGroupIcon } from '../../../../assets/icons';
 import { Person, Today } from '@mui/icons-material';
 
-export const Patients: MenuItem = {
+export const PATIENTS: MenuItem = {
   key: 1000,
   title: 'patients',
   link: 'patients',

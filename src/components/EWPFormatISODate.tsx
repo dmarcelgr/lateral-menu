@@ -4,6 +4,6 @@ interface dateForFormat {
   date: string;
 }
 
-export default function FormatISODate(date: dateForFormat) {
+export default function EWPFormatISODate(date: dateForFormat) {
   return format(parseISO(date.date), 'MM/dd/yyyy');
 }

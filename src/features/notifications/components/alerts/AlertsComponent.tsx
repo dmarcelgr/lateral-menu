@@ -1,5 +1,4 @@
 import {
-  AppBar,
   Box,
   Button,
   FormControlLabel,
@@ -36,52 +35,44 @@ export default function AlertsComponent() {
   return (
     <>
       <Box>
-        <AppBar
-          position="static"
-          color="secondary.light"
-          elevation={0}
-          disable-gutters
-          className="!flex !flex-nowrap"
-        >
-          <Toolbar className="justify-center space-x-4 -ml-6">
-            <IconButton className="!p-0 !mx-0" aria-label="Example">
-              <Refresh />
-            </IconButton>
-            <FormGroup row className="!mx-0 !flex-nowrap">
-              <FormControlLabel
-                className="!mx-0"
-                control={
-                  <Switch
-                    checked={checkedUnread}
-                    onChange={(event) => handleChange(event, 'unread')}
-                    inputProps={{ 'aria-label': 'controlled' }}
-                  />
-                }
-                label={t('only_show_unread')}
-              />
-              <FormControlLabel
-                className="!mx-0"
-                control={
-                  <Switch
-                    checked={checkedShowPatients}
-                    onChange={(event) => handleChange(event, 'patients')}
-                    inputProps={{ 'aria-label': 'controlled' }}
-                  />
-                }
-                label={t('show_my_patients')}
-              />
-            </FormGroup>
-            <Button
-              className="font-bold !px-2 !py-1 !normal-case"
-              variant="outlined"
-              tabIndex={-1}
-              size="large"
-              href="#"
-            >
-              {t('events')}
-            </Button>
-          </Toolbar>
-        </AppBar>
+        <Toolbar className="justify-center space-x-4 -ml-6">
+          <IconButton className="!p-0 !mx-0" aria-label="Example">
+            <Refresh />
+          </IconButton>
+          <FormGroup row className="!mx-0 !flex-nowrap">
+            <FormControlLabel
+              className="!mx-0"
+              control={
+                <Switch
+                  checked={checkedUnread}
+                  onChange={(event) => handleChange(event, 'unread')}
+                  inputProps={{ 'aria-label': 'controlled' }}
+                />
+              }
+              label={t('only_show_unread')}
+            />
+            <FormControlLabel
+              className="!mx-0"
+              control={
+                <Switch
+                  checked={checkedShowPatients}
+                  onChange={(event) => handleChange(event, 'patients')}
+                  inputProps={{ 'aria-label': 'controlled' }}
+                />
+              }
+              label={t('show_my_patients')}
+            />
+          </FormGroup>
+          <Button
+            className="font-bold !px-2 !py-1 !normal-case"
+            variant="outlined"
+            tabIndex={-1}
+            size="large"
+            href="#"
+          >
+            {t('events')}
+          </Button>
+        </Toolbar>
         <AlertsDataComponent />
       </Box>
     </>
