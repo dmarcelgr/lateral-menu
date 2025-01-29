@@ -12,10 +12,10 @@ import { Link } from 'react-router-dom';
 import LoaderIcon from '../../../../assets/loaders/loading.tsx';
 import EWPFormatISODate from '../../../../components/EWPFormatISODate.tsx';
 import { Person } from '@mui/icons-material';
+import { Alert } from '../../models';
 
 export default function AlertsDataComponent() {
-  const { data: alerts, isLoading } = useGetAlertsQuery();
-  console.log('Data at alerts', alerts);
+  const { data: alerts, isLoading }: Alert = useGetAlertsQuery();
   return (
     <>
       <Box>
@@ -23,25 +23,23 @@ export default function AlertsDataComponent() {
           <LoaderIcon />
         ) : (
           <List>
-            {alerts.data.events.map((alert) => (
+            {alerts.events.map((alert) => (
               <ListItem
                 component={Link}
                 // to={`patients/#/msgs/view/${alert.id}`}
                 key={alert.id}
                 secondaryAction={
                   <span className="text-slate-500">
-                    <EWPFormatISODate date={alert.symptom_resport.created_at} />
+                    <EWPFormatISODate date={alert.createDate} />
                   </span>
                 }
                 className="shadow-inner hover:bg-slate-50"
               >
                 <ListItemAvatar>
                   <Avatar sx={{ backgroundColor: 'primary.light' }}>
-                    {alert.patient.id_people.image_filename != null ? (
-                      <img
-                        src={alert.patient.id_people.image_filename}
-                        alt="User"
-                      />
+                    {alert.patientPhoto != null ||
+                    alert.patientPhoto != undefined ? (
+                      <img src={alert.patientPhoto} alt="User" />
                     ) : (
                       <Person />
                     )}
@@ -53,8 +51,7 @@ export default function AlertsDataComponent() {
                   primary={
                     <>
                       <b>
-                        {alert.patient.id_people.first_name}{' '}
-                        {alert.patient.id_people.last_name} (id: {alert.id}){' '}
+                        {alert.patientName} (id: {alert.id}){' '}
                       </b>{' '}
                       {alert.status === 'new' && (
                         <Badge

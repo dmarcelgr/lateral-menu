@@ -209,7 +209,7 @@ export const dataAux = [
         {
           id: 500,
           message:
-            'Hello doctor. I\'m taking medication and reporting vital signs on my blood pressure and weight. I want to schedule an appointment just for follow up. Thanks a lot.',
+            "Hello doctor. I'm taking medication and reporting vital signs on my blood pressure and weight. I want to schedule an appointment just for follow up. Thanks a lot.",
           created_at: '2018-04-12T12:07:19.670458-05:00',
           read_at: '2018-04-12T16:14:48.536741-05:00',
           read_from: 'web',
@@ -693,7 +693,7 @@ export const dataAux = [
       },
       {
         id: 525,
-        message: 'Dr. I\'m in a lot of pain',
+        message: "Dr. I'm in a lot of pain",
         created_at: '2018-07-04T09:59:29.669702-05:00',
         read_at: '2018-07-04T09:59:51.176683-05:00',
         read_from: 'web',
@@ -814,7 +814,7 @@ export const dataAux = [
       {
         id: 500,
         message:
-          'Hello doctor. I\'m taking medication and reporting vital signs on my blood pressure and weight. I want to schedule an appointment just for follow up. Thanks a lot.',
+          "Hello doctor. I'm taking medication and reporting vital signs on my blood pressure and weight. I want to schedule an appointment just for follow up. Thanks a lot.",
         created_at: '2018-04-12T12:07:19.670458-05:00',
         read_at: '2018-04-12T16:14:48.536741-05:00',
         read_from: 'web',
@@ -1229,8 +1229,6 @@ function countUnreadMessages(data) {
 
 export default function MessagesAdapter(data: MessagesProps) {
   const messages = countUnreadMessages(data[0]);
-  console.log('Data at messages adapter:: ', messages);
-
   return {
     isPatient: messages.is_patient,
     isFamilyMember: messages.is_family_member,
@@ -1247,47 +1245,3 @@ export default function MessagesAdapter(data: MessagesProps) {
     totalMessages: messages.total_messages,
   };
 }
-
-// export default function MessagesAdapter(data: []):
-//   | {
-//   data: [] | undefined;
-// }
-//   | undefined {
-//   // // @ts-ignore
-//   data = dataAux;
-//   // console.log('MessagesAdapterAdapter: ', data);
-//   try {
-//     const result = data?.length ? data : [];
-//     return {
-//       data: countUnreadMessages(result[0]),
-//     };
-//   } catch (e) {
-//     console.log('Error at MessagesAdapterAdapter', e);
-//   }
-// }
-
-// function countUnreadMessages(data) {
-//   const messages = data.group_data;
-//   for (let i = messages.user_list.length - 1; i >= 0; i--) {
-//     messages.user_list[i]['count'] = messages.user_count_list[i];
-//   }
-//   return data;
-// }
-
-// export default function MessagesAdapter(data: []):
-//   | {
-//   data: [] | undefined;
-// }
-//   | undefined {
-//   // // @ts-ignore
-//   data = dataAux;
-//   // console.log('MessagesAdapterAdapter: ', data);
-//   try {
-//     const result = data?.length ? data : [];
-//     return {
-//       data: countUnreadMessages(result[0]),
-//     };
-//   } catch (e) {
-//     console.log('Error at MessagesAdapterAdapter', e);
-//   }
-// }

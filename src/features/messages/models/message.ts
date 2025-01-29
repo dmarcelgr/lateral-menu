@@ -8,9 +8,3 @@ export interface Message {
   is_patient: boolean;
   total_messages: number;
 }
-
-//group_data: JSON;
-//   messages: [];
-//   is_family_member: boolean;
-//   is_patient: boolean;
-//   total_messages: number;

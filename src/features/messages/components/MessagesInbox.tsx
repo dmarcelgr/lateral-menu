@@ -19,9 +19,6 @@ export function MessagesInbox() {
 
   const { data: messages, isLoading }: Message = useGetMessagesInboxQuery();
   if (isLoading) return <p>{t('loading')}...</p>;
-
-  console.log('Messages at Inbox :: ', messages);
-
   return (
     <List>
       {messages.messages.map((message) => (

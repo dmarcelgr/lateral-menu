@@ -1,32 +1,26 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import NotificationsModel, {
-  dataAux,
-} from '../../models/NotificationsModel.ts';
-import AlertsModel from '../../models/AlertsModel.ts';
-
-interface Notification {
-  total: number;
-  data: [];
-}
-
-interface Alert {
-  total_events: number;
-  events: [];
-}
+import NotificationsAdapter, {
+  NOTIFICATIONS_DATA,
+} from '../../adapters/NotificationsAdapter.adapter.ts';
+import AlertsAdapterAdapter, {
+  ALERTS_DATA,
+} from '../../adapters/AlertsAdapter.adapter.ts';
+import { AlertsProps } from '../../dto/Alerts';
+import { NotificationsProps } from '../../dto/Notifications';
 
 export const notificationsApi = createApi({
   reducerPath: 'notificationsApi',
   baseQuery: fetchBaseQuery({ baseUrl: '/api/' }), // Base ficticia
   endpoints: (builder) => {
     return {
-      getAlerts: builder.query<Alert[], void>({
+      getAlerts: builder.query<AlertsProps[], void>({
         queryFn: async () => {
-          return { data: AlertsModel(dataAux) };
+          return { data: AlertsAdapterAdapter(ALERTS_DATA) };
         },
       }),
-      getNotifications: builder.query<Notification[], void>({
+      getNotifications: builder.query<NotificationsProps[], void>({
         queryFn: async () => {
-          return { data: NotificationsModel(dataAux) };
+          return { data: NotificationsAdapter(NOTIFICATIONS_DATA) };
         },
       }),
     };

@@ -12,11 +12,13 @@ import { Link } from 'react-router-dom';
 import EWPFormatISODate from '../../../../components/EWPFormatISODate.tsx';
 import { ReceiptLong } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
+import { Notification } from '../../models';
 
 export default function NotificationsDataComponent() {
   const { t } = useTranslation();
 
-  const { data: notifications, isLoading } = useGetNotificationsQuery();
+  const { data: notifications, isLoading }: Notification =
+    useGetNotificationsQuery();
   console.log('Data at notifications', notifications);
   return (
     <>
@@ -25,14 +27,14 @@ export default function NotificationsDataComponent() {
           <LoaderIcon />
         ) : (
           <List>
-            {notifications.data.data.map((notification) => (
+            {notifications.events.map((notification) => (
               <ListItem
                 component={Link}
                 // to={`patients/#/msgs/view/${notification.id}`}
                 key={notification.id}
                 secondaryAction={
                   <span className="text-slate-500">
-                    <EWPFormatISODate date={notification.created_at} />
+                    <EWPFormatISODate date={notification.createDate} />
                   </span>
                 }
                 className="shadow-inner hover:bg-slate-50"
@@ -47,10 +49,10 @@ export default function NotificationsDataComponent() {
                   primary={
                     <>
                       <b>
-                        {notification.record_name} | {notification.patient_name}{' '}
-                        |{' '}
+                        {notification.notificationName} |{' '}
+                        {notification.patientName} |{' '}
                       </b>{' '}
-                      {!notification.is_read && (
+                      {!notification.status && (
                         <Badge
                           className="!ml-6 capitalize"
                           color="error"

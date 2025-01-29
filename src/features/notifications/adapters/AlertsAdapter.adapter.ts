@@ -1,7 +1,9 @@
 // Api for alerts tab at Lateral Menu:
 //esvyda-events-api-eventlist&is_read_by_medical_staff=false&only_my_patients=true&page=1&page_size=5
 
-export const dataAux = {
+import { AlertsProps } from '../dto/Alerts';
+
+export const ALERTS_DATA = {
   total_events: 3603,
   events: [
     {
@@ -727,26 +729,21 @@ export const dataAux = {
   ],
 };
 
-export default function AlertsModel(data: []):
-  | {
-      data: [] | undefined;
-    }
-  | undefined {
-  // // @ts-ignore
-  data = dataAux;
-  console.log('AlertsModel: ', data);
-  try {
-    const result = data;
-    // const result = data?.length ? data : [];
-    return {
-      // data: result,
-      data: TestingAlertsModel(result),
-    };
-  } catch (e) {
-    console.log('Error at AlertsModel', e);
-  }
-}
-
-function TestingAlertsModel(alertsData: []) {
-  return alertsData;
+export default function AlertsAdapter(data: AlertsProps) {
+  const alerts = data;
+  return {
+    totalEvents: alerts.total_events,
+    events: alerts.events.map((item) => ({
+      id: item.id,
+      createDate: item.symptom_resport.created_at,
+      status: item.status,
+      cause: item.cause,
+      patientPhoto: item.patient.id_people.image_filename,
+      patientId: item.patient.id,
+      patientName:
+        item.patient.id_people.first_name +
+        ' ' +
+        item.patient.id_people.last_name,
+    })),
+  };
 }

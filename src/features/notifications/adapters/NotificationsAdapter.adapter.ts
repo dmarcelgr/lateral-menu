@@ -1,7 +1,8 @@
 // Api for alerts tab at Lateral Menu:
 // http://localhost/api/comments/comment/?type=6&is_read=false
+import { NotificationsProps } from '../dto/Notifications';
 
-export const dataAux = {
+export const NOTIFICATIONS_DATA = {
   total: 4,
   data: [
     {
@@ -151,25 +152,18 @@ export const dataAux = {
   ],
 };
 
-export default function NotificationsModel(data: []):
-  | {
-      data: [] | undefined;
-    }
-  | undefined {
-  // // @ts-ignore
-  data = dataAux;
-  // console.log('MessagesAdapterAdapter: ', data);
-  try {
-    const result = data;
-    // const result = data?.length ? data : [];
-    return {
-      data: TestingNotificationsModel(result),
-    };
-  } catch (e) {
-    console.log('Error at NotificationsModel', e);
-  }
-}
-
-function TestingNotificationsModel(notificationsData: []) {
-  return notificationsData;
+export default function NotificationsAdapter(data: NotificationsProps) {
+  const notificationsData = data;
+  return {
+    total: notificationsData.total,
+    events: notificationsData.data.map((item) => ({
+      id: item.id,
+      createDate: item.created_at,
+      status: item.is_read,
+      notificationName: item.record_name,
+      comment: item.comment,
+      patientId: item.patient,
+      patientName: item.patient_name,
+    })),
+  };
 }
