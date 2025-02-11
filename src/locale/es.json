@@ -54,5 +54,17 @@
   "error_loading": "Error al cargar",
   "only_show_unread": "Mostrar sólo no leídos",
   "show_my_patients": "Mostrar mis pacientes",
-  "events": "Eventos"
+  "events": "Events",
+  "no_available_data": "No hay datos disponibles",
+  "search_by": "Buscar por",
+  "patient_name": "Nombre del paciente",
+  "dob": "DOB",
+  "welcome": "Bienvenido/a",
+  "share_link_to_invite": "Comparta este enlace para invitar a alguien a la sala de espera",
+  "copy_link": "Copiar",
+  "waiting_room": "Sala de espera",
+  "patients_waiting": "pacientes esperando",
+  "no_one_in_waiting_room": "No hay nadie en la sala de espera",
+  "select_a_room": "Seleccione una sala",
+  "select_a_department": "Seleccione un departamento"
 }

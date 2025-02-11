@@ -1,7 +1,7 @@
 import * as React from 'react';
 import NotificationsComponent from './notifications/NotificationsComponent.tsx';
 import AlertsComponent from './alerts/AlertsComponent.tsx';
-import EWPTabsComponent from '../../../components/EWPTabsComponent.tsx';
+import EWPTabsComponent from '../../../components/reusableTabs/EWPTabsComponent.tsx';
 
 export function Notifications() {
   const tabsData = [
@@ -12,7 +12,6 @@ export function Notifications() {
   return (
     <>
       <EWPTabsComponent tabsData={tabsData} />
-      {/*<EWPPagination />*/}
     </>
   );
 }

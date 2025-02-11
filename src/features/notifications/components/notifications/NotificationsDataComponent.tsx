@@ -9,7 +9,7 @@ import {
 import { useGetNotificationsQuery } from '../../redux/api/notificationsApi.ts';
 import LoaderIcon from '../../../../assets/loaders/loading.tsx';
 import { Link } from 'react-router-dom';
-import EWPFormatISODate from '../../../../components/EWPFormatISODate.tsx';
+import EWPFormatISODate from '../../../../components/reusableDateFormatter/EWPFormatISODate.tsx';
 import { ReceiptLong } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { Notification } from '../../models';
@@ -19,7 +19,6 @@ export default function NotificationsDataComponent() {
 
   const { data: notifications, isLoading }: Notification =
     useGetNotificationsQuery();
-  console.log('Data at notifications', notifications);
   return (
     <>
       <Box>
@@ -27,7 +26,7 @@ export default function NotificationsDataComponent() {
           <LoaderIcon />
         ) : (
           <List>
-            {notifications.events.map((notification) => (
+            {notifications.data.map((notification) => (
               <ListItem
                 component={Link}
                 // to={`patients/#/msgs/view/${notification.id}`}

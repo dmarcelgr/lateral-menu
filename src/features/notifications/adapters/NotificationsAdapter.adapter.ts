@@ -156,7 +156,7 @@ export default function NotificationsAdapter(data: NotificationsProps) {
   const notificationsData = data;
   return {
     total: notificationsData.total,
-    events: notificationsData.data.map((item) => ({
+    data: notificationsData.data.map((item) => ({
       id: item.id,
       createDate: item.created_at,
       status: item.is_read,

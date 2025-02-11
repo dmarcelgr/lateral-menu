@@ -731,6 +731,7 @@ export const ALERTS_DATA = {
 
 export default function AlertsAdapter(data: AlertsProps) {
   const alerts = data;
+  console.log('alerts adapter:: ', alerts);
   return {
     totalEvents: alerts.total_events,
     events: alerts.events.map((item) => ({

@@ -9,10 +9,10 @@ import {
 } from '@mui/material';
 import { useGetAlertsQuery } from '../../redux/api/notificationsApi.ts';
 import { Link } from 'react-router-dom';
-import LoaderIcon from '../../../../assets/loaders/loading.tsx';
-import EWPFormatISODate from '../../../../components/EWPFormatISODate.tsx';
+import EWPFormatISODate from '../../../../components/reusableDateFormatter/EWPFormatISODate.tsx';
 import { Person } from '@mui/icons-material';
 import { Alert } from '../../models';
+import LoaderIcon from '../../../../assets/loaders/loading.tsx';
 
 export default function AlertsDataComponent() {
   const { data: alerts, isLoading }: Alert = useGetAlertsQuery();

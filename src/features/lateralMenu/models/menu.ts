@@ -8,5 +8,5 @@ export interface Menu {
 }
 
 export interface MenuItem extends Omit<Menu, 'submenu'> {
-  submenu: Menu[];
+  submenu: Menu[] | JSX.Element;
 }

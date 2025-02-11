@@ -1,40 +1,46 @@
 import * as React from 'react';
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
-import { Box, TablePagination } from '@mui/material';
+import TablePagination from '@mui/material/TablePagination';
+import { useGetAlertsQuery } from '../../features/notifications/redux/api/notificationsApi.ts';
+import { Alert } from '../../features/notifications/models';
 
-export default function EWPPagination() {
-  const [page, setPage] = React.useState(2);
+export default function TablePaginationDemo() {
+  const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
-    setPage(newPage);
-  };
+  const { data, error, isLoading }: Alert = useGetAlertsQuery({
+    // page: page + 1,
+    // pageSize: rowsPerPage,
+  });
+  // const { data, error, isLoading }: Alert = useGetAlertsQuery({
+  //   page: page + 1,
+  //   pageSize: rowsPerPage,
+  // });
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChangePage = (_, newPage) => setPage(newPage);
+
+  const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
+  console.log('Data at pagination ', data);
+
   return (
-    <Box className="!items-center">
+    <div>
+      <h2>Lista de datos</h2>
+      {isLoading && <p>Cargando...</p>}
+      {error && <p>Error al cargar los datos</p>}
+
+      <ul>{data?.data?.map((item) => <li key={item.id}>{item.name}</li>)}</ul>
+
       <TablePagination
         component="div"
-        count={100}
+        count={data?.total || 0}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-
-      <Stack spacing={2}>
-        <Pagination count={10} shape="rounded" />
-      </Stack>
-    </Box>
+    </div>
   );
 }

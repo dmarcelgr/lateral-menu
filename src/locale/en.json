@@ -54,5 +54,17 @@
   "error_loading": "Error at loading",
   "only_show_unread": "Only show unread",
   "show_my_patients": "Show my patients",
-  "events": "Events"
+  "events": "Events",
+  "no_available_data": "No available data",
+  "search_by": "Search by",
+  "patient_name": "Patient name",
+  "dob": "DOB",
+  "welcome": "Welcome",
+  "share_link_to_invite": "To invite someone to your waiting room, share this link",
+  "copy_link": "Copy",
+  "waiting_room": "Waiting room",
+  "patients_waiting": "patients waiting",
+  "no_one_in_waiting_room": "No one is waiting in room",
+  "select_a_room": "Select a room",
+  "select_a_department": "Select a department"
 }

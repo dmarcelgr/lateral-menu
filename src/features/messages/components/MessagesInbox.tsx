@@ -9,7 +9,7 @@ import {
 import { useGetMessagesInboxQuery } from '../redux/api/messagesApi.ts';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import EWPFormatISODate from '../../../components/EWPFormatISODate.tsx';
+import EWPFormatISODate from '../../../components/reusableDateFormatter/EWPFormatISODate.tsx';
 import { Person } from '@mui/icons-material';
 
 import { Message } from '../models';

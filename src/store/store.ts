@@ -2,17 +2,26 @@ import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { messagesApi } from '../features/messages/redux/api/messagesApi.ts';
 import { notificationsApi } from '../features/notifications/redux/api/notificationsApi.ts';
+import { telehealthApi } from '../features/telehealth/redux/api/TelehealthApi.ts';
+import { patientSearchApi } from '../features/patientSearch/redux/api/patientSearchApi.ts';
+import { providerDepartmentsApi } from '../components/providerFilters/redux/api/ProviderDepartmentsApi.ts';
 
 export const store = configureStore({
   reducer: {
     [messagesApi.reducerPath]: messagesApi.reducer,
     [notificationsApi.reducerPath]: notificationsApi.reducer,
+    [telehealthApi.reducerPath]: telehealthApi.reducer,
+    [patientSearchApi.reducerPath]: patientSearchApi.reducer,
+    [providerDepartmentsApi.reducerPath]: providerDepartmentsApi.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       messagesApi.middleware,
-      notificationsApi.middleware
+      notificationsApi.middleware,
+      telehealthApi.middleware,
+      patientSearchApi.middleware,
+      providerDepartmentsApi.middleware
     ),
 });
 
