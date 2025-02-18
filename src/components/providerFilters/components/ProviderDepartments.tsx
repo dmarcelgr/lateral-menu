@@ -2,24 +2,21 @@ import { Message } from '../../../features/messages/models';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import * as React from 'react';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGetProviderDepartmentsQuery } from '../redux/api/ProviderDepartmentsApi.ts';
 import { Checkbox } from '@mui/material';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
-const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-const checkedIcon = <CheckBoxIcon fontSize="small" />;
-
 export default function ProviderDepartments({ onFilterChange }) {
   const { t } = useTranslation();
-  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
-  const handleFilterChange = (event) => {
-    const newFilters = event.target.value;
-    setSelectedFilters(newFilters);
-    onFilterChange(newFilters);
+  const handleFilterChange = (event, value) => {
+    let departmentInsertions = [];
+    value.forEach((item) => {
+      departmentInsertions.push(item.departmentId);
+    });
+    onFilterChange(event, departmentInsertions);
   };
 
   const { data: departments, isLoading }: Message =
@@ -43,8 +40,8 @@ export default function ProviderDepartments({ onFilterChange }) {
           return (
             <li key={key} {...optionProps}>
               <Checkbox
-                icon={icon}
-                checkedIcon={checkedIcon}
+                icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+                checkedIcon={<CheckBoxIcon fontSize="small" />}
                 style={{ marginRight: 8 }}
                 checked={selected}
               />

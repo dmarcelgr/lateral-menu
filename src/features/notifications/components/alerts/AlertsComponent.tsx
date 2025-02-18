@@ -10,6 +10,7 @@ import {
 import { Refresh } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import AlertsDataComponent from './AlertsDataComponent.tsx';
+import EWPPagination from '../../../../components/pagination/EWPPagination.tsx';
 
 export default function AlertsComponent() {
   const { t } = useTranslation();
@@ -85,7 +86,7 @@ export default function AlertsComponent() {
         {/*  <AlertsDataComponent />*/}
         {/*)}*/}
         <AlertsDataComponent />
-        {/*<EWPPagination />*/}
+        <EWPPagination />
       </Box>
     </>
   );

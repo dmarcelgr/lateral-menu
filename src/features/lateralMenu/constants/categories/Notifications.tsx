@@ -1,11 +1,11 @@
 import { MenuItem } from '../../models/menu.ts';
-import { Notifications } from '@mui/icons-material';
-import NotificationsComponent from '../../../notifications/components/notifications/NotificationsComponent.tsx';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import Notifications from '../../../notifications/components/Notifications.tsx';
 
 export const USER_NOTIFICATIONS: MenuItem = {
   key: 8000,
   title: 'notifications',
   link: '/notifications',
-  icon: <Notifications />,
-  submenu: <NotificationsComponent />,
+  icon: <NotificationsIcon />,
+  submenu: <Notifications />,
 };
