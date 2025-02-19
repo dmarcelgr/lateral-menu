@@ -1,9 +1,10 @@
 // Api for alerts tab at Lateral Menu:
 // http://localhost/api/comments/comment/?type=6&is_read=false
 import { NotificationsProps } from '../dto/Notifications';
+import { NotificationsSearchProps } from '../dto/NotificationsSearch';
 
 export const NOTIFICATIONS_DATA = {
-  total: 4,
+  total: 5,
   data: [
     {
       id: 4,
@@ -149,6 +150,42 @@ export const NOTIFICATIONS_DATA = {
       partner_ids: [],
       starred_partner_ids: [],
     },
+    {
+      id: 11,
+      documents: [],
+      patient_name: 'Marcela G',
+      need_action_by: [],
+      user_data: {
+        id: 298,
+        full_name: 'esvyda super system user',
+      },
+      comment:
+        'CCM verbal consent form of the patient Ford signed by user 14 at 2024-06-19 16:47:27.386039',
+      action_id: null,
+      created_at: '2024-06-19T11:47:27.391758-05:00',
+      updated_at: null,
+      relation_id: 17,
+      subject:
+        'Patient Ford signed the consent form for RPM at 2024-06-19 16:47:27.386045',
+      needaction: null,
+      need_moderation: null,
+      record_name: 'New Test at Notifications Adapt',
+      starred: false,
+      status: null,
+      moderation_status: null,
+      is_read: true,
+      reason_comment: null,
+      user: 298,
+      type: 6,
+      patient: 60,
+      updated_by: null,
+      comment_subtype: 40,
+      related_model: 226,
+      parent_comment: null,
+      moderated_by: [],
+      partner_ids: [],
+      starred_partner_ids: [],
+    },
   ],
 };
 
@@ -156,7 +193,7 @@ export default function NotificationsAdapter(data: NotificationsProps) {
   const notificationsData = data;
   return {
     total: notificationsData.total,
-    data: notificationsData.data.map((item) => ({
+    data: notificationsData.map((item) => ({
       id: item.id,
       createDate: item.created_at,
       status: item.is_read,
@@ -165,5 +202,13 @@ export default function NotificationsAdapter(data: NotificationsProps) {
       patientId: item.patient,
       patientName: item.patient_name,
     })),
+  };
+}
+
+export function NotificationsSearchAdapter(data: NotificationsSearchProps) {
+  const searchParams = data;
+  return {
+    type: searchParams.type,
+    isRead: searchParams.is_read,
   };
 }

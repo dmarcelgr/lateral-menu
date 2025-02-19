@@ -7,67 +7,61 @@ import {
   ListItemAvatar,
   ListItemText,
 } from '@mui/material';
-import { useGetAlertsQuery } from '../../redux/api/notificationsApi.ts';
 import { Link } from 'react-router-dom';
 import EWPFormatISODate from '../../../../components/reusableDateFormatter/EWPFormatISODate.tsx';
 import { Person } from '@mui/icons-material';
+import * as React from 'react';
 import { Alert } from '../../models';
-import LoaderIcon from '../../../../assets/loaders/loading.tsx';
 
-export default function AlertsDataComponent() {
-  const { data: alerts, isLoading }: Alert = useGetAlertsQuery();
+export default function AlertsDataComponent({ alerts }: Alert) {
   return (
     <>
       <Box>
-        {isLoading ? (
-          <LoaderIcon />
-        ) : (
-          <List>
-            {alerts.events.map((alert) => (
-              <ListItem
-                component={Link}
-                // to={`patients/#/msgs/view/${alert.id}`}
-                key={alert.id}
-                secondaryAction={
-                  <span className="text-slate-500">
-                    <EWPFormatISODate date={alert.createDate} />
-                  </span>
-                }
-                className="shadow-inner hover:bg-slate-50"
-              >
-                <ListItemAvatar>
-                  <Avatar sx={{ backgroundColor: 'primary.light' }}>
-                    {alert.patientPhoto != null ||
-                    alert.patientPhoto != undefined ? (
-                      <img src={alert.patientPhoto} alt="User" />
-                    ) : (
-                      <Person />
-                    )}
-                  </Avatar>
-                </ListItemAvatar>
+        <List>
+          {alerts.events.map((alert) => (
+            <ListItem
+              component={Link}
+              to={`patients/#/msgs/view/${alert.id}`}
+              key={alert.id}
+              secondaryAction={
+                <span className="text-slate-500">
+                  <EWPFormatISODate date={alert.createDate} />
+                </span>
+              }
+              className="shadow-inner hover:bg-slate-50"
+            >
+              <ListItemAvatar>
+                <Avatar sx={{ backgroundColor: 'primary.light' }}>
+                  {alert.patientPhoto != null ||
+                  alert.patientPhoto != undefined ? (
+                    <img src={alert.patientPhoto} alt="User" />
+                  ) : (
+                    <Person />
+                  )}
+                </Avatar>
+              </ListItemAvatar>
 
-                <ListItemText
-                  className="hover:!text-sky-700"
-                  primary={
-                    <>
-                      <b>
-                        {alert.patientName} (id: {alert.id}){' '}
-                      </b>{' '}
-                      {alert.status === 'new' && (
-                        <Badge
-                          className="!ml-6 capitalize"
-                          color="error"
-                          badgeContent={alert.status}
-                        ></Badge>
-                      )}
-                    </>
-                  }
-                  secondary={alert.cause}
-                />
-              </ListItem>
-            ))}
-          </List>
-        )}
+              <ListItemText
+                className="hover:!text-sky-700"
+                primary={
+                  <>
+                    <b>
+                      {alert.patientName} (id: {alert.id}){' '}
+                    </b>{' '}
+                    {alert.status === 'new' && (
+                      <Badge
+                        className="!ml-6 capitalize"
+                        color="error"
+                        badgeContent={alert.status}
+                      ></Badge>
+                    )}
+                  </>
+                }
+                secondary={alert.cause}
+              />
+            </ListItem>
+          ))}
+        </List>
       </Box>
     </>
   );

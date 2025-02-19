@@ -1,11 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import NotificationsAdapter, {
   NOTIFICATIONS_DATA,
+  NotificationsSearchAdapter,
 } from '../../adapters/NotificationsAdapter.adapter.ts';
 import { AlertsProps } from '../../dto/Alerts';
 import { NotificationsProps } from '../../dto/Notifications';
 import AlertsAdapter, {
   ALERTS_DATA,
+  AlertsSearchAdapter,
 } from '../../adapters/AlertsAdapter.adapter.ts';
 
 export const notificationsApi = createApi({
@@ -14,28 +16,24 @@ export const notificationsApi = createApi({
   endpoints: (builder) => {
     return {
       getAlerts: builder.query<AlertsProps[], void>({
-        queryFn: async () => {
-          return { data: AlertsAdapter(ALERTS_DATA) };
+        queryFn: async (searchTerms: AlertsSearchAdapter) => {
+          const filteredData = ALERTS_DATA.events.filter(
+            (item) =>
+              item?.is_read_by_medical_staff === searchTerms?.readByMedicalStaff
+          );
+          filteredData['total_events'] = ALERTS_DATA.total_events;
+          return { data: AlertsAdapter(filteredData) };
         },
-
-        // query: ({ page, pageSize }) =>
-        //   `items?page=${page}&page_size=${pageSize}`,
-        // transformResponse: (ALERTS_DATA) => {
-        //   return AlertsAdapter(ALERTS_DATA);
-        // },
-        // keepUnusedDataFor: 0,
-
-        // queryFn: async () => {
-        //   try {
-        //     return { data: AlertsAdapter(ALERTS_DATA) };
-        //   } catch (error) {
-        //     return { error: { message: error.message } };
-        //   }
-        // },
       }),
       getNotifications: builder.query<NotificationsProps[], void>({
-        queryFn: async () => {
-          return { data: NotificationsAdapter(NOTIFICATIONS_DATA) };
+        queryFn: async (searchTerms: NotificationsSearchAdapter) => {
+          const filteredData = NOTIFICATIONS_DATA.data.filter(
+            (item) =>
+              item?.type === searchTerms?.type ||
+              item?.is_read === searchTerms?.isRead
+          );
+          filteredData['total'] = NOTIFICATIONS_DATA.total;
+          return { data: NotificationsAdapter(filteredData) };
         },
       }),
     };

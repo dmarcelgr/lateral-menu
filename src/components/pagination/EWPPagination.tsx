@@ -1,46 +1,47 @@
 import * as React from 'react';
-import TablePagination from '@mui/material/TablePagination';
-import { useGetAlertsQuery } from '../../features/notifications/redux/api/notificationsApi.ts';
-import { Alert } from '../../features/notifications/models';
+import { useState } from 'react';
+import { TablePagination } from '@mui/material';
 
-export default function TablePaginationDemo() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+export default function EWPPagination({
+  onPaginationChange,
+  initialPage,
+  initialPageSize,
+  total,
+}) {
+  let filters = {
+    page: initialPage,
+    pageSize: initialPageSize,
+  };
+  const [page, setPage] = useState(initialPage);
+  const [rowsPerPage, setRowsPerPage] = useState(initialPageSize);
 
-  const { data, error, isLoading }: Alert = useGetAlertsQuery({
-    // page: page + 1,
-    // pageSize: rowsPerPage,
-  });
-  // const { data, error, isLoading }: Alert = useGetAlertsQuery({
-  //   page: page + 1,
-  //   pageSize: rowsPerPage,
-  // });
-
-  const handleChangePage = (_, newPage) => setPage(newPage);
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const newPageSize = parseInt(event.target.value, 10);
+    setRowsPerPage(newPageSize);
     setPage(0);
+    filters['pageSize'] = newPageSize;
+    onPaginationChange(0, filters);
   };
 
-  console.log('Data at pagination ', data);
+  const handlePageChange = (
+    event: React.MouseEvent | null,
+    newPage: number
+  ) => {
+    setPage(newPage);
+    filters['page'] = newPage;
+    onPaginationChange(newPage, filters);
+  };
 
   return (
-    <div>
-      <h2>Lista de datos</h2>
-      {isLoading && <p>Cargando...</p>}
-      {error && <p>Error al cargar los datos</p>}
-
-      <ul>{data?.data?.map((item) => <li key={item.id}>{item.name}</li>)}</ul>
-
-      <TablePagination
-        component="div"
-        count={data?.total || 0}
-        page={page}
-        onPageChange={handleChangePage}
-        rowsPerPage={rowsPerPage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </div>
+    <TablePagination
+      component="div"
+      count={total}
+      page={page}
+      onPageChange={handlePageChange} // Ahora pasa el valor correcto
+      rowsPerPage={rowsPerPage}
+      onRowsPerPageChange={handleChangeRowsPerPage}
+    />
   );
 }

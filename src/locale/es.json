@@ -66,5 +66,6 @@
   "patients_waiting": "pacientes esperando",
   "no_one_in_waiting_room": "No hay nadie en la sala de espera",
   "select_a_room": "Seleccione una sala",
-  "select_a_department": "Seleccione un departamento"
+  "select_a_department": "Seleccione un departamento",
+  "page": "Página"
 }
