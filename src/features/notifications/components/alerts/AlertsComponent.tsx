@@ -19,23 +19,21 @@ import EWPPagination from '../../../../components/pagination/EWPPagination.tsx';
 export default function AlertsComponent() {
   const { t } = useTranslation();
 
-  const filters = {
+  let filters = {
     readByMedicalStaff: false,
     onlyMyPatients: true,
-    page: 1,
+    page: 0,
     pageSize: 10,
   };
 
   const [checkedUnread, setCheckedUnread] = useState(true);
-  const [searchTerm, setSearchTerm] = useState(''); // API state
+  const [searchTerm, setSearchTerm] = useState(filters); // API state
 
   const {
     data: alerts,
     isFetching,
     refetch,
-  }: AlertsSearch = useGetAlertsQuery(
-    searchTerm && searchTerm !== '' ? searchTerm : filters
-  );
+  }: AlertsSearch = useGetAlertsQuery(searchTerm);
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement>,
@@ -48,19 +46,9 @@ export default function AlertsComponent() {
     }
   };
 
-  // const handleFilterChange = (event, newFilters?: boolean) => {
-  //   console.log('Handle filter change:: ', newFilters);
-  //   if (typeof newFilters === 'boolean') {
-  //     setSearchTerm((prevFilters) => ({
-  //       ...prevFilters,
-  //       readByMedicalStaff: !newFilters,
-  //     }));
-  //   }
-  // };
-
   const handleFilterChange = (
     event: ChangeEvent<unknown>,
-    newFilters?: boolean | []
+    newFilters?: Partial<AlertsSearch>
   ) => {
     console.log('Handle filter change:: ', newFilters);
 
@@ -70,18 +58,6 @@ export default function AlertsComponent() {
         ? { readByMedicalStaff: !newFilters }
         : newFilters),
     }));
-
-    // setSearchTerm((prevFilters) => ({
-    //   ...prevFilters,
-    //   if(typeof newFilters === 'boolean'){
-    //     { readByMedicalStaff: !newFilters }
-    //   } else if (typeof newFilters === 'number'){
-    //     switch (filterType) {
-    //       case 'page':
-    //
-    //     }
-    // }
-    // }))
   };
 
   if (isFetching) return <p>{t('loading')}...</p>;

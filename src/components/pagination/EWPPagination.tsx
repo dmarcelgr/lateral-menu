@@ -12,36 +12,29 @@ export default function EWPPagination({
     page: initialPage,
     pageSize: initialPageSize,
   };
-  const [page, setPage] = useState(initialPage);
-  const [rowsPerPage, setRowsPerPage] = useState(initialPageSize);
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const newPageSize = parseInt(event.target.value, 10);
-    setRowsPerPage(newPageSize);
-    setPage(0);
-    filters['pageSize'] = newPageSize;
-    onPaginationChange(0, filters);
-  };
+  const maxPage = Math.ceil(total / filters.pageSize) - 1;
 
-  const handlePageChange = (
-    event: React.MouseEvent | null,
-    newPage: number
-  ) => {
-    setPage(newPage);
-    filters['page'] = newPage;
-    onPaginationChange(newPage, filters);
-  };
+  const [page, setPage] = useState(Math.min(filters.page || 0, maxPage));
 
   return (
     <TablePagination
       component="div"
       count={total}
       page={page}
-      onPageChange={handlePageChange} // Ahora pasa el valor correcto
-      rowsPerPage={rowsPerPage}
-      onRowsPerPageChange={handleChangeRowsPerPage}
+      onPageChange={(event, newPage) => {
+        if (newPage <= maxPage) {
+          setPage(newPage);
+          onPaginationChange(event, { page: newPage });
+        }
+      }}
+      rowsPerPage={filters.pageSize || 10}
+      onRowsPerPageChange={(event) =>
+        onPaginationChange(event, {
+          page: 0,
+          pageSize: parseInt(event.target.value, 10),
+        })
+      }
     />
   );
 }

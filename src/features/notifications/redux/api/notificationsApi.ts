@@ -3,12 +3,12 @@ import NotificationsAdapter, {
   NOTIFICATIONS_DATA,
   NotificationsSearchAdapter,
 } from '../../adapters/NotificationsAdapter.adapter.ts';
-import { AlertsProps } from '../../dto/Alerts';
 import { NotificationsProps } from '../../dto/Notifications';
 import AlertsAdapter, {
   ALERTS_DATA,
   AlertsSearchAdapter,
 } from '../../adapters/AlertsAdapter.adapter.ts';
+import { AlertsProps } from '../../dto/Alerts';
 
 export const notificationsApi = createApi({
   reducerPath: 'notificationsApi',
@@ -17,14 +17,31 @@ export const notificationsApi = createApi({
     return {
       getAlerts: builder.query<AlertsProps[], void>({
         queryFn: async (searchTerms: AlertsSearchAdapter) => {
+          // const startIndex =
+          //   (searchTerms.page >= 1
+          //     ? searchTerms.page - 1
+          //     : searchTerms.page + 1) * searchTerms.pageSize;
+
+          // const startIndex =
+          //   (searchTerms.page < 1
+          //     ? searchTerms.page + 1
+          //     : searchTerms.page - 1) * searchTerms.pageSize;
+          const startIndex = (searchTerms.page || 0) * searchTerms.pageSize;
+          const endIndex = startIndex + searchTerms.pageSize;
+
           const filteredData = ALERTS_DATA.events.filter(
             (item) =>
               item?.is_read_by_medical_staff === searchTerms?.readByMedicalStaff
           );
-          filteredData['total_events'] = ALERTS_DATA.total_events;
-          return { data: AlertsAdapter(filteredData) };
+
+          const paginatedData = filteredData.slice(startIndex, endIndex);
+
+          paginatedData['total_events'] = filteredData.length;
+
+          return { data: AlertsAdapter(paginatedData) };
         },
       }),
+
       getNotifications: builder.query<NotificationsProps[], void>({
         queryFn: async (searchTerms: NotificationsSearchAdapter) => {
           const filteredData = NOTIFICATIONS_DATA.data.filter(
