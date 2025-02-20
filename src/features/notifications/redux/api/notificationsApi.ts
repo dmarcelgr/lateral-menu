@@ -17,15 +17,6 @@ export const notificationsApi = createApi({
     return {
       getAlerts: builder.query<AlertsProps[], void>({
         queryFn: async (searchTerms: AlertsSearchAdapter) => {
-          // const startIndex =
-          //   (searchTerms.page >= 1
-          //     ? searchTerms.page - 1
-          //     : searchTerms.page + 1) * searchTerms.pageSize;
-
-          // const startIndex =
-          //   (searchTerms.page < 1
-          //     ? searchTerms.page + 1
-          //     : searchTerms.page - 1) * searchTerms.pageSize;
           const startIndex = (searchTerms.page || 0) * searchTerms.pageSize;
           const endIndex = startIndex + searchTerms.pageSize;
 

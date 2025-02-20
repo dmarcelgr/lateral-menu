@@ -19,7 +19,7 @@ import EWPPagination from '../../../../components/pagination/EWPPagination.tsx';
 export default function AlertsComponent() {
   const { t } = useTranslation();
 
-  let filters = {
+  const filters = {
     readByMedicalStaff: false,
     onlyMyPatients: true,
     page: 0,
@@ -35,28 +35,23 @@ export default function AlertsComponent() {
     refetch,
   }: AlertsSearch = useGetAlertsQuery(searchTerm);
 
-  const handleChange = (
-    event: ChangeEvent<HTMLInputElement>,
-    alertType: string
-  ) => {
-    switch (alertType) {
-      case 'unread':
-        setCheckedUnread(event.target.checked);
-        break;
-    }
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setCheckedUnread(event.target.checked);
   };
 
-  const handleFilterChange = (
-    event: ChangeEvent<unknown>,
-    newFilters?: Partial<AlertsSearch>
-  ) => {
-    console.log('Handle filter change:: ', newFilters);
+  const handleFilterChange = (event, newFilters?: boolean | AlertsSearch) => {
+    filters: typeof newFilters != 'boolean'
+      ? (filters.page = newFilters.page || 0)
+      : (filters.pageSize = newFilters.pageSize || 10);
 
     setSearchTerm((prevFilters) => ({
       ...prevFilters,
-      ...(typeof newFilters === 'boolean'
-        ? { readByMedicalStaff: !newFilters }
-        : newFilters),
+      readByMedicalStaff:
+        typeof newFilters === 'boolean'
+          ? !newFilters
+          : prevFilters.readByMedicalStaff,
+      page: filters.page,
+      pageSize: filters.pageSize,
     }));
   };
 
@@ -81,7 +76,7 @@ export default function AlertsComponent() {
                 <Switch
                   checked={checkedUnread}
                   onChange={(event) => {
-                    handleChange(event, 'unread');
+                    handleChange(event);
                     handleFilterChange(event, event.target.checked);
                   }}
                   inputProps={{ 'aria-label': 'controlled' }}
@@ -106,7 +101,7 @@ export default function AlertsComponent() {
             variant="outlined"
             tabIndex={-1}
             size="large"
-            href="#"
+            href="patients/#/events//"
           >
             {t('events')}
           </Button>
