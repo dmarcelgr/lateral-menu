@@ -8,18 +8,19 @@ function getRandomInt(max): number {
 }
 
 interface MenuItemsProps {
+  menuKey?: number;
   items: MenuItem[];
 }
 
 export function SubMenuItems(props: MenuItemsProps[]) {
   const { items }: MenuItem = props;
+  const { menuKey }: MenuItem = props;
 
   const { t } = useTranslation();
-  const randomKey: number = getRandomInt(2);
   return (
     <>
       {Array.isArray(items) ? (
-        <List aria-label="lateral menu" key={randomKey}>
+        <List aria-label="lateral menu" key={menuKey}>
           {items.map((subitem) => {
             return (
               <ListItem

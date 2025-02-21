@@ -21,12 +21,13 @@ export function PatientSearch() {
   const [inputValue, setInputValue] = useState(''); // Input state
   const [searchTerm, setSearchTerm] = useState(''); // API state
 
-  const { data: patients, isFetching }: PatientSearch = useGetPatientQuery(
-    searchTerm,
-    {
-      skip: !searchTerm,
-    }
-  );
+  const {
+    data: patients,
+    isFetching,
+    refetch,
+  }: PatientSearch = useGetPatientQuery(searchTerm, {
+    skip: !searchTerm,
+  });
 
   const handleFilterChange = (event, newFilters: any) => {
     filters[Array.isArray(newFilters) ? 'departmentInsertions' : 'searchBox'] =
@@ -105,7 +106,7 @@ export function PatientSearch() {
               variant="contained"
               className="!h-full"
               sx={{ backgroundColor: 'primary.light' }}
-              onClick={handleFilterChange}
+              onClick={refetch}
             >
               <Search />
             </Button>

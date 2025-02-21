@@ -57,7 +57,7 @@ export function LateralMenu() {
               },
             }}
           >
-            <MenuContent />
+            <MenuContent key={'mainMenu'} />
           </Drawer>
         </Box>
       </Container>
