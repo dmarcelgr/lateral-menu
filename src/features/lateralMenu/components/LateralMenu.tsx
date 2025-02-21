@@ -6,7 +6,7 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { Close, Menu } from '@mui/icons-material';
-import { MenuContent } from '../constants/MenuContent.tsx';
+import { MenuContent } from './MenuContent.tsx';
 import { useState } from 'react';
 
 export function LateralMenu() {

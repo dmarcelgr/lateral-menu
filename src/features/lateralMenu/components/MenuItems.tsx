@@ -36,18 +36,18 @@ export default function MenuItems(props: menuProps) {
     <List
       aria-label="lateral menu"
       key={menuItems.key}
-      className={`p-0 ${openIndex !== -1 ? '!w-[40rem]' : '!w-full'}`}
+      className={`p-0 ${openIndex !== -1 && openIndex !== 10 ? 'lg:!w-[42rem]' : '!w-full'}`}
     >
       {menuItems.map(({ title, icon, submenu, key }, index) => (
         <React.Fragment key={index}>
           <Divider
             component="li"
             className={`
-              z-100 opacity-60 lg:!border-t	lg:!border-slate-400 ${openIndex !== -1 ? '!w-[10%]' : '!w-full'}`}
+              z-100 opacity-60 lg:!border-t	lg:!border-slate-400 ${openIndex !== -1 && openIndex !== 10 ? 'lg:!w-[11%]' : '!w-full'}`}
           />
           <ListItem
             disablePadding
-            className={`h-14 lg:opacity-60 hover:opacity-100 h-fit ${openIndex !== -1 ? '!w-[10%]' : '!w-full'}`}
+            className={`h-14 lg:opacity-60 hover:opacity-100 h-fit ${openIndex !== -1 && openIndex !== 10 ? 'lg:!w-[11%]' : '!w-full'}`}
             sx={{
               bgcolor: 'primary.main',
               ':hover': {
@@ -81,15 +81,16 @@ export default function MenuItems(props: menuProps) {
           <Collapse
             in={openIndex === index}
             orientation={'horizontal'}
-            timeout={0}
             unmountOnExit
+            timeout={-2}
+            transitionprops={{ timeout: 0 }}
             className={`bg-white !float-right !h-screen !w-full
-                        ${openIndex !== -1 && menuKey === 'topItems' ? '!w-[100%] !absolute !left-[10%] !-top-[15.5%] !z-[999]' : '!w-full'} 
-                        ${openIndex !== -1 && menuKey === 'bottomItems' ? '!w-[100%] !absolute !left-[10%] !-top-[69vh] !z-[999]' : '!w-full'}`}
+                        ${openIndex !== -1 && menuKey === 'topItems' ? 'lg:!w-[100%] lg:!absolute lg:!left-[11%] lg:!-top-[15.5%] lg:!z-[999]' : '!w-full'} 
+                        ${openIndex !== 10 && menuKey === 'bottomItems' ? 'lg:!w-[100%] lg:!absolute lg:!left-[11%] lg:!-top-[237%] lg:!z-[999]' : '!w-full'}`}
             sx={{
               '& .MuiCollapse-wrapper': {
                 display: 'block',
-                padding: '10px',
+                width: '90%',
               },
             }}
           >
@@ -98,7 +99,7 @@ export default function MenuItems(props: menuProps) {
               bgcolor="primary.main lg:secondary.light"
             >
               <Toolbar
-                className={`flex flex-row min-h-12 ${openIndex !== -1 ? 'justify-start' : 'justify-between'}`}
+                className={`flex flex-row min-h-12 ${openIndex !== -1 && openIndex !== 10 ? 'justify-start' : 'justify-between'}`}
               >
                 <span className="flex-1 hidden lg:block"></span>
                 <Typography

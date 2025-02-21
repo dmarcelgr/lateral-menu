@@ -3,32 +3,31 @@ import { Box, Drawer, useMediaQuery } from '@mui/material';
 import esvydaBigIcon from '/logos/fulllogo-svg-esvyda.svg';
 import esvydaIcon from '/logos/logo-svg-esvyda.svg';
 import JSX from 'react';
-import React, { useEffect, useState } from 'react';
-import { EWP_BOTTOM_MENU_ITEMS, EWP_TOP_MENU_ITEMS } from './MenuConstants.tsx';
+import React, { useState } from 'react';
+import {
+  EWP_BOTTOM_MENU_ITEMS,
+  EWP_TOP_MENU_ITEMS,
+} from '../constants/MenuConstants.tsx';
 import { Link } from 'react-router-dom';
-import MenuItems from '../components/MenuItems.tsx';
+import MenuItems from './MenuItems.tsx';
 
 export function MenuContent(): JSX.Element {
   const matchesResponsiveWidth: boolean = useMediaQuery('(min-width:1023px)');
-  const [openMenu, setOpenMenu] = useState(false);
   const [openIndex, setOpenIndex] = useState(-1);
-  const [bottomIndex, setBottomIndex] = useState(10);
+  const [bottomIndex, setBottomIndex] = useState(-1);
 
   const handleOpenSubmenu = (index, source) => {
     switch (source) {
       case 'topItems':
+        if (bottomIndex != -1) setBottomIndex(-1);
         setOpenIndex((prevIndex) => (prevIndex === index ? -1 : index));
-        console.log('openIndex actualizado:', openIndex);
         break;
       case 'bottomItems':
+        if (openIndex != -1) setOpenIndex(-1);
         setBottomIndex((prevIndex) => (prevIndex === index ? -1 : index));
         break;
     }
   };
-
-  useEffect(() => {
-    console.log('Current openIndex:', openIndex);
-  }, [openIndex]);
 
   return (
     <>
@@ -36,17 +35,18 @@ export function MenuContent(): JSX.Element {
         bgcolor="primary.main"
         variant="permanent"
         anchor={matchesResponsiveWidth ? 'left' : 'top'}
-        open={openMenu}
         PaperProps={{
           sx: {
             backgroundColor: 'primary.main',
             width: { xs: '100%', lg: 'auto' },
+            overflow: 'auto',
+            overflowX: 'hidden',
           },
         }}
       >
         <Box
           bgcolor="primary.main"
-          className="w-full p-0 border-t-2 border-t-slate-500"
+          className="w-full p-0 border-t-2 border-t-slate-500 !overflow-hidden"
         >
           <Link to="/">
             <img
