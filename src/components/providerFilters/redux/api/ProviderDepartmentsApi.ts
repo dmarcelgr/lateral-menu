@@ -7,17 +7,15 @@ import { ProviderDepartmentsProps } from '../../dto';
 export const providerDepartmentsApi = createApi({
   reducerPath: 'providerDepartmentsApi',
   baseQuery: fetchBaseQuery({ baseUrl: '/api/' }), // Base ficticia
-  endpoints: (builder) => {
-    return {
-      getProviderDepartments: builder.query<ProviderDepartmentsProps[], void>({
-        queryFn: async () => {
-          return {
-            data: ProviderDepartmentAdapter(PROVIDER_DEPARTMENTS),
-          };
-        },
-      }),
-    };
-  },
+  endpoints: (builder) => ({
+    getProviderDepartments: builder.query<ProviderDepartmentsProps[], void>({
+      queryFn: async () => {
+        return {
+          data: ProviderDepartmentAdapter(PROVIDER_DEPARTMENTS),
+        };
+      },
+    }),
+  }),
 });
 
 export const { useGetProviderDepartmentsQuery } = providerDepartmentsApi;

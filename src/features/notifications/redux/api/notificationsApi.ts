@@ -13,39 +13,40 @@ import { AlertsProps } from '../../dto/Alerts';
 export const notificationsApi = createApi({
   reducerPath: 'notificationsApi',
   baseQuery: fetchBaseQuery({ baseUrl: '/api/' }),
-  endpoints: (builder) => {
-    return {
-      getAlerts: builder.query<AlertsProps[], void>({
-        queryFn: async (searchTerms: AlertsSearchAdapter) => {
-          const startIndex = (searchTerms.page || 0) * searchTerms.pageSize;
-          const endIndex = startIndex + searchTerms.pageSize;
+  endpoints: (builder) => ({
+    getAlerts: builder.query<AlertsProps[], void>({
+      // Query cambiarlo
+      // Backend manda total
+      queryFn: async (searchTerms: AlertsSearchAdapter) => {
+        const startIndex = (searchTerms.page || 0) * searchTerms.pageSize;
+        const endIndex = startIndex + searchTerms.pageSize;
 
-          const filteredData = ALERTS_DATA.events.filter(
-            (item) =>
-              item?.is_read_by_medical_staff === searchTerms?.readByMedicalStaff
-          );
+        const filteredData = ALERTS_DATA.events.filter(
+          (item) =>
+            item?.is_read_by_medical_staff === searchTerms?.readByMedicalStaff
+        );
 
-          const paginatedData = filteredData.slice(startIndex, endIndex);
+        const paginatedData = filteredData.slice(startIndex, endIndex);
 
-          paginatedData['total_events'] = filteredData.length;
+        paginatedData['total_events'] = filteredData.length;
 
-          return { data: AlertsAdapter(paginatedData) };
-        },
-      }),
+        return { data: AlertsAdapter(paginatedData) };
+      },
+    }),
 
-      getNotifications: builder.query<NotificationsProps[], void>({
-        queryFn: async (searchTerms: NotificationsSearchAdapter) => {
-          const filteredData = NOTIFICATIONS_DATA.data.filter(
-            (item) =>
-              item?.type === searchTerms?.type ||
-              item?.is_read === searchTerms?.isRead
-          );
-          filteredData['total'] = NOTIFICATIONS_DATA.total;
-          return { data: NotificationsAdapter(filteredData) };
-        },
-      }),
-    };
-  },
+    getNotifications: builder.query<NotificationsProps[], void>({
+      // Query cambiarlo
+      queryFn: async (searchTerms: NotificationsSearchAdapter) => {
+        const filteredData = NOTIFICATIONS_DATA.data.filter(
+          (item) =>
+            item?.type === searchTerms?.type ||
+            item?.is_read === searchTerms?.isRead
+        );
+        filteredData['total'] = NOTIFICATIONS_DATA.total;
+        return { data: NotificationsAdapter(filteredData) };
+      },
+    }),
+  }),
 });
 
 export const { useGetAlertsQuery, useGetNotificationsQuery } = notificationsApi;

@@ -107,6 +107,7 @@ export default function AlertsComponent() {
           </Button>
         </Toolbar>
         <AlertsDataComponent alerts={alerts} />
+        {/*Set pagination model que contenga*/}
         <EWPPagination
           onPaginationChange={handleFilterChange}
           initialPage={filters.page}

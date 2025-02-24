@@ -16,7 +16,9 @@ export function MenuContent(): JSX.Element {
   const [openIndex, setOpenIndex] = useState(-1);
   const [bottomIndex, setBottomIndex] = useState(-1);
 
-  const handleOpenSubmenu = (index, source) => {
+  // Tslint deberia indicar que no esta tipando
+  const handleOpenSubmenu = (index: number, source: string) => {
+    // cambiar a constantes en carpeta const
     switch (source) {
       case 'topItems':
         if (bottomIndex != -1) setBottomIndex(-1);
@@ -39,7 +41,7 @@ export function MenuContent(): JSX.Element {
           sx: {
             backgroundColor: 'primary.main',
             width: { xs: '100%', lg: 'auto' },
-            overflow: 'auto',
+            overflowY: 'auto',
             overflowX: 'hidden',
           },
         }}

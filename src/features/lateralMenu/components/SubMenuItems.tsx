@@ -20,7 +20,7 @@ export function SubMenuItems(props: MenuItemsProps[]) {
   return (
     <>
       {Array.isArray(items) ? (
-        <List aria-label="lateral menu" key={menuKey}>
+        <List aria-label="lateral menu" key={menuKey} className="!px-2">
           {items.map((subitem) => {
             return (
               <ListItem

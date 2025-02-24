@@ -4,19 +4,29 @@ import MessagesAdapter, {
 } from '../../adapters/MessagesAdapter.adapter.ts';
 
 import { MessagesProps } from '../../dto';
+// import baseQueryWithReauth from '../../../../utils/api/apiConst.ts';
 
+// export const messagesApi = createApi({
+//   reducerPath: 'messagesApi',
+//   baseQuery: baseQueryWithReauth,
+//   endpoints: (build) => ({
+//     getMessagesInbox: build.query({
+//       query: () => "",
+//       transformResponse: (dataAux: MeasureProps[]) => MessagesAdapter(dataAux),
+//       keepUnusedDataFor: 0,
+//     },
+//   }),
+// });
 export const messagesApi = createApi({
   reducerPath: 'messagesApi',
   baseQuery: fetchBaseQuery({ baseUrl: '/api/' }), // Base ficticia
-  endpoints: (builder) => {
-    return {
-      getMessagesInbox: builder.query<MessagesProps[], void>({
-        queryFn: async () => {
-          return { data: MessagesAdapter(dataAux) };
-        },
-      }),
-    };
-  },
+  endpoints: (builder) => ({
+    getMessagesInbox: builder.query<MessagesProps[], void>({
+      queryFn: async () => {
+        return { data: MessagesAdapter(dataAux) };
+      },
+    }),
+  }),
 });
 
 export const { useGetMessagesInboxQuery } = messagesApi;

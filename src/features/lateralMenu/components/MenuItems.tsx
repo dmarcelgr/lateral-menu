@@ -18,7 +18,7 @@ import { SubMenuItems } from './SubMenuItems.tsx';
 import { ArrowBack } from '@mui/icons-material';
 
 interface menuProps {
-  openSubMenu?: () => void;
+  openSubMenu?: (index: number, source: string) => void;
   openIndex?: number;
   menuKey: string;
   menuItems?: MenuItem[];
@@ -36,7 +36,7 @@ export default function MenuItems(props: menuProps) {
     <List
       aria-label="lateral menu"
       key={menuItems.key}
-      className={`p-0 ${openIndex !== -1 && openIndex !== 10 ? 'lg:!w-[42rem]' : '!w-full'}`}
+      className={`p-2 ${openIndex !== -1 && openIndex !== 10 ? 'lg:!w-[43rem]' : '!w-full'}`}
     >
       {menuItems.map(({ title, icon, submenu, key }, index) => (
         <React.Fragment key={index}>
@@ -61,6 +61,7 @@ export default function MenuItems(props: menuProps) {
               onClick={() => handleClick(index, menuKey)}
             >
               <ListItemIcon className="min-w-12	">
+                {/*cambiar para evitar warning*/}
                 {cloneElement(icon, {
                   sx: {
                     color: 'secondary.light',
@@ -91,12 +92,13 @@ export default function MenuItems(props: menuProps) {
               '& .MuiCollapse-wrapper': {
                 display: 'block',
                 width: '90%',
+                height: '100%',
               },
             }}
           >
             <Box
-              className="h-full w-full px-2"
-              bgcolor="primary.main lg:secondary.light"
+              className="h-full w-full"
+              bgcolor="primary.main lg:!secondary.light"
             >
               <Toolbar
                 className={`flex flex-row min-h-12 ${openIndex !== -1 && openIndex !== 10 ? 'justify-start' : 'justify-between'}`}

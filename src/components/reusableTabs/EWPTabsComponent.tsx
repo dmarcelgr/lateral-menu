@@ -49,7 +49,7 @@ export default function EWPTabsComponent({ tabsData }: TabsComponentProps) {
   };
 
   return (
-    <Box>
+    <Box bgcolor="secondary.light">
       <AppBar position="static">
         <Tabs
           bgcolor="primary"

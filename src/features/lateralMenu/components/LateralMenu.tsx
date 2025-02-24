@@ -1,24 +1,13 @@
-import {
-  Box,
-  Container,
-  Drawer,
-  IconButton,
-  useMediaQuery,
-} from '@mui/material';
+import { Box, Container, IconButton } from '@mui/material';
 import { Close, Menu } from '@mui/icons-material';
 import { MenuContent } from './MenuContent.tsx';
 import { useState } from 'react';
 
 export function LateralMenu() {
-  const matchesResponsiveWidth = useMediaQuery('(min-width:1023px)');
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleToggle = (): void => {
     setMenuOpen(!menuOpen);
-  };
-
-  const handleClose = (): void => {
-    setMenuOpen(false);
   };
 
   return (
@@ -44,22 +33,7 @@ export function LateralMenu() {
             {menuOpen ? <Close /> : <Menu />}
           </IconButton>
         </Box>
-        <Box>
-          <Drawer
-            className="flex items-center x-4 sm:align-middle shadow-md !z-4"
-            anchor={matchesResponsiveWidth ? 'left' : 'top'}
-            variant={matchesResponsiveWidth ? 'permanent' : 'temporary'}
-            open={menuOpen}
-            onClose={handleClose}
-            PaperProps={{
-              sx: {
-                backgroundColor: 'primary.main',
-              },
-            }}
-          >
-            <MenuContent key={'mainMenu'} />
-          </Drawer>
-        </Box>
+        <MenuContent key={'mainMenu'} />
       </Container>
     </>
   );
