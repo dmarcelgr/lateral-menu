@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useMemo, useState } from 'react';
+import { SyntheticEvent, useMemo, useState } from 'react';
 import { useGetPatientQuery } from '../redux/api/patientSearchApi.ts';
 import { useTranslation } from 'react-i18next';
 import { Button, CircularProgress, Stack } from '@mui/material';
@@ -8,18 +8,17 @@ import Grid from '@mui/material/Grid2';
 import { Search } from '@mui/icons-material';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { PatientSearch } from '../models';
+import { PatientSearch, PatientSearchBox } from '../models';
 import EWPFormatISODate from '../../../components/reusableDateFormatter/EWPFormatISODate.tsx';
+import { PATIENTS_SEARCH_FILTERS } from '../const/patientsSearch.const.ts';
 
 export function PatientSearch() {
   const { t } = useTranslation();
-  const filters = {
-    dailyReview: false,
-    section: 'lateralsearch',
-  };
-
+  
   const [inputValue, setInputValue] = useState(''); // Input state
-  const [searchTerm, setSearchTerm] = useState(''); // API state
+  const [searchTerm, setSearchTerm]: PatientSearchBox = useState(
+    PATIENTS_SEARCH_FILTERS
+  ); // API state
 
   const {
     data: patients,
@@ -29,12 +28,13 @@ export function PatientSearch() {
     skip: !searchTerm,
   });
 
-  const handleFilterChange = (event, newFilters: any) => {
-    filters[Array.isArray(newFilters) ? 'departmentInsertions' : 'searchBox'] =
-      newFilters;
-
+  const handleFilterChange = (event, newFilters: PatientSearchBox | string) => {
     const timeout = setTimeout(() => {
-      setSearchTerm(filters);
+      setSearchTerm((prevFilters) => ({
+        ...prevFilters,
+        [Array.isArray(newFilters) ? 'departmentInsertions' : 'searchBox']:
+          newFilters,
+      }));
     }, 1500);
 
     return () => clearTimeout(timeout);
@@ -48,7 +48,7 @@ export function PatientSearch() {
   return (
     <>
       <Stack gap={4}>
-        {/*Provier department component*/}
+        {/*Provider department component*/}
         <ProviderDepartments onFilterChange={handleFilterChange} />
         {/*Patient Search input*/}
         <Grid container spacing={0} direction="row" className="!w-full">
@@ -59,7 +59,7 @@ export function PatientSearch() {
               options={patientsFiltered}
               getOptionLabel={(option) => option.patientFullName || ''}
               loading={isFetching}
-              onInputChange={(event, newInputValue) => {
+              onInputChange={(event: SyntheticEvent, newInputValue: string) => {
                 if (inputValue !== newInputValue) {
                   setInputValue(newInputValue);
                   handleFilterChange(event, newInputValue);

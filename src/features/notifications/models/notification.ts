@@ -1,4 +1,4 @@
 export interface Notification {
-  total?: number;
-  data?: [];
+  total: number;
+  data: [];
 }

@@ -15,47 +15,40 @@ import { useGetAlertsQuery } from '../../redux/api/notificationsApi.ts';
 import { AlertsSearch } from '../../models';
 import AlertsDataComponent from './AlertsDataComponent.tsx';
 import EWPPagination from '../../../../components/pagination/EWPPagination.tsx';
+import { ALERTS_FILTERS } from '../const/alertsFilters.const.ts';
 
 export default function AlertsComponent() {
   const { t } = useTranslation();
-
-  const filters = {
-    readByMedicalStaff: false,
-    onlyMyPatients: true,
-    page: 0,
-    pageSize: 10,
-  };
-
-  const [checkedUnread, setCheckedUnread] = useState(true);
-  const [searchTerm, setSearchTerm] = useState(filters); // API state
+  const [checkedUnread, setCheckedUnread] = useState(true); // Unread switch state
+  const [searchTerms, setSearchTerms]: AlertsSearch = useState(ALERTS_FILTERS); // API state
 
   const {
-    data: alerts,
+    data: { events, totalEvents } = {},
     isFetching,
     refetch,
-  }: AlertsSearch = useGetAlertsQuery(searchTerm);
+  } = useGetAlertsQuery(searchTerms);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setCheckedUnread(event.target.checked);
   };
 
-  const handleFilterChange = (event, newFilters?: boolean | AlertsSearch) => {
-    filters: typeof newFilters != 'boolean'
-      ? (filters.page = newFilters.page || 0)
-      : (filters.pageSize = newFilters.pageSize || 10);
-
-    setSearchTerm((prevFilters) => ({
+  const handleFilterChange = (event, newFilters: boolean | AlertsSearch) => {
+    setSearchTerms((prevFilters) => ({
       ...prevFilters,
       readByMedicalStaff:
         typeof newFilters === 'boolean'
           ? !newFilters
           : prevFilters.readByMedicalStaff,
-      page: filters.page,
-      pageSize: filters.pageSize,
+      page: newFilters.page != undefined ? newFilters.page : prevFilters.page,
+      pageSize:
+        newFilters.pageSize != undefined
+          ? newFilters.pageSize
+          : prevFilters.pageSize,
     }));
   };
 
   if (isFetching) return <p>{t('loading')}...</p>;
+  if (!events) return <p>{t('no_available_data')}...</p>;
 
   return (
     <>
@@ -106,13 +99,11 @@ export default function AlertsComponent() {
             {t('events')}
           </Button>
         </Toolbar>
-        <AlertsDataComponent alerts={alerts} />
-        {/*Set pagination model que contenga*/}
+        <AlertsDataComponent events={events} />
         <EWPPagination
           onPaginationChange={handleFilterChange}
-          initialPage={filters.page}
-          initialPageSize={filters.pageSize}
-          total={alerts.totalEvents}
+          filters={searchTerms}
+          total={totalEvents}
         />
       </Box>
     </>

@@ -1,4 +1,3 @@
-import { Message } from '../../../features/messages/models';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import * as React from 'react';
@@ -7,19 +6,20 @@ import { useGetProviderDepartmentsQuery } from '../redux/api/ProviderDepartments
 import { Checkbox } from '@mui/material';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import { ProviderDepartments } from '../models';
 
 export default function ProviderDepartments({ onFilterChange }) {
   const { t } = useTranslation();
 
   const handleFilterChange = (event, value) => {
-    let departmentInsertions = [];
+    const departmentInsertions = [];
     value.forEach((item) => {
       departmentInsertions.push(item.departmentId);
     });
     onFilterChange(event, departmentInsertions);
   };
 
-  const { data: departments, isLoading }: Message =
+  const { data: departments, isLoading }: ProviderDepartments =
     useGetProviderDepartmentsQuery();
   if (isLoading) return <p>{t('loading')}...</p>;
   if (!departments) return <p>{t('no_available_data')}...</p>;

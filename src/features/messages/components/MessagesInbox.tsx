@@ -13,12 +13,16 @@ import EWPFormatISODate from '../../../components/reusableDateFormatter/EWPForma
 import { Person } from '@mui/icons-material';
 
 import { Message } from '../models';
+import { MESSAGES_SEARCH_FILTERS } from '../const/messagesSearch.const.ts';
 
 export function MessagesInbox() {
   const { t } = useTranslation();
 
-  const { data: messages, isLoading }: Message = useGetMessagesInboxQuery();
+  const { data: messages, isLoading }: Message = useGetMessagesInboxQuery(
+    MESSAGES_SEARCH_FILTERS
+  );
   if (isLoading) return <p>{t('loading')}...</p>;
+  if (!messages) return <p>{t('no_available_data')}...</p>;
   return (
     <List>
       {messages.messages.map((message) => (

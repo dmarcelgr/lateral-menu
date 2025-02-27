@@ -1,6 +1,6 @@
 export interface PatientSearchBox {
-  search_box?: string;
-  daily_review?: boolean;
+  searchBox?: string;
+  dailyReview?: boolean;
   section?: string;
-  department_insertions?: [];
+  departmentInsertions?: [];
 }

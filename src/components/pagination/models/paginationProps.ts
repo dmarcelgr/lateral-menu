@@ -8,7 +8,9 @@ export interface PaginationProps {
       | null,
     p: { page?: number; pageSize?: number }
   ) => void;
-  initialPage: number;
-  initialPageSize: number;
+  filters: {
+    page: number;
+    pageSize: number;
+  };
   total: number;
 }

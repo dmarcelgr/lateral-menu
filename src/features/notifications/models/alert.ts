@@ -1,4 +1,4 @@
 export interface Alert {
-  total_events: number;
+  total_events?: number;
   events?: [];
 }

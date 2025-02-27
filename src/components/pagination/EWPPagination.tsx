@@ -5,27 +5,25 @@ import { PaginationProps } from './models/paginationProps.ts';
 
 export default function EWPPagination({
   onPaginationChange,
-  initialPage,
-  initialPageSize,
+  filters,
   total,
 }: PaginationProps) {
-  const maxPage = Math.ceil(total / initialPageSize) - 1;
-
-  const [page, setPage] = useState(Math.min(initialPage || 0, maxPage));
-  const [rowsPerPage, setRowsPerPage] = useState(initialPageSize || 10);
+  const maxPage = Math.ceil(total / filters.page) - 1;
+  const [page, setPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   return (
     <TablePagination
       component="div"
       count={total}
       page={page}
-      onPageChange={(event, newPage) => {
+      onPageChange={(event, newPage: number) => {
         if (newPage <= maxPage) {
           setPage(newPage);
           onPaginationChange(event, { page: newPage });
         }
       }}
-      rowsPerPage={rowsPerPage || initialPageSize}
+      rowsPerPage={rowsPerPage || filters.pageSize}
       onRowsPerPageChange={(event) => {
         setPage(0);
         setRowsPerPage(parseInt(event.target.value, 10));

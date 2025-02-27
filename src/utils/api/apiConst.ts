@@ -4,12 +4,13 @@ import {
   fetchBaseQuery,
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/query';
+import { Environment } from '../env/Environment';
 
-// const env = new Environment();
+const env = new Environment();
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: '/',
-  // baseUrl: env.baseUrlApi,
+  // baseUrl: '/',
+  baseUrl: env.baseUrlApi,
 });
 
 const baseQueryWithReauth: BaseQueryFn<

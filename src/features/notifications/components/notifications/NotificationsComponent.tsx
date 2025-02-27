@@ -11,27 +11,23 @@ import { useTranslation } from 'react-i18next';
 import * as React from 'react';
 import { ChangeEvent, useState } from 'react';
 import NotificationsDataComponent from './NotificationsDataComponent.tsx';
-import { Notification } from '../../models';
+import { Notification, NotificationsSearch } from '../../models';
 import { useGetNotificationsQuery } from '../../redux/api/notificationsApi.ts';
+import { NOTIFICATIONS_FILTERS } from '../const/notificationsFilters.const.ts';
 
 export default function NotificationsComponent() {
   const { t } = useTranslation();
 
-  const filters = {
-    type: 6,
-    isRead: false,
-  };
-
-  const [checkedUnread, setCheckedUnread] = useState(true);
-  const [searchTerm, setSearchTerm] = useState(''); // API state
+  const [checkedUnread, setCheckedUnread] = useState(true); // State handler for 'Show only unread' switch
+  const [searchTerm, setSearchTerm]: NotificationsSearch = useState(
+    NOTIFICATIONS_FILTERS
+  ); // API state
 
   const {
     data: notifications,
     isFetching,
     refetch,
-  }: Notification = useGetNotificationsQuery(
-    searchTerm && searchTerm !== '' ? searchTerm : filters
-  );
+  }: Notification = useGetNotificationsQuery(searchTerm);
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement>,
@@ -48,12 +44,7 @@ export default function NotificationsComponent() {
     event: ChangeEvent<unknown>,
     newFilters?: boolean
   ) => {
-    if (typeof newFilters === 'boolean') {
-      setSearchTerm((prevFilters) => ({
-        ...prevFilters,
-        isRead: !newFilters,
-      }));
-    }
+    setSearchTerm((prevFilters) => ({ ...prevFilters, isRead: !newFilters }));
   };
 
   if (isFetching) return <p>{t('loading')}...</p>;

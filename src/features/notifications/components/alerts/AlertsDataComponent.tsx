@@ -13,28 +13,28 @@ import { Person } from '@mui/icons-material';
 import * as React from 'react';
 import { Alert } from '../../models';
 
-export default function AlertsDataComponent({ alerts }: Alert) {
+export default function AlertsDataComponent({ events }: Alert) {
   return (
     <>
       <Box>
         <List>
-          {alerts.events.map((alert) => (
+          {events.map((event) => (
             <ListItem
               component={Link}
-              to={`patients/#/msgs/view/${alert.id}`}
-              key={alert.id}
+              to={`patients/#/msgs/view/${event.id}`}
+              key={event.id}
               secondaryAction={
                 <span className="text-slate-500">
-                  <EWPFormatISODate date={alert.createDate} />
+                  <EWPFormatISODate date={event.createDate} />
                 </span>
               }
               className="shadow-inner hover:bg-slate-50"
             >
               <ListItemAvatar>
                 <Avatar sx={{ backgroundColor: 'primary.light' }}>
-                  {alert.patientPhoto != null ||
-                  alert.patientPhoto != undefined ? (
-                    <img src={alert.patientPhoto} alt="User" />
+                  {event.patientPhoto != null ||
+                  event.patientPhoto != undefined ? (
+                    <img src={event.patientPhoto} alt="User" />
                   ) : (
                     <Person />
                   )}
@@ -46,18 +46,18 @@ export default function AlertsDataComponent({ alerts }: Alert) {
                 primary={
                   <>
                     <b>
-                      {alert.patientName} (id: {alert.id}){' '}
+                      {event.patientName} (id: {event.id}){' '}
                     </b>{' '}
-                    {alert.status === 'new' && (
+                    {event.status === 'new' && (
                       <Badge
                         className="!ml-6 capitalize"
                         color="error"
-                        badgeContent={alert.status}
+                        badgeContent={event.status}
                       ></Badge>
                     )}
                   </>
                 }
-                secondary={alert.cause}
+                secondary={event.cause}
               />
             </ListItem>
           ))}

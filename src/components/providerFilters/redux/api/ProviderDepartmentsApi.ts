@@ -1,19 +1,18 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import ProviderDepartmentAdapter, {
-  PROVIDER_DEPARTMENTS,
-} from '../../adapters/ProviderDepartmentAdapter.adapter.ts';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import ProviderDepartmentAdapter from '../../adapters/ProviderDepartmentAdapter.adapter.ts';
 import { ProviderDepartmentsProps } from '../../dto';
+import baseQueryWithReauth from '../../../../utils/api/apiConst.ts';
 
 export const providerDepartmentsApi = createApi({
   reducerPath: 'providerDepartmentsApi',
-  baseQuery: fetchBaseQuery({ baseUrl: '/api/' }), // Base ficticia
-  endpoints: (builder) => ({
-    getProviderDepartments: builder.query<ProviderDepartmentsProps[], void>({
-      queryFn: async () => {
-        return {
-          data: ProviderDepartmentAdapter(PROVIDER_DEPARTMENTS),
-        };
+  baseQuery: baseQueryWithReauth,
+  endpoints: (build) => ({
+    getProviderDepartments: build.query({
+      query: () => `/api/interoperability/patient-departments/`,
+      transformResponse: (rawResult: ProviderDepartmentsProps[]) => {
+        return ProviderDepartmentAdapter(rawResult);
       },
+      keepUnusedDataFor: 0,
     }),
   }),
 });
