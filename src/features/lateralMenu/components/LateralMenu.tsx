@@ -18,25 +18,14 @@ import {
 
 export function LateralMenu() {
   const matchesResponsiveWidth = useMediaQuery('(min-width:1023px)');
-  const [open, setOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleMobileToggle = (): void => {
+  const handleToggle = (): void => {
     setMenuOpen(!menuOpen);
   };
 
-  const handleDrawer = (key: string) => {
-    // // const handleDrawer = (key: string, status: boolean) => {
-    // //   console.log('key:: ', key);
-    // //   console.log('status:: ', status);
-    // console.log('contentWidth:: ', contentWidth);
-    // setContentWidth(() => (open ? '80rem' : 'auto'));
-    // // setSubmenu((prevKey: string) => (prevKey === key ? '' : key));
-
-    console.log('key at main handle ', key);
-    console.log('status at main handle ', open);
-
-    setOpen(!open);
+  const openMobileMenu = (): void => {
+    setMenuOpen(!menuOpen);
   };
 
   return (
@@ -49,7 +38,7 @@ export function LateralMenu() {
           <IconButton
             aria-label="open menu"
             edge={menuOpen ? 'end' : 'start'}
-            onClick={handleMobileToggle}
+            onClick={handleToggle}
             className="z-[2000] shadow rounded-full"
             sx={{
               color: 'secondary.light',
@@ -63,16 +52,14 @@ export function LateralMenu() {
           </IconButton>
         </Box>
         <Drawer
-          bgcolor="primary.main"
-          className="flex items-center x-4 sm:align-middle shadow-md !z-2"
+          className="flex items-center x-4 sm:align-middle !shadow-md !z-2"
           anchor={matchesResponsiveWidth ? 'left' : 'top'}
           variant={matchesResponsiveWidth ? 'permanent' : 'temporary'}
+          open={menuOpen}
+          onClose={openMobileMenu}
           PaperProps={{
             sx: {
               backgroundColor: 'primary.main',
-              width: { xs: '100%', lg: 'auto' },
-              overflowY: 'auto',
-              overflowX: 'hidden',
             },
           }}
         >

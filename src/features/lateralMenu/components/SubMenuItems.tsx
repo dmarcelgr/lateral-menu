@@ -86,7 +86,9 @@ export function SubMenuItems({ props, handleDrawerClose }: SubmenuItemsProps) {
             })}
           </List>
         ) : (
-          <Box key={key}>{submenu}</Box>
+          <Box className="p-5" key={key}>
+            {submenu}
+          </Box>
         )}
       </Box>
     </>

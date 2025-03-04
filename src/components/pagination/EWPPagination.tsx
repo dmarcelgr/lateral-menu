@@ -25,10 +25,10 @@ export default function EWPPagination({
       }}
       rowsPerPage={rowsPerPage || filters.pageSize}
       onRowsPerPageChange={(event) => {
-        setPage(0);
+        setPage(1);
         setRowsPerPage(parseInt(event.target.value, 10));
         onPaginationChange(event, {
-          page: 0,
+          page: 1,
           pageSize: parseInt(event.target.value, 10),
         });
       }}

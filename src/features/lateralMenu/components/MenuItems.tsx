@@ -3,7 +3,13 @@ import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Divider, Drawer, ListItemButton, useMediaQuery } from '@mui/material';
+import {
+  Divider,
+  Drawer,
+  Fade,
+  ListItemButton,
+  useMediaQuery,
+} from '@mui/material';
 import { MenuItem } from '../models/menu.ts';
 import { useTranslation } from 'react-i18next';
 import { SubMenuItems } from './SubMenuItems.tsx';
@@ -29,31 +35,26 @@ export default function MenuItems(props: menuItemsProps) {
 
   return (
     <>
-      <List
-        aria-label="lateral menu"
-        key={menuKey}
-        className={`p-0 ${open ? '!w-lg' : '!w-auto'}  !justify-between`}
-      >
+      <List aria-label="lateral menu" key={menuKey} className="p-0">
         {menuItems.map((item) => (
           <React.Fragment key={item.key}>
             <Divider
               component="li"
               className={`
-                z-100 opacity-60 lg:!border-t	lg:!border-slate-400 ${open ? 'w-16' : 'w-full'}`}
+                z-100 opacity-60 lg:!border-t	lg:!border-slate-400 w-full'}`}
             />
             <ListItem
               disablePadding
-              className={` h-fit overflow-y-auto ${open ? '!w-18' : '!w-auto'}`}
+              className="h-14 lg:opacity-60 hover:opacity-100 !w-18"
               sx={{
                 bgcolor: 'primary.main',
                 ':hover': {
-                  // color: 'secondary.light',
                   bgcolor: 'secondary.dark',
                 },
               }}
             >
               <ListItemButton
-                className={`py-10 h-16 lg:opacity-60 hover:opacity-100 h-fit ${open ? '!w-18' : '!w-auto'}`}
+                className="shadow-inner py-10 h-16 h-[4rem]"
                 onClick={() => {
                   handleOpenDrawer(item);
                 }}
@@ -77,20 +78,23 @@ export default function MenuItems(props: menuItemsProps) {
             </ListItem>
           </React.Fragment>
         ))}
+        {/*Submenu*/}
         <Drawer
-          className="w-full"
+          className="w-full absolute !left-20"
           anchor={matchesResponsiveWidth ? 'left' : 'top'}
+          variant={matchesResponsiveWidth ? 'temporary' : 'permanent'}
           open={open}
           onClose={handleCloseDrawer}
+          TransitionComponent={Fade}
+          transitionDuration={0}
           hideBackdrop
-          variant="temporary"
           ModalProps={{
             keepMounted: false,
           }}
           PaperProps={{
             sx: {
               left: { xs: '1', lg: '4.5rem' },
-              width: { xs: '100%', lg: '30%' },
+              width: { xs: '100%', lg: '32%' },
             },
           }}
         >

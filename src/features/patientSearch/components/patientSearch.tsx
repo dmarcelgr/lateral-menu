@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SyntheticEvent, useMemo, useState } from 'react';
+import { SyntheticEvent, useEffect, useMemo, useState } from 'react';
 import { useGetPatientQuery } from '../redux/api/patientSearchApi.ts';
 import { useTranslation } from 'react-i18next';
 import { Button, CircularProgress, Stack } from '@mui/material';
@@ -14,7 +14,7 @@ import { PATIENTS_SEARCH_FILTERS } from '../const/patientsSearch.const.ts';
 
 export function PatientSearch() {
   const { t } = useTranslation();
-  
+
   const [inputValue, setInputValue] = useState(''); // Input state
   const [searchTerm, setSearchTerm]: PatientSearchBox = useState(
     PATIENTS_SEARCH_FILTERS
@@ -28,16 +28,19 @@ export function PatientSearch() {
     skip: !searchTerm,
   });
 
-  const handleFilterChange = (event, newFilters: PatientSearchBox | string) => {
+  useEffect(() => {
     const timeout = setTimeout(() => {
-      setSearchTerm((prevFilters) => ({
-        ...prevFilters,
-        [Array.isArray(newFilters) ? 'departmentInsertions' : 'searchBox']:
-          newFilters,
-      }));
+      handleFilterChange('ChangeEvent', inputValue);
     }, 1500);
-
     return () => clearTimeout(timeout);
+  }, [inputValue]);
+
+  const handleFilterChange = (event, newFilters: PatientSearchBox | string) => {
+    setSearchTerm((prevFilters) => ({
+      ...prevFilters,
+      [Array.isArray(newFilters) ? 'departmentInsertions' : 'searchBox']:
+        newFilters,
+    }));
   };
 
   const patientsFiltered = useMemo(
@@ -60,10 +63,10 @@ export function PatientSearch() {
               getOptionLabel={(option) => option.patientFullName || ''}
               loading={isFetching}
               onInputChange={(event: SyntheticEvent, newInputValue: string) => {
-                if (inputValue !== newInputValue) {
-                  setInputValue(newInputValue);
-                  handleFilterChange(event, newInputValue);
-                }
+                setInputValue(newInputValue);
+                // if (inputValue !== newInputValue) {
+                //   // handleFilterChange(event, newInputValue);
+                // }
               }}
               renderOption={(props, option) => (
                 <li {...props} key={option.patientId}>
