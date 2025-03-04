@@ -9,8 +9,8 @@ export default function EWPPagination({
   total,
 }: PaginationProps) {
   const maxPage = Math.ceil(total / filters.page) - 1;
-  const [page, setPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [page, setPage] = useState(filters.page);
+  const [rowsPerPage, setRowsPerPage] = useState(filters.pageSize);
 
   return (
     <TablePagination
@@ -18,12 +18,12 @@ export default function EWPPagination({
       count={total}
       page={page}
       onPageChange={(event, newPage: number) => {
-        if (newPage <= maxPage) {
+        if (newPage < maxPage) {
           setPage(newPage);
           onPaginationChange(event, { page: newPage });
         }
       }}
-      rowsPerPage={rowsPerPage || filters.pageSize}
+      rowsPerPage={rowsPerPage}
       onRowsPerPageChange={(event) => {
         setPage(1);
         setRowsPerPage(parseInt(event.target.value, 10));
