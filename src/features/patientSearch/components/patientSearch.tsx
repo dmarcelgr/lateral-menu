@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid2';
 import { Search } from '@mui/icons-material';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { PatientSearch, PatientSearchBox } from '../models';
+import { EwpPatientSearch, EwpPatientSearchBox } from '../models';
 import EWPFormatISODate from '../../../components/reusableDateFormatter/EWPFormatISODate.tsx';
 import { PATIENTS_SEARCH_FILTERS } from '../const/patientsSearch.const.ts';
 
@@ -16,7 +16,7 @@ export function PatientSearch() {
   const { t } = useTranslation();
 
   const [inputValue, setInputValue] = useState(''); // Input state
-  const [searchTerm, setSearchTerm]: PatientSearchBox = useState(
+  const [searchTerm, setSearchTerm]: EwpPatientSearchBox = useState(
     PATIENTS_SEARCH_FILTERS
   ); // API state
 
@@ -24,7 +24,7 @@ export function PatientSearch() {
     data: patients,
     isFetching,
     refetch,
-  }: PatientSearch = useGetPatientQuery(searchTerm, {
+  }: EwpPatientSearch = useGetPatientQuery(searchTerm, {
     skip: !searchTerm,
   });
 
@@ -35,7 +35,10 @@ export function PatientSearch() {
     return () => clearTimeout(timeout);
   }, [inputValue]);
 
-  const handleFilterChange = (event, newFilters: PatientSearchBox | string) => {
+  const handleFilterChange = (
+    event,
+    newFilters: EwpPatientSearchBox | string
+  ) => {
     setSearchTerm((prevFilters) => ({
       ...prevFilters,
       [Array.isArray(newFilters) ? 'departmentInsertions' : 'searchBox']:
@@ -64,9 +67,6 @@ export function PatientSearch() {
               loading={isFetching}
               onInputChange={(event: SyntheticEvent, newInputValue: string) => {
                 setInputValue(newInputValue);
-                // if (inputValue !== newInputValue) {
-                //   // handleFilterChange(event, newInputValue);
-                // }
               }}
               renderOption={(props, option) => (
                 <li {...props} key={option.patientId}>

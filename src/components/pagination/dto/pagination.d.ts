@@ -6,7 +6,7 @@ export interface PaginationProps {
       | ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
       | MouseEvent<HTMLButtonElement>
       | null,
-    p: { page?: number; pageSize?: number }
+    pageFilters: { page?: number; pageSize?: number }
   ) => void;
   filters: {
     page: number;

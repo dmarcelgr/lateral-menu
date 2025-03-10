@@ -1,4 +1,9 @@
-export interface Telehealth {
+export interface EwpTelehealth {
   records?: [];
-  total_records?: number;
+  totalRecords?: number;
+}
+
+export interface EwpTelehealthSearch {
+  page: number;
+  pageSize: number;
 }

@@ -1,4 +1,4 @@
-export interface AlertsSearch {
+export interface EwpAlertsSearch {
   readByMedicalStaff?: boolean;
   onlyMyPatients?: boolean;
   page?: number;

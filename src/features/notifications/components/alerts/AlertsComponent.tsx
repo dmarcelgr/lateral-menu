@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import * as React from 'react';
 import { ChangeEvent, useState } from 'react';
 import { useGetAlertsQuery } from '../../redux/api/notificationsApi.ts';
-import { AlertsSearch } from '../../models';
+import { EwpAlertsSearch } from '../../models';
 import AlertsDataComponent from './AlertsDataComponent.tsx';
 import EWPPagination from '../../../../components/pagination/EWPPagination.tsx';
 import { ALERTS_FILTERS } from '../const/alertsFilters.const.ts';
@@ -20,7 +20,8 @@ import { ALERTS_FILTERS } from '../const/alertsFilters.const.ts';
 export default function AlertsComponent() {
   const { t } = useTranslation();
   const [checkedUnread, setCheckedUnread] = useState(true); // Unread switch state
-  const [searchTerms, setSearchTerms]: AlertsSearch = useState(ALERTS_FILTERS); // API state
+  const [searchTerms, setSearchTerms]: EwpAlertsSearch =
+    useState(ALERTS_FILTERS); // API state
 
   const {
     data: { events, totalEvents } = {},
@@ -32,16 +33,16 @@ export default function AlertsComponent() {
     setCheckedUnread(event.target.checked);
   };
 
-  const handleFilterChange = (event, newFilters: boolean | AlertsSearch) => {
+  const handleFilterChange = (event, newFilters: boolean | EwpAlertsSearch) => {
     setSearchTerms((prevFilters) => ({
       ...prevFilters,
       readByMedicalStaff:
         typeof newFilters === 'boolean'
           ? !newFilters
           : prevFilters.readByMedicalStaff,
-      page: newFilters.page != undefined ? newFilters.page : prevFilters.page,
+      page: newFilters?.page != undefined ? newFilters?.page : prevFilters.page,
       pageSize:
-        newFilters.pageSize != undefined
+        newFilters?.pageSize != undefined
           ? newFilters.pageSize
           : prevFilters.pageSize,
     }));

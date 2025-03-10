@@ -12,13 +12,13 @@ import { Link } from 'react-router-dom';
 import EWPFormatISODate from '../../../components/reusableDateFormatter/EWPFormatISODate.tsx';
 import { Person } from '@mui/icons-material';
 
-import { Message } from '../models';
+import { EwpMessage } from '../models';
 import { MESSAGES_SEARCH_FILTERS } from '../const/messagesSearch.const.ts';
 
 export function MessagesInbox() {
   const { t } = useTranslation();
 
-  const { data: messages, isLoading }: Message = useGetMessagesInboxQuery(
+  const { data: messages, isLoading }: EwpMessage = useGetMessagesInboxQuery(
     MESSAGES_SEARCH_FILTERS
   );
   if (isLoading) return <p>{t('loading')}...</p>;

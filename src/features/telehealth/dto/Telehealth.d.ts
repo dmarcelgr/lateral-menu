@@ -1,5 +1,10 @@
-import { Telehealth } from '../models/';
+import { EwpTelehealth } from '../models/';
 
 export interface TelehealthProps {
-  data: Telehealth;
+  data: EwpTelehealth;
+}
+
+export interface TelehalthRoomsSearchProps {
+  page?: number;
+  pageSize?: number;
 }

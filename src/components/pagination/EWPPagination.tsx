@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { TablePagination } from '@mui/material';
-import { PaginationProps } from './models/paginationProps.ts';
+import { PaginationProps } from './dto/pagination';
 
 export default function EWPPagination({
   onPaginationChange,

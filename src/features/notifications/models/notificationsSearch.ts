@@ -1,4 +1,4 @@
-export interface NotificationsSearch {
+export interface EwpNotificationsSearch {
   type: number;
   isRead: boolean;
 }

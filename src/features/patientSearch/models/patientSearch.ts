@@ -1,4 +1,4 @@
-export interface PatientSearch {
+export interface EwpPatientSearch {
   total_patients?: number;
   patients?: [];
 }

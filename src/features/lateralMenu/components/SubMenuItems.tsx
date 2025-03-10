@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import React from 'react';
 import { ArrowBack } from '@mui/icons-material';
-import { SubmenuItemsProps } from '../models/submenuItemsProps.ts';
+import { SubmenuItemsProps } from '../dto/menu';
 
 export function SubMenuItems({ props, handleDrawerClose }: SubmenuItemsProps) {
   const { key, submenu, title } = props;

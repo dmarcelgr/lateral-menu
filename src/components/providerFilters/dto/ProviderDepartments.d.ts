@@ -1,5 +1,5 @@
-import { ProviderDepartments } from '../models/';
+import { EwpProviderDepartments } from '../models/';
 
 export interface ProviderDepartmentsProps {
-  data: ProviderDepartments;
+  data: EwpProviderDepartments;
 }

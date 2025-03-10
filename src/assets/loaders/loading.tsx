@@ -1,4 +1,6 @@
-export default function LoaderIcon(): JSX.Element {
+import { ReactNode } from 'react';
+
+export default function LoaderIcon(): ReactNode {
   return (
     <svg
       className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"

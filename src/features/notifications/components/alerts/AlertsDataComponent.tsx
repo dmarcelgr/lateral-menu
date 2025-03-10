@@ -11,9 +11,9 @@ import { Link } from 'react-router-dom';
 import EWPFormatISODate from '../../../../components/reusableDateFormatter/EWPFormatISODate.tsx';
 import { Person } from '@mui/icons-material';
 import * as React from 'react';
-import { Alert } from '../../models';
+import { EwpAlert } from '../../models';
 
-export default function AlertsDataComponent({ events }: Alert) {
+export default function AlertsDataComponent({ events }: EwpAlert) {
   return (
     <>
       <Box>

@@ -10,11 +10,11 @@ import { Link } from 'react-router-dom';
 import EWPFormatISODate from '../../../../components/reusableDateFormatter/EWPFormatISODate.tsx';
 import { ReceiptLong } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
-import { Notification } from '../../models';
+import { EwpNotification } from '../../models';
 
 export default function NotificationsDataComponent({
   notifications,
-}: Notification) {
+}: EwpNotification) {
   const { t } = useTranslation();
   return (
     <>

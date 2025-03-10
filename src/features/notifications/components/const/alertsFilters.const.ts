@@ -1,6 +1,6 @@
-import { AlertsSearch } from '../../models';
+import { EwpAlertsSearch } from '../../models';
 
-export const ALERTS_FILTERS: AlertsSearch = {
+export const ALERTS_FILTERS: EwpAlertsSearch = {
   readByMedicalStaff: false,
   onlyMyPatients: true,
   page: 1,

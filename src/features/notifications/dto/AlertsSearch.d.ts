@@ -1,5 +1,5 @@
-import { AlertsSearch } from '../models/';
+import { EwpAlertsSearch } from '../models/';
 
 export interface AlertsSearchProps {
-  data: AlertsSearch;
+  data: EwpAlertsSearch;
 }

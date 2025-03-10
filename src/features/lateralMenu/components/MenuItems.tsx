@@ -13,7 +13,7 @@ import {
 import { MenuItem } from '../models/menu.ts';
 import { useTranslation } from 'react-i18next';
 import { SubMenuItems } from './SubMenuItems.tsx';
-import { menuItemsProps } from '../models/menuItemsProps.ts';
+import { menuItemsProps } from '../dto/menu';
 
 export default function MenuItems(props: menuItemsProps) {
   const { t } = useTranslation();

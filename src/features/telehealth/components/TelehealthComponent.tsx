@@ -4,20 +4,21 @@ import {
 } from '../redux/api/TelehealthApi.ts';
 import Grid from '@mui/material/Grid2';
 import { useTranslation } from 'react-i18next';
-import { Message } from '../../messages/models';
 import * as React from 'react';
 import { useRef } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Button } from '@mui/material';
+import { TELEHEALTH_ROOMS_SEARCH } from '../const/telehealthRoomsSearch.const.ts';
+import { EwpTelehealth } from '../models';
 
 export default function TelehealthComponent() {
   const { t } = useTranslation();
   const RoomRef = useRef();
 
-  const { data: telehealth, isLoadingTelehealth }: Message =
-    useGetTelehealthRoomsQuery();
-  const { data: provider, isLoadingProvider }: Message =
+  const { data: telehealth, isLoadingTelehealth }: EwpTelehealth =
+    useGetTelehealthRoomsQuery(TELEHEALTH_ROOMS_SEARCH);
+  const { data: provider, isLoadingProvider }: EwpTelehealth =
     useGetTelehealthProviderQuery();
   if (!telehealth && !provider) return <p>{t('no_available_data')}...</p>;
 

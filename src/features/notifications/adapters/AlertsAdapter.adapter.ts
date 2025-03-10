@@ -5,9 +5,8 @@ import { AlertsProps } from '../dto/Alerts';
 import { AlertsSearchProps } from '../dto/AlertsSearch';
 
 export default function AlertsAdapter(data: AlertsProps) {
-  const { events, total_events } = data;
+  const { events, total_events: totalEvents } = data;
   return {
-    totalEvents: total_events,
     events: events.map((item) => ({
       id: item.id,
       createDate: item.symptom_resport.created_at,
@@ -20,6 +19,7 @@ export default function AlertsAdapter(data: AlertsProps) {
         ' ' +
         item.patient.id_people.last_name,
     })),
+    totalEvents: totalEvents,
   };
 }
 

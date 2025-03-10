@@ -13,25 +13,6 @@ export const notificationsApi = createApi({
   reducerPath: 'notificationsApi',
   baseQuery: baseQueryWithReauth,
   endpoints: (build) => ({
-    // getAlerts: build.query<AlertsProps[], void>({
-    //   // Query cambiarlo
-    //   // Backend manda total
-    //   queryFn: async (searchTerms: AlertsSearchAdapter) => {
-    //     const startIndex = (searchTerms.page || 0) * searchTerms.pageSize;
-    //     const endIndex = startIndex + searchTerms.pageSize;
-    //
-    //     const filteredData = ALERTS_DATA.events.filter(
-    //       (item) =>
-    //         item?.is_read_by_medical_staff === searchTerms?.readByMedicalStaff
-    //     );
-    //
-    //     const paginatedData = filteredData.slice(startIndex, endIndex);
-    //
-    //     paginatedData['total_events'] = filteredData.length;
-    //
-    //     return { data: AlertsAdapter(paginatedData) };
-    //   },
-    // }),
     getAlerts: build.query({
       query: (searchTerms: AlertsSearchAdapter) =>
         `api/events/events/?is_read_by_medical_staff=${searchTerms.readByMedicalStaff}&only_my_patients=${searchTerms.onlyMyPatients}&page=${searchTerms.page}&page_size=${searchTerms.pageSize}`,

@@ -1,5 +1,5 @@
-import { Notification } from '../models/';
+import { EwpNotification } from '../models/';
 
 export interface NotificationsProps {
-  data: Notification;
+  data: EwpNotification;
 }

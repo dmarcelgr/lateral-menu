@@ -5,11 +5,10 @@ interface dateForFormat {
 }
 
 function formatDate(date) {
-  switch (typeof date.date) {
-    case 'string':
-      return format(parseISO(date.date), 'MM/dd/yyyy');
-    case 'undefined':
-      return 'invalid date type';
+  if (typeof date.date === 'string') {
+    return format(parseISO(date.date), 'MM/dd/yyyy');
+  } else {
+    return 'invalid date type';
   }
 }
 

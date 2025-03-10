@@ -1,4 +1,4 @@
-export interface Alert {
-  total_events?: number;
+export interface EwpAlert {
   events?: [];
+  totalEvents?: number;
 }

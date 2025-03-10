@@ -6,9 +6,9 @@ import { useGetProviderDepartmentsQuery } from '../redux/api/ProviderDepartments
 import { Checkbox } from '@mui/material';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import { ProviderDepartments } from '../models';
+import { EwpProviderDepartments } from '../models';
 
-export default function ProviderDepartments({ onFilterChange }) {
+export default function EwpProviderDepartments({ onFilterChange }) {
   const { t } = useTranslation();
 
   const handleFilterChange = (event, value) => {
@@ -19,7 +19,7 @@ export default function ProviderDepartments({ onFilterChange }) {
     onFilterChange(event, departmentInsertions);
   };
 
-  const { data: departments, isLoading }: ProviderDepartments =
+  const { data: departments, isLoading }: EwpProviderDepartments =
     useGetProviderDepartmentsQuery();
   if (isLoading) return <p>{t('loading')}...</p>;
   if (!departments) return <p>{t('no_available_data')}...</p>;

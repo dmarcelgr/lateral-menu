@@ -1,5 +1,5 @@
-import { Alert } from '../models/';
+import { EwpAlert } from '../models/';
 
 export interface AlertsProps {
-  data: Alert;
+  data: EwpAlert;
 }

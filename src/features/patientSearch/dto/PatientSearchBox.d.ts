@@ -1,5 +1,5 @@
-import { PatientSearchBox } from '../models/';
+import { EwpPatientSearchBox } from '../models/';
 
 export interface PatientSearchBoxProps {
-  data: PatientSearchBox;
+  data: EwpPatientSearchBox;
 }

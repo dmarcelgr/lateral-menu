@@ -1,5 +1,5 @@
-import { Message } from '../models/';
+import { EwpMessage } from '../models/';
 
 export interface MessagesProps {
-  data: Message;
+  data: EwpMessage;
 }
