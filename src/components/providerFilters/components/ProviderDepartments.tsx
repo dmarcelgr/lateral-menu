@@ -21,47 +21,51 @@ export default function EwpProviderDepartments({ onFilterChange }) {
 
   const { data: departments, isLoading }: EwpProviderDepartments =
     useGetProviderDepartmentsQuery();
-  if (isLoading) return <p>{t('loading')}...</p>;
-  if (!departments) return <p>{t('no_available_data')}...</p>;
 
   return (
     <>
-      <Autocomplete
-        id="provider-departments"
-        multiple
-        disableCloseOnSelect
-        onChange={handleFilterChange}
-        options={departments?.departments || []} //
-        getOptionLabel={(option) =>
-          option.departmentName + ' (id: ' + option.departmentId + ')' || ''
-        }
-        renderOption={(props, option, { selected }) => {
-          const { key, ...optionProps } = props;
-          return (
-            <li key={key} {...optionProps}>
-              <Checkbox
-                icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
-                checkedIcon={<CheckBoxIcon fontSize="small" />}
-                style={{ marginRight: 8 }}
-                checked={selected}
-              />
-              {option.departmentName} (id: {option.departmentId})
-            </li>
-          );
-        }}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label={t('select_a_department')}
-            slotProps={{
-              input: {
-                ...params.InputProps,
-                type: 'search',
-              },
-            }}
-          />
-        )}
-      />
+      {isLoading ? (
+        <p>{t('loading')}...</p>
+      ) : !departments || departments.length === 0 ? (
+        <p>{t('no_available_data')}...</p>
+      ) : (
+        <Autocomplete
+          id="provider-departments"
+          multiple
+          disableCloseOnSelect
+          onChange={handleFilterChange}
+          options={departments?.departments || []} //
+          getOptionLabel={(option) =>
+            option.departmentName + ' (id: ' + option.departmentId + ')' || ''
+          }
+          renderOption={(props, option, { selected }) => {
+            const { key, ...optionProps } = props;
+            return (
+              <li key={key} {...optionProps}>
+                <Checkbox
+                  icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+                  checkedIcon={<CheckBoxIcon fontSize="small" />}
+                  style={{ marginRight: 8 }}
+                  checked={selected}
+                />
+                {option.departmentName} (id: {option.departmentId})
+              </li>
+            );
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label={t('select_a_department')}
+              slotProps={{
+                input: {
+                  ...params.InputProps,
+                  type: 'search',
+                },
+              }}
+            />
+          )}
+        />
+      )}
     </>
   );
 }

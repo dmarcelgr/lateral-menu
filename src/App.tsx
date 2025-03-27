@@ -1,5 +1,5 @@
 import './styles/App.css';
-import { LateralMenu } from './features/lateralMenu/components/LateralMenu.tsx';
+import { EwpLateralMenu } from './components/lateralMenu/lateralMenu/components/EwpLateralMenu.tsx';
 import { ThemeProvider } from '@mui/material';
 import esvydaTheme from './styles/esvydaTheme.ts';
 import { AppRouter } from './app/AppRouter.tsx';
@@ -14,7 +14,7 @@ function App() {
       <ThemeProvider theme={esvydaTheme}>
         <BrowserRouter>
           <AppRouter />
-          <LateralMenu className="invisible lg:visible" />
+          <EwpLateralMenu className="invisible lg:visible" />
         </BrowserRouter>
       </ThemeProvider>
     </Provider>
