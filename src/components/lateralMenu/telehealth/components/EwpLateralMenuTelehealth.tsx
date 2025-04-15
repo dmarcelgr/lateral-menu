@@ -11,7 +11,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { Button } from '@mui/material';
 import { TELEHEALTH_ROOMS_SEARCH } from '../const/telehealthRoomsSearch.const.ts';
 
-export default function EwpLateralMenuTelehealthComponent() {
+export default function EwpLateralMenuTelehealth() {
   const { t } = useTranslation();
   const RoomRef = useRef();
 
@@ -27,11 +27,9 @@ export default function EwpLateralMenuTelehealthComponent() {
 
   return (
     <>
-      {isLoadingProvider || isLoadingTelehealth ? (
-        <p>{t('loading')}...</p>
-      ) : !telehealth && !provider ? (
-        <p>{t('no_available_data')}...</p>
-      ) : (
+      {isLoadingProvider && <i>{t('loading_provider')}...</i>}
+      {isLoadingTelehealth && <i>{t('loading_telehealth')}...</i>}
+      {telehealth != undefined && provider != undefined ? (
         <Grid
           container
           spacing={2}
@@ -79,6 +77,8 @@ export default function EwpLateralMenuTelehealthComponent() {
           <span className="text-slate-400">0 {t('patients_waiting')}</span>
           <b>{t('no_one_in_waiting_room')}</b>
         </Grid>
+      ) : (
+        <i>{t('no_available_data')}...</i>
       )}
     </>
   );

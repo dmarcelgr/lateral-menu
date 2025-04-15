@@ -8,7 +8,7 @@ import {
 import { Close, Menu } from '@mui/icons-material';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import EwpMenuItems from './EwpMenuItems.tsx';
+import EwpLateralMenuItems from './EwpLateralMenuItems.tsx';
 import esvydaBigIcon from '/logos/fulllogo-svg-esvyda.svg';
 import esvydaIcon from '/logos/logo-svg-esvyda.svg';
 import {
@@ -20,7 +20,7 @@ export function EwpLateralMenu() {
   const matchesResponsiveWidth = useMediaQuery('(min-width:1023px)');
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleToggle = (): void => {
+  const handleToggle = () => {
     setMenuOpen(!menuOpen);
   };
 
@@ -68,8 +68,8 @@ export function EwpLateralMenu() {
           </Link>
 
           <Box className="flex flex-col justify-between h-full">
-            <EwpMenuItems menuKey="topItems" menuItems={EWP_TOP_MENU_ITEMS} />
-            <EwpMenuItems
+            <EwpLateralMenuItems menuKey="topItems" menuItems={EWP_TOP_MENU_ITEMS} />
+            <EwpLateralMenuItems
               menuKey="bottomItems"
               menuItems={EWP_BOTTOM_MENU_ITEMS}
             />

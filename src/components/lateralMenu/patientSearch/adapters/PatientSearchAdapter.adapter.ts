@@ -1,15 +1,15 @@
 // Api for Patient Search Section at Lateral Menu:
 //esvyda-patients-api-patients-get
-import { PatientSearchProps, PatientSearchResponse } from '../dto';
-import { PatientSearchBoxProps } from '../dto/PatientSearchBox';
+import { PatientSearchBoxProps, PatientSearchInfoApi, PatientSearchProps } from '../dto';
+import { EwpPatientSearch, EwpPatientSearchBox } from '../models';
 
 export default function PatientSearchAdapter(
   data: PatientSearchProps
-): PatientSearchResponse {
+): EwpPatientSearch {
   const { patients, total: total_patients } = data;
   return {
     totalPatients: total_patients,
-    patients: patients.map((patient) => ({
+    patients: patients.map((patient: PatientSearchInfoApi) => ({
       patientId: patient.id,
       patientFirstName: patient.id_people.first_name,
       patientLastName: patient.id_people.last_name,
@@ -20,7 +20,9 @@ export default function PatientSearchAdapter(
   };
 }
 
-export function searchBoxAdapter(data: PatientSearchBoxProps) {
+export function searchBoxAdapter(
+  data: PatientSearchBoxProps
+): EwpPatientSearchBox {
   const { searchData } = data;
   return {
     searchBox: searchData.search_box,

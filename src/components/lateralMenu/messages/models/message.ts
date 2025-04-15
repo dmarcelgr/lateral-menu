@@ -1,21 +1,17 @@
 export interface EwpMessage {
-  groupData?: {
-    userList: object;
-    userCountList: object;
-  };
-  messages?: MessagesContent[];
-  isFamilyMember: boolean;
   isPatient: boolean;
+  isFamilyMember: boolean;
+  messages: MessageContent[];
   totalMessages: number;
 }
 
-export interface MessagesContent {
+export interface MessageContent {
   id: number;
   createDate: string;
   status: string;
-  message: object;
+  message: string;
   patientPhoto: string;
-  patientId: number;
+  patientId: number | null;
   patientName: string;
   messagesCount: number;
 }

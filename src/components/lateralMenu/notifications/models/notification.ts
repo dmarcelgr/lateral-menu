@@ -1,9 +1,9 @@
 export interface EwpNotification {
-  total: number;
   data: NotificationData[];
+  total?: number;
 }
 
-export interface EwpNotificationsSearch {
+export interface EwpNotificationSearch {
   type: number;
   isRead: boolean;
 }

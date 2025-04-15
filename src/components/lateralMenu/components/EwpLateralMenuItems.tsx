@@ -3,27 +3,23 @@ import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import {
-  Divider,
-  Drawer,
-  Fade,
-  ListItemButton,
-  useMediaQuery,
-} from '@mui/material';
-import { MenuItem } from '../models/menu.ts';
+import { Box, Divider, ListItemButton, useMediaQuery } from '@mui/material';
+import { EwpLateralMenuItem } from '../models/menu.ts';
 import { useTranslation } from 'react-i18next';
-import { SubMenuItems } from './SubMenuItems.tsx';
-import { menuItemsProps } from '../dto/menu';
+import { EwpLateralMenuSubMenuItems } from './EwpLateralMenuSubMenuItems.tsx';
+import { MenuItemProps } from '../dto/menu';
 
-export default function EwpMenuItems(props: menuItemsProps) {
+export default function EwpLateralMenuItems(props: MenuItemProps) {
   const { t } = useTranslation();
   const { menuItems, menuKey } = props;
   const matchesResponsiveWidth: boolean = useMediaQuery('(min-width:1023px)');
 
   const [open, setOpen] = useState(false);
-  const [selectedMenu, setSelectedMenu] = useState<MenuItem | null>(null);
+  const [selectedMenu, setSelectedMenu] = useState<EwpLateralMenuItem | null>(
+    null
+  );
 
-  const handleOpenDrawer = (menu: MenuItem) => {
+  const handleOpenDrawer = (menu: EwpLateralMenuItem) => {
     setSelectedMenu(menu);
     setOpen(true);
   };
@@ -36,8 +32,8 @@ export default function EwpMenuItems(props: menuItemsProps) {
   return (
     <>
       <List aria-label="lateral menu" key={menuKey} className="p-0">
-        {menuItems.map((item) => (
-          <React.Fragment key={item.key}>
+        {menuItems.map((item: EwpLateralMenuItem) => (
+          <span key={item.key}>
             <Divider
               component="li"
               className={`
@@ -76,35 +72,47 @@ export default function EwpMenuItems(props: menuItemsProps) {
                 </ListItemText>
               </ListItemButton>
             </ListItem>
-          </React.Fragment>
+          </span>
         ))}
         {/*Submenu*/}
-        <Drawer
-          className="w-full absolute !left-20"
-          anchor={matchesResponsiveWidth ? 'left' : 'top'}
-          variant={matchesResponsiveWidth ? 'temporary' : 'permanent'}
+        <Box
+          className="z-[999] fixed top-px lg:!left-20 lg:w-2/6 sm:w-full rounded-md bg-white !shadow-md"
           open={open}
           onClose={handleCloseDrawer}
-          TransitionComponent={Fade}
-          transitionDuration={0}
-          hideBackdrop
-          ModalProps={{
-            keepMounted: false,
-          }}
-          PaperProps={{
-            sx: {
-              left: { xs: '1', lg: '4.5rem' },
-              width: { xs: '100%', lg: '32%' },
-            },
-          }}
         >
           {selectedMenu && (
-            <SubMenuItems
+            <EwpLateralMenuSubMenuItems
               props={selectedMenu}
               handleDrawerClose={handleCloseDrawer}
-            ></SubMenuItems>
+            ></EwpLateralMenuSubMenuItems>
           )}
-        </Drawer>
+        </Box>
+        {/*<Drawer*/}
+        {/*  className="w-full absolute !left-20"*/}
+        {/*  anchor={matchesResponsiveWidth ? 'left' : 'top'}*/}
+        {/*  variant={matchesResponsiveWidth ? 'temporary' : 'permanent'}*/}
+        {/*  open={open}*/}
+        {/*  onClose={handleCloseDrawer}*/}
+        {/*  TransitionComponent={Fade}*/}
+        {/*  transitionDuration={0}*/}
+        {/*  hideBackdrop*/}
+        {/*  ModalProps={{*/}
+        {/*    keepMounted: false,*/}
+        {/*  }}*/}
+        {/*  PaperProps={{*/}
+        {/*    sx: {*/}
+        {/*      left: { xs: '1', lg: '4.5rem' },*/}
+        {/*      width: { xs: '100%', lg: '32%' },*/}
+        {/*    },*/}
+        {/*  }}*/}
+        {/*>*/}
+        {/*  {selectedMenu && (*/}
+        {/*    <EwpLateralMenuSubMenuItems*/}
+        {/*      props={selectedMenu}*/}
+        {/*      handleDrawerClose={handleCloseDrawer}*/}
+        {/*    ></EwpLateralMenuSubMenuItems>*/}
+        {/*  )}*/}
+        {/*</Drawer>*/}
       </List>
     </>
   );

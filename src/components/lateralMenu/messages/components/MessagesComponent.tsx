@@ -12,26 +12,24 @@ import { Link } from 'react-router-dom';
 import EwpFormatISODate from '../../../reusableDateFormatter/EwpFormatISODate.tsx';
 import { Person } from '@mui/icons-material';
 import { MESSAGES_SEARCH_FILTERS } from '../const/messagesSearch.const.ts';
+import { EwpLateralMenuLinkHandler } from '../../linkHandler/EwpLateralMenuLinkHandler.tsx';
 
 export function MessagesComponent() {
   const { t } = useTranslation();
 
-  const { data: messages, isLoading } = useGetMessagesInboxQuery(
-    MESSAGES_SEARCH_FILTERS
-  );
+  const { data, isLoading } = useGetMessagesInboxQuery(MESSAGES_SEARCH_FILTERS);
 
   return (
     <>
-      {isLoading ? (
-        <p>{t('loading')}...</p>
-      ) : !messages || messages.length === 0 ? (
-        <p>{t('no_available_data')}...</p>
-      ) : (
+      {isLoading && <i>{t('loading')}... </i>}
+      {data != undefined && data?.messages.length > 0 ? (
         <List>
-          {messages.messages.map((message) => (
+          {data.messages.map((message) => (
             <ListItem
               component={Link}
-              to={`patients/#/msgs/view/${message.id}`}
+              onClick={() =>
+                EwpLateralMenuLinkHandler(`patients/#/msgs/view/${message.id}`)
+              }
               key={message.id}
               secondaryAction={
                 message.messagesCount > 0 && (
@@ -77,6 +75,8 @@ export function MessagesComponent() {
             </ListItem>
           ))}
         </List>
+      ) : (
+        <i>{t('no_available_data')}...</i>
       )}
     </>
   );

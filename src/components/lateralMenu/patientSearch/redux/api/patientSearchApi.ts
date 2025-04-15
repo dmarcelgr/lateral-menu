@@ -1,12 +1,13 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 import { PatientSearchProps } from '../../dto/';
 import PatientSearchAdapter, {
   searchBoxAdapter,
 } from '../../adapters/PatientSearchAdapter.adapter.ts';
+import baseQueryWithReauth from '../../../../../utils/api/apiConst.ts';
 
 export const patientSearchApi = createApi({
   reducerPath: 'patientSearchApi',
-  baseQuery: fetchBaseQuery({ baseUrl: '/api/' }),
+  baseQuery: baseQueryWithReauth,
   endpoints: (build) => ({
     getPatient: build.query({
       query: (searchTerms: searchBoxAdapter) => ({

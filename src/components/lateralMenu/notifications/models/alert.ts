@@ -1,6 +1,6 @@
 export interface EwpAlert {
-  events?: AlertEvent[];
-  totalEvents?: number;
+  events: AlertEvent[];
+  totalEvents: number;
 }
 
 export interface AlertEvent {
@@ -13,7 +13,7 @@ export interface AlertEvent {
   patientName: string;
 }
 
-export interface EwpAlertsSearch {
+export interface EwpAlertSearch {
   readByMedicalStaff?: boolean;
   onlyMyPatients?: boolean;
   page?: number;

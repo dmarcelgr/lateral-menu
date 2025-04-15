@@ -67,5 +67,7 @@
   "no_one_in_waiting_room": "No one is waiting in room",
   "select_a_room": "Select a room",
   "select_a_department": "Select a department",
-  "page": "Page"
+  "page": "Page",
+  "loading_telehealth": "Loading telehealth information",
+  "loading_provider": "Loading provider information"
 }

@@ -13,9 +13,9 @@ import { ChangeEvent, useState } from 'react';
 import NotificationsDataComponent from './NotificationsDataComponent.tsx';
 import { useGetNotificationsQuery } from '../../redux/api/notificationsApi.ts';
 import { NOTIFICATIONS_FILTERS } from '../const/notificationsFilters.const.ts';
-import { EwpNotificationsSearch } from '../../models';
+import { EwpNotificationSearch } from '../../models';
 
-export default function EwpNotificationsComponent() {
+export default function EwpLateralMenuNotificationsComponent() {
   const { t } = useTranslation();
 
   const [checkedUnread, setCheckedUnread] = useState(true); // State handler for 'Show only unread' switch
@@ -27,22 +27,11 @@ export default function EwpNotificationsComponent() {
     refetch,
   }: Notification = useGetNotificationsQuery(searchTerm);
 
-  const handleChange = (
-    event: ChangeEvent<HTMLInputElement>,
-    alertType: string
-  ) => {
-    switch (alertType) {
-      case 'unread':
-        setCheckedUnread(event.target.checked);
-        break;
-    }
-  };
-
   const handleFilterChange = (
     event: ChangeEvent<unknown>,
     newFilters?: boolean
   ) => {
-    setSearchTerm((prevFilters: EwpNotificationsSearch) => ({
+    setSearchTerm((prevFilters: EwpNotificationSearch) => ({
       ...prevFilters,
       isRead: !newFilters,
     }));
@@ -50,11 +39,8 @@ export default function EwpNotificationsComponent() {
 
   return (
     <>
-      {isFetching ? (
-        <p>{t('loading')}...</p>
-      ) : !notifications || notifications.length === 0 ? (
-        <p>{t('no_available_data')}...</p>
-      ) : (
+      {isFetching && <i>{t('loading')}... </i>}
+      {notifications != undefined && notifications?.data.length > 0 ? (
         <Box>
           <Toolbar className="justify-center space-x-4 -ml-6">
             <span className="flex-1 hidden lg:block"></span>
@@ -72,7 +58,7 @@ export default function EwpNotificationsComponent() {
                   <Switch
                     checked={checkedUnread}
                     onChange={(event) => {
-                      handleChange(event, 'unread');
+                      setCheckedUnread(event.target.checked);
                       handleFilterChange(event, event.target.checked);
                     }}
                     inputProps={{ 'aria-label': 'controlled' }}
@@ -82,8 +68,10 @@ export default function EwpNotificationsComponent() {
               />
             </FormGroup>
           </Toolbar>
-          <NotificationsDataComponent notifications={notifications} />
+          <NotificationsDataComponent data={notifications.data} />
         </Box>
+      ) : (
+        <i>{t('no_available_data')}...</i>
       )}
     </>
   );

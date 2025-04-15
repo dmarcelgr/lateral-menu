@@ -1,12 +1,10 @@
-import { ReactNode, SyntheticEvent, useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { AppBar, Box, Tab, Tabs } from '@mui/material';
-
-interface TabPanelProps {
-  children?: ReactNode;
-  dir?: string;
-  index: number;
-  value: number;
-}
+import {
+  TabPanelProps,
+  TabsComponentProps,
+  TabsData,
+} from './models/TabsComponent.ts';
 
 function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
@@ -15,8 +13,8 @@ function CustomTabPanel(props: TabPanelProps) {
     <div
       role="tabpanel"
       hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
+      id={`tabpanel-${index}`}
+      aria-labelledby={`tab-${index}`}
       {...other}
     >
       {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
@@ -24,21 +22,11 @@ function CustomTabPanel(props: TabPanelProps) {
   );
 }
 
-function a11yProps(index: number) {
+function TabIndex(index: number) {
   return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    id: `tab-${index}`,
+    'aria-controls': `tabpanel-${index}`,
   };
-}
-
-interface TabsData {
-  index: number;
-  label: string;
-  content: ReactNode;
-}
-
-interface TabsComponentProps {
-  tabsData: TabsData[];
 }
 
 export default function EwpTabsComponent({ tabsData }: TabsComponentProps) {
@@ -64,7 +52,7 @@ export default function EwpTabsComponent({ tabsData }: TabsComponentProps) {
             <Tab
               key={item.index}
               label={item.label}
-              {...a11yProps(item.index)}
+              {...TabIndex(item.index)}
             />
           ))}
         </Tabs>

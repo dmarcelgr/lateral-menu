@@ -6,9 +6,11 @@ import { useGetProviderDepartmentsQuery } from '../redux/api/ProviderDepartments
 import { Checkbox } from '@mui/material';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import { EwpProviderDepartments } from '../models';
+import { FilterChangeHandler } from '../../lateralMenu/patientSearch/models';
 
-export default function EwpProviderDepartments({ onFilterChange }) {
+export default function EwpProviderDepartments({
+  onFilterChange,
+}: FilterChangeHandler) {
   const { t } = useTranslation();
 
   const handleFilterChange = (event, value) => {
@@ -19,22 +21,18 @@ export default function EwpProviderDepartments({ onFilterChange }) {
     onFilterChange(event, departmentInsertions);
   };
 
-  const { data: departments, isLoading }: EwpProviderDepartments =
-    useGetProviderDepartmentsQuery();
+  const { data, isLoading } = useGetProviderDepartmentsQuery();
 
   return (
     <>
-      {isLoading ? (
-        <p>{t('loading')}...</p>
-      ) : !departments || departments.length === 0 ? (
-        <p>{t('no_available_data')}...</p>
-      ) : (
+      {isLoading && t('loading')}
+      {data != undefined ? (
         <Autocomplete
           id="provider-departments"
           multiple
           disableCloseOnSelect
           onChange={handleFilterChange}
-          options={departments?.departments || []} //
+          options={data.departments || []}
           getOptionLabel={(option) =>
             option.departmentName + ' (id: ' + option.departmentId + ')' || ''
           }
@@ -65,6 +63,8 @@ export default function EwpProviderDepartments({ onFilterChange }) {
             />
           )}
         />
+      ) : (
+        t('no_available_data')
       )}
     </>
   );

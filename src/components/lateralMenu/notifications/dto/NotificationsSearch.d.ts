@@ -1,5 +1,5 @@
-import { EwpNotificationsSearch } from '../models/';
+import { EwpNotificationSearch } from '../models/';
 
-export interface NotificationsSearchProps {
-  data: EwpNotificationsSearch;
+export interface NotificationSearchProps {
+  data: EwpNotificationSearch;
 }

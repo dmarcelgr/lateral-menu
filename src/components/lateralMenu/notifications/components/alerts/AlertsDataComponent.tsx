@@ -11,17 +11,20 @@ import { Link } from 'react-router-dom';
 import EwpFormatISODate from '../../../../reusableDateFormatter/EwpFormatISODate.tsx';
 import { Person } from '@mui/icons-material';
 import * as React from 'react';
-import { EwpAlert } from '../../models';
+import { AlertEvent, EwpAlert } from '../../models';
+import { EwpLateralMenuLinkHandler } from '../../../linkHandler/EwpLateralMenuLinkHandler.tsx';
 
 export default function AlertsDataComponent({ events }: EwpAlert) {
   return (
     <>
       <Box>
         <List>
-          {events.map((event) => (
+          {events.map((event: AlertEvent) => (
             <ListItem
               component={Link}
-              to={`patients/#/msgs/view/${event.id}`}
+              onClick={() =>
+                EwpLateralMenuLinkHandler(`patients/#/msgs/view/${event.id}`)
+              }
               key={event.id}
               secondaryAction={
                 <span className="text-slate-500">

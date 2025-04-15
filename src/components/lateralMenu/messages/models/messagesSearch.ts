@@ -1,5 +1,4 @@
-export interface EwpMessagesSearch {
-  urlSection: string;
+export interface EwpMessageSearch {
   page: number;
   pageSize: number;
 }

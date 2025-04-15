@@ -1,13 +1,14 @@
 // Api for alerts tab at Lateral Menu:
 // http://localhost/api/comments/comment/?type=6&is_read=false
-import { NotificationsProps } from '../dto/Notifications';
-import { NotificationsSearchProps } from '../dto/NotificationsSearch';
+import { NotificationDataApi, NotificationProps, NotificationSearchProps } from '../dto/';
+import { EwpNotification } from '../models';
 
-export default function NotificationsAdapter(data: NotificationsProps) {
-  const { data: notifications, total } = data;
+export default function NotificationsAdapter(
+  notifications: NotificationProps
+): EwpNotification {
+  const { data, total } = notifications;
   return {
-    total: total,
-    data: notifications.map((item) => ({
+    data: data.map((item: NotificationDataApi) => ({
       id: item.id,
       createDate: item.created_at,
       status: item.is_read,
@@ -16,10 +17,11 @@ export default function NotificationsAdapter(data: NotificationsProps) {
       patientId: item.patient,
       patientName: item.patient_name,
     })),
+    total: total,
   };
 }
 
-export function NotificationsSearchAdapter(data: NotificationsSearchProps) {
+export function NotificationsSearchAdapter(data: NotificationSearchProps) {
   const { searchParams } = data;
   return {
     type: searchParams.type,

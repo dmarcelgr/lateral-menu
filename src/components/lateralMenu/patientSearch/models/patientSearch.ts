@@ -1,9 +1,9 @@
 export interface EwpPatientSearch {
-  total_patients?: number;
-  patients?: PatientsInfo[];
+  totalPatients: number;
+  patients: PatientInfo[];
 }
 
-export interface PatientsInfo {
+export interface PatientInfo {
   patientId: number;
   patientFirstName: string;
   patientLastName: string;

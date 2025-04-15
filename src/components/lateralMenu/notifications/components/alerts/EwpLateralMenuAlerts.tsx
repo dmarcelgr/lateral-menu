@@ -12,12 +12,13 @@ import { useTranslation } from 'react-i18next';
 import * as React from 'react';
 import { ChangeEvent, useState } from 'react';
 import { useGetAlertsQuery } from '../../redux/api/notificationsApi.ts';
-import { EwpAlertsSearch } from '../../models';
+import { EwpAlertSearch } from '../../models';
 import AlertsDataComponent from './AlertsDataComponent.tsx';
 import EwpPagination from '../../../../pagination/EwpPagination.tsx';
 import { ALERTS_FILTERS } from '../const/alertsFilters.const.ts';
+import { EwpLateralMenuLinkHandler } from '../../../linkHandler/EwpLateralMenuLinkHandler.tsx';
 
-export default function EwpAlertsComponent() {
+export default function EwpLateralMenuAlerts() {
   const { t } = useTranslation();
   const [checkedUnread, setCheckedUnread] = useState(true); // Unread switch state
   const [searchTerms, setSearchTerms] = useState(ALERTS_FILTERS); // API state
@@ -32,8 +33,8 @@ export default function EwpAlertsComponent() {
     setCheckedUnread(event.target.checked);
   };
 
-  const handleFilterChange = (event, newFilters: boolean | EwpAlertsSearch) => {
-    setSearchTerms((prevFilters: EwpAlertsSearch) => ({
+  const handleFilterChange = (event, newFilters: boolean | EwpAlertSearch) => {
+    setSearchTerms((prevFilters: EwpAlertSearch) => ({
       ...prevFilters,
       readByMedicalStaff:
         typeof newFilters === 'boolean'
@@ -49,11 +50,8 @@ export default function EwpAlertsComponent() {
 
   return (
     <>
-      {isFetching ? (
-        <p>{t('loading')}...</p>
-      ) : !events || events.length === 0 ? (
-        <p>{t('no_available_data')}...</p>
-      ) : (
+      {isFetching && <i>{t('loading')}... </i>}
+      {events?.length > 0 ? (
         <Box>
           <Toolbar className="justify-center space-x-4 -ml-6">
             <IconButton
@@ -96,7 +94,7 @@ export default function EwpAlertsComponent() {
               variant="outlined"
               tabIndex={-1}
               size="large"
-              href="patients/#/events//"
+              onClick={() => EwpLateralMenuLinkHandler('patients/#/events//')}
             >
               {t('events')}
             </Button>
@@ -108,6 +106,8 @@ export default function EwpAlertsComponent() {
             total={totalEvents}
           />
         </Box>
+      ) : (
+        <i>{t('no_available_data')}...</i>
       )}
     </>
   );

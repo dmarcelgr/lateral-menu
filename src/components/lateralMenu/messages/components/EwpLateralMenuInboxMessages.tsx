@@ -2,9 +2,11 @@ import { Box, Button, Toolbar } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Create, Forum } from '@mui/icons-material';
 import { MessagesComponent } from './MessagesComponent.tsx';
+import { EwpLateralMenuLinkHandler } from '../../linkHandler/EwpLateralMenuLinkHandler.tsx';
 
-export function EwpInboxMessagesComponent() {
+export function EwpLateralMenuInboxMessages() {
   const { t } = useTranslation();
+
   return (
     <Box
       className="h-full w-full px-0 lg:-mt-2"
@@ -17,7 +19,9 @@ export function EwpInboxMessagesComponent() {
           tabIndex={-1}
           size="small"
           startIcon={<Create />}
-          href="msg/compose"
+          onClick={() =>
+            EwpLateralMenuLinkHandler('/en/patients/#/msgs/compose/')
+          }
         >
           {t('compose_message')}
         </Button>
@@ -27,7 +31,9 @@ export function EwpInboxMessagesComponent() {
           tabIndex={-1}
           size="small"
           startIcon={<Forum />}
-          href="msg/view"
+          onClick={() =>
+            EwpLateralMenuLinkHandler('/en/patients/#/msgs/inbox/')
+          }
         >
           {t('view_messages')}
         </Button>

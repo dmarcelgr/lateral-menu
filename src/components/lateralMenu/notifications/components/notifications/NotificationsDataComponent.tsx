@@ -10,20 +10,23 @@ import { Link } from 'react-router-dom';
 import EwpFormatISODate from '../../../../reusableDateFormatter/EwpFormatISODate.tsx';
 import { ReceiptLong } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
-import { EwpNotification } from '../../models';
+import { EwpNotification, NotificationData } from '../../models';
+import { EwpLateralMenuLinkHandler } from '../../../linkHandler/EwpLateralMenuLinkHandler.tsx';
 
-export default function NotificationsDataComponent({
-  notifications,
-}: EwpNotification) {
+export default function NotificationsDataComponent({ data }: EwpNotification) {
   const { t } = useTranslation();
   return (
     <>
       <Box>
         <List>
-          {notifications.data.map((notification) => (
+          {data.map((notification: NotificationData) => (
             <ListItem
               component={Link}
-              to={`patients/#/msgs/view/${notification.id}`}
+              onClick={() =>
+                EwpLateralMenuLinkHandler(
+                  `patients/#/msgs/view/${notification.id}`
+                )
+              }
               key={notification.id}
               secondaryAction={
                 <span className="text-slate-500">

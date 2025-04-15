@@ -1,13 +1,13 @@
 // Api for alerts tab at Lateral Menu:
 //esvyda-events-api-eventlist&is_read_by_medical_staff=false&only_my_patients=true&page=1&page_size=5
 
-import { AlertsProps, AlertsResponse } from '../dto/Alerts';
-import { AlertsSearchProps } from '../dto/AlertsSearch';
+import { AlertEvents, AlertProps, AlertSearchProps } from '../dto/';
+import { EwpAlert } from '../models';
 
-export default function AlertsAdapter(data: AlertsProps): AlertsResponse {
-  const { events, total_events: totalEvents } = data;
+export default function AlertsAdapter(data: AlertProps): EwpAlert {
+  const { events, total_events } = data;
   return {
-    events: events.map((item) => ({
+    events: events.map((item: AlertEvents) => ({
       id: item.id,
       createDate: item.symptom_resport.created_at,
       status: item.status,
@@ -19,11 +19,11 @@ export default function AlertsAdapter(data: AlertsProps): AlertsResponse {
         ' ' +
         item.patient.id_people.last_name,
     })),
-    totalEvents: totalEvents,
+    totalEvents: total_events,
   };
 }
 
-export function AlertsSearchAdapter(data: AlertsSearchProps) {
+export function AlertsSearchAdapter(data: AlertSearchProps) {
   const { searchParams } = data;
   return {
     readByMedicalStaff: searchParams.readByMedicalStaff,

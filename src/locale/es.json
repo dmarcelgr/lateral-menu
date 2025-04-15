@@ -67,5 +67,7 @@
   "no_one_in_waiting_room": "No hay nadie en la sala de espera",
   "select_a_room": "Seleccione una sala",
   "select_a_department": "Seleccione un departamento",
-  "page": "Página"
+  "page": "Página",
+  "loading_telehealth": "Cargando información de telemedicina",
+  "loading_provider": "Cargando información del proveedor"
 }

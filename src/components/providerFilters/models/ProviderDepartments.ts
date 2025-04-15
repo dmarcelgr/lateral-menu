@@ -1,12 +1,12 @@
 export interface EwpProviderDepartments {
-  message?: ProviderDepartmentsResponse[];
+  departments: ProviderDepartments[];
 }
 
-export interface ProviderDepartmentsResponse {
+export interface ProviderDepartments {
   id: number;
-  departmentid: number;
-  patientdepartmentname: string;
-  providergroupid: number;
-  providergroupname: string;
-  practice: number;
+  departmentId: number;
+  departmentName: string;
+  providerGroupId: number;
+  providerGroupName: string;
+  departmentPractice: number;
 }

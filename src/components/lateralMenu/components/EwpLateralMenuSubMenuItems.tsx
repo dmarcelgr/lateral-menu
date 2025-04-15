@@ -12,15 +12,20 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import React from 'react';
 import { ArrowBack } from '@mui/icons-material';
-import { SubmenuItemsProps } from '../dto/menu';
+import { SubmenuItemProps } from '../dto/menu';
+import { EwpLateralMenuItem } from '../models/menu.ts';
 
-export function SubMenuItems({ props, handleDrawerClose }) {
-  const { key, submenu, title }: SubmenuItemsProps = props;
+export function EwpLateralMenuSubMenuItems({ props, handleDrawerClose }) {
+  const { key, submenu, title }: SubmenuItemProps = props;
   const { t } = useTranslation();
+
+  const handleOnclickAction = (item: EwpLateralMenuItem) => {
+    if (item.reload) window.location.href = item.link;
+  };
 
   return (
     <>
-      <Box>
+      <Box className="h-screen">
         <Toolbar
           className={`flex flex-row min-h-12 sm:justify-start lg:justify-between`}
         >
@@ -45,13 +50,13 @@ export function SubMenuItems({ props, handleDrawerClose }) {
         </Toolbar>
         {Array.isArray(submenu) ? (
           <List aria-label="lateral menu" key={key} className="!px-2">
-            {submenu.map((subitem) => {
+            {submenu.map((item: EwpLateralMenuItem) => {
               return (
                 <ListItem
                   component={Link}
-                  key={subitem.key}
+                  key={item.key}
                   className="shadow-inner"
-                  to={subitem.link}
+                  onClick={() => handleOnclickAction(item)}
                   sx={{
                     padding: '5px 10px',
                     ':hover': {
@@ -69,7 +74,7 @@ export function SubMenuItems({ props, handleDrawerClose }) {
                       },
                     }}
                   >
-                    {subitem.icon}
+                    {item.icon}
                   </ListItemIcon>
                   <ListItemText
                     className="z-10 w-fit"
@@ -79,7 +84,7 @@ export function SubMenuItems({ props, handleDrawerClose }) {
                         color: 'secondary.light',
                       },
                     }}
-                    primary={t(subitem.title)}
+                    primary={t(item.title)}
                   />
                 </ListItem>
               );

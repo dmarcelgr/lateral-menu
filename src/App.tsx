@@ -1,5 +1,5 @@
 import './styles/App.css';
-import { EwpLateralMenu } from './components/lateralMenu/lateralMenu/components/EwpLateralMenu.tsx';
+import { EwpLateralMenu } from './components/lateralMenu/components/EwpLateralMenu.tsx';
 import { ThemeProvider } from '@mui/material';
 import esvydaTheme from './styles/esvydaTheme.ts';
 import { AppRouter } from './app/AppRouter.tsx';

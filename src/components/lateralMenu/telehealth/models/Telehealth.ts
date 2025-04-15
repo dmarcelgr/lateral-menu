@@ -1,26 +1,17 @@
 export interface EwpTelehealth {
-  records?: object;
-  totalRecords?: number;
+  records: {
+    id: number;
+    createDate: string;
+    name: string;
+    displayName: string;
+    url: string | null;
+    cause: string;
+    providerId: number;
+  }[];
+  totalRoomsRecords: number;
 }
 
 export interface EwpTelehealthSearch {
   page: number;
   pageSize: number;
-}
-
-export interface EwpTelehealthRoomDetail {
-  id: number | null;
-  createDate: string;
-  name: string;
-  displayName: string;
-  url: string;
-  cause: string;
-  providerId: number | null;
-}
-
-export interface EwpRoomProviderInfo {
-  id: number | null;
-  name: string;
-  room: string;
-  userType: string | number;
 }

@@ -1,23 +1,28 @@
-import {
-  EwpRoomProviderInfo,
-  EwpTelehealth,
-  EwpTelehealthRoomDetail,
-} from '../models/';
-
 export interface TelehealthProps {
-  data: EwpTelehealth;
+  data: TelehealthRoomApi;
 }
 
-export interface TelehalthRoomsSearchProps {
-  page?: number;
-  pageSize?: number;
+export interface TelehealthRoomApi {
+  records: TelehealthRoomDetail[];
+  total_records: number;
+}
+
+export interface TelehealthRoomDetail {
+  id: number | null;
+  created: string;
+  name: string;
+  display_name: string;
+  url: string;
+  cause: string;
+  provider: number | null;
 }
 
 export interface TelehealthRoomResponse {
-  roomsInfo: EwpTelehealthRoomDetail[];
+  roomsInfo: TelehealthRoomDetail[];
   totalRoomsRecords: number;
 }
 
-export interface TelehealthProviderInfo {
-  providerInfo: EwpRoomProviderInfo[];
+export interface TelehealthRoomSearchProps {
+  page: number;
+  pageSize: number;
 }
