@@ -58,7 +58,7 @@ export function MessagesComponent() {
                   <>
                     <b>{message.patientName}</b>{' '}
                     <span className="text-slate-500">
-                      <EwpFormatISODate date={message.createDate} />
+                      {EwpFormatISODate(message.createDate, 'MMMM d, yyyy')}
                     </span>
                   </>
                 }

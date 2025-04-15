@@ -28,7 +28,7 @@ export default function AlertsDataComponent({ events }: EwpAlert) {
               key={event.id}
               secondaryAction={
                 <span className="text-slate-500">
-                  <EwpFormatISODate date={event.createDate} />
+                  {EwpFormatISODate(event.createDate, 'MMMM d, yyyy')}
                 </span>
               }
               className="shadow-inner hover:bg-slate-50"

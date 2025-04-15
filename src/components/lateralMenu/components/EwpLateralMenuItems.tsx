@@ -3,7 +3,7 @@ import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Box, Divider, ListItemButton, useMediaQuery } from '@mui/material';
+import { Box, Divider, ListItemButton } from '@mui/material';
 import { EwpLateralMenuItem } from '../models/menu.ts';
 import { useTranslation } from 'react-i18next';
 import { EwpLateralMenuSubMenuItems } from './EwpLateralMenuSubMenuItems.tsx';
@@ -12,7 +12,6 @@ import { MenuItemProps } from '../dto/menu';
 export default function EwpLateralMenuItems(props: MenuItemProps) {
   const { t } = useTranslation();
   const { menuItems, menuKey } = props;
-  const matchesResponsiveWidth: boolean = useMediaQuery('(min-width:1023px)');
 
   const [open, setOpen] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState<EwpLateralMenuItem | null>(
@@ -87,32 +86,6 @@ export default function EwpLateralMenuItems(props: MenuItemProps) {
             ></EwpLateralMenuSubMenuItems>
           )}
         </Box>
-        {/*<Drawer*/}
-        {/*  className="w-full absolute !left-20"*/}
-        {/*  anchor={matchesResponsiveWidth ? 'left' : 'top'}*/}
-        {/*  variant={matchesResponsiveWidth ? 'temporary' : 'permanent'}*/}
-        {/*  open={open}*/}
-        {/*  onClose={handleCloseDrawer}*/}
-        {/*  TransitionComponent={Fade}*/}
-        {/*  transitionDuration={0}*/}
-        {/*  hideBackdrop*/}
-        {/*  ModalProps={{*/}
-        {/*    keepMounted: false,*/}
-        {/*  }}*/}
-        {/*  PaperProps={{*/}
-        {/*    sx: {*/}
-        {/*      left: { xs: '1', lg: '4.5rem' },*/}
-        {/*      width: { xs: '100%', lg: '32%' },*/}
-        {/*    },*/}
-        {/*  }}*/}
-        {/*>*/}
-        {/*  {selectedMenu && (*/}
-        {/*    <EwpLateralMenuSubMenuItems*/}
-        {/*      props={selectedMenu}*/}
-        {/*      handleDrawerClose={handleCloseDrawer}*/}
-        {/*    ></EwpLateralMenuSubMenuItems>*/}
-        {/*  )}*/}
-        {/*</Drawer>*/}
       </List>
     </>
   );

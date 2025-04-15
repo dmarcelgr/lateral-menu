@@ -30,7 +30,7 @@ export default function NotificationsDataComponent({ data }: EwpNotification) {
               key={notification.id}
               secondaryAction={
                 <span className="text-slate-500">
-                  <EwpFormatISODate date={notification.createDate} />
+                  {EwpFormatISODate(notification.createDate, 'MMMM d, yyyy')}
                 </span>
               }
               className="shadow-inner hover:bg-slate-50"

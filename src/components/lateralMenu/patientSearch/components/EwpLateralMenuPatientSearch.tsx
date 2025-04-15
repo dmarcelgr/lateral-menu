@@ -80,8 +80,9 @@ export function EwpLateralMenuPatientSearch() {
                   >
                     <p>
                       <b>{option.patientLastName}</b>, {option.patientFirstName}{' '}
-                      / DOB: <EwpFormatISODate date={option.patientDOB} /> / ID:{' '}
-                      {option.patientId} / {option.status}
+                      / DOB:{' '}
+                      {EwpFormatISODate(option.patientDOB, 'MMMM d, yyyy')} /
+                      ID: {option.patientId} / {option.status}
                     </p>
                   </li>
                 )}
